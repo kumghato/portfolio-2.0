@@ -16,8 +16,8 @@ interface FoundryPlate {
 const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 01",
-    shortName: "HTML5",
-    name: "HTML5 Semantic Core",
+    shortName: "HTML 5",
+    name: "HTML5",
     metricLabel: "W3C SPECIFICATION COMPLIANCE",
     metricValue: "100% SPEC",
     progress: 100,
@@ -29,8 +29,8 @@ const plates: FoundryPlate[] = [
   },
   {
     plateNumber: "PLATE 02",
-    shortName: "CSS3",
-    name: "CSS3 Styling Engines",
+    shortName: "CSS 3",
+    name: "CSS3 ",
     metricLabel: "GPU COMPOSITOR BUDGET",
     metricValue: "120 FPS",
     progress: 98,
@@ -43,7 +43,7 @@ const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 03",
     shortName: "JAVASCRIPT",
-    name: "JavaScript ESNext",
+    name: "JavaScript",
     metricLabel: "MICROTASK CYCLE LATENCY",
     metricValue: "< 1.0ms",
     progress: 97,
@@ -69,7 +69,7 @@ const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 05",
     shortName: "REACT",
-    name: "React Architecture",
+    name: "React",
     metricLabel: "CONCURRENT FIBER RECONCILIATION",
     metricValue: "PURE DIFF",
     progress: 95,
@@ -82,7 +82,7 @@ const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 06",
     shortName: "NEXT.JS",
-    name: "Next.js Platform",
+    name: "Next.js",
     metricLabel: "EDGE TIME TO FIRST BYTE (TTFB)",
     metricValue: "< 45ms",
     progress: 94,
@@ -95,7 +95,7 @@ const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 07",
     shortName: "NODE.JS",
-    name: "Node.js Runtime",
+    name: "Node.js",
     metricLabel: "NON-BLOCKING I/O THROUGHPUT",
     metricValue: "10K+ REQ/S",
     progress: 93,
@@ -121,7 +121,7 @@ const plates: FoundryPlate[] = [
   {
     plateNumber: "PLATE 09",
     shortName: "SUPABASE",
-    name: "Supabase Cloud Core",
+    name: "Supabase",
     metricLabel: "POSTGRES ENGINE RESPONSE",
     metricValue: "< 8.0ms",
     progress: 95,
@@ -209,25 +209,6 @@ const plates: FoundryPlate[] = [
         </div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- EXHIBITION STATUS & MOTION BAR             -->
-      <!-- ========================================== -->
-      <div class="atelier-toolbar-bar">
-        <div class="toolbar-left">
-          <span class="toolbar-label">EXHIBITION INTERFACE:</span>
-          <span class="toolbar-mode-badge">
-            <span class="btn-icon" aria-hidden="true">◎</span>
-            <span>3D IMAGE WHEEL</span>
-          </span>
-        </div>
-
-        <div class="toolbar-right">
-          <div class="motion-badge-chip">
-            <span class="pulse-indicator" aria-hidden="true"></span>
-            <span>MOTION ENGINE // SPRING KINEMATICS</span>
-          </div>
-        </div>
-      </div>
 
       <!-- ========================================== -->
       <!-- THE INTERACTIVE 3D IMAGE WHEEL STAGE       -->
@@ -266,7 +247,6 @@ const plates: FoundryPlate[] = [
                 <article 
                   class={`wheel-card ${index === 0 ? 'is-active-front' : index === 1 ? 'is-flanking is-flanking-next' : index === 8 ? 'is-flanking is-flanking-prev' : 'is-distant'}`}
                   data-index={index}
-                  data-plate-id={plate.plateNumber}
                   style={`--accent-color: ${plate.accentColor};`}
                 >
                   <!-- Flanking Navigation Cues -->
@@ -289,9 +269,8 @@ const plates: FoundryPlate[] = [
                     <span class="card-corner bottom-left" aria-hidden="true">⌞</span>
                     <span class="card-corner bottom-right" aria-hidden="true">⌟</span>
 
-                    <!-- Card Header: Plate Pill & Mini Status -->
+                    <!-- Card Header: Mini Status -->
                     <div class="card-header">
-                      <span class="card-pill">{plate.plateNumber}</span>
                       <span class="card-mini-badge">{plate.statusBadge}</span>
                     </div>
 
@@ -315,7 +294,6 @@ const plates: FoundryPlate[] = [
                     <!-- Card Mini Metric Footer -->
                     <div class="card-metric-footer">
                       <div class="card-metric-line">
-                        <span class="metric-lbl">{plate.metricLabel}</span>
                         <span class="metric-val">{plate.metricValue}</span>
                       </div>
                       <div class="card-gauge-track">
@@ -339,12 +317,6 @@ const plates: FoundryPlate[] = [
               <span class="nav-arrow" aria-hidden="true">←</span>
               <span class="nav-text">PREV</span>
             </button>
-
-            <div class="wheel-center-counter">
-              <span class="counter-curr" id="counter-current">PLATE 01</span>
-              <span class="counter-sep">/</span>
-              <span class="counter-total">09 SPECIMENS</span>
-            </div>
 
             <button 
               type="button" 
@@ -377,34 +349,7 @@ const plates: FoundryPlate[] = [
 
       </div>
 
-      <!-- ========================================== -->
-      <!-- ATELIER COLOPHON SUMMARY STRIP             -->
-      <!-- ========================================== -->
-      <div class="atelier-colophon-strip">
-        <div class="colophon-col">
-          <span class="colophon-strong">09 / 09</span>
-          <span class="colophon-caption">DISCIPLINES COMPILED</span>
-          <span class="colophon-sub">Zero Inessential Abstractions</span>
-        </div>
-
-        <div class="colophon-col">
-          <span class="colophon-strong">100<span class="colophon-unit">%</span></span>
-          <span class="colophon-caption">CORE SEMANTIC COHESION</span>
-          <span class="colophon-sub">Universal Browser Compatibility</span>
-        </div>
-
-        <div class="colophon-col">
-          <span class="colophon-strong">&lt; 50<span class="colophon-unit">ms</span></span>
-          <span class="colophon-caption">AVERAGE EDGE DISPATCH</span>
-          <span class="colophon-sub">Distributed Cache Invalidation</span>
-        </div>
-
-        <div class="colophon-col">
-          <span class="colophon-strong">0.0<span class="colophon-unit">kb</span></span>
-          <span class="colophon-caption">RUNTIME OVERHEAD</span>
-          <span class="colophon-sub">Zero-Lockin Architecture</span>
-        </div>
-      </div>
+ 
 
     </div>
   </div>
@@ -429,7 +374,6 @@ const plates: FoundryPlate[] = [
   const stage = document.getElementById('wheel-stage');
   const cylinder = document.getElementById('wheel-cylinder');
   const cards = Array.from(document.querySelectorAll('.wheel-card')) as HTMLElement[];
-  const counterCurrent = document.getElementById('counter-current');
   const paginationPills = Array.from(document.querySelectorAll('.pagination-pill')) as HTMLElement[];
   const prevBtn = document.getElementById('wheel-btn-prev');
   const nextBtn = document.getElementById('wheel-btn-next');
@@ -546,9 +490,6 @@ const plates: FoundryPlate[] = [
     lastActiveIdx = idx;
     const specimen = platesData[idx];
     if (!specimen) return;
-
-    // Update Counter
-    if (counterCurrent) counterCurrent.textContent = specimen.plateNumber;
 
     // Update Quick Nav Pills
     paginationPills.forEach((pill, i) => {
@@ -1397,7 +1338,7 @@ const plates: FoundryPlate[] = [
   /* Card Header */
   .card-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     border-bottom: 1px solid rgba(26, 26, 26, 0.08);
     padding-bottom: 0.65rem;
@@ -1488,7 +1429,7 @@ const plates: FoundryPlate[] = [
 
   .card-metric-line {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     font-family: var(--font-label, 'Space Mono', monospace);
     font-size: 0.5rem;
     letter-spacing: 0.08em;
