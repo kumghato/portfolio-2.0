@@ -1,0 +1,1840 @@
+---
+interface FoundryPlate {
+  plateNumber: string;
+  name: string;
+  metricLabel: string;
+  metricValue: string;
+  progress: number;
+  statusNote: string;
+  statusBadge: string;
+  svgType: string;
+  assetFile: string;
+  shortName: string;
+  accentColor: string;
+}
+
+const plates: FoundryPlate[] = [
+  {
+    plateNumber: "PLATE 01",
+    shortName: "HTML5",
+    name: "HTML5 Semantic Core",
+    metricLabel: "W3C SPECIFICATION COMPLIANCE",
+    metricValue: "100% SPEC",
+    progress: 100,
+    statusNote: "PARSER: 0.00ms HYDRATION BLOCK",
+    statusBadge: "WCAG AAA",
+    svgType: "html",
+    assetFile: "/Assets/HTML.svg",
+    accentColor: "#e34f26"
+  },
+  {
+    plateNumber: "PLATE 02",
+    shortName: "CSS3",
+    name: "CSS3 Styling Engines",
+    metricLabel: "GPU COMPOSITOR BUDGET",
+    metricValue: "120 FPS",
+    progress: 98,
+    statusNote: "LAYOUT: SUBGRID & STRICT BOUNDS",
+    statusBadge: "FLUID CORE",
+    svgType: "css",
+    assetFile: "/Assets/CSS.3.svg",
+    accentColor: "#0170ba"
+  },
+  {
+    plateNumber: "PLATE 03",
+    shortName: "JAVASCRIPT",
+    name: "JavaScript ESNext",
+    metricLabel: "MICROTASK CYCLE LATENCY",
+    metricValue: "< 1.0ms",
+    progress: 97,
+    statusNote: "MEMORY: LEAK-FREE ISOLATION",
+    statusBadge: "ZERO-LIB",
+    svgType: "javascript",
+    assetFile: "/Assets/Javascript.svg",
+    accentColor: "#f7df1e"
+  },
+  {
+    plateNumber: "PLATE 04",
+    shortName: "TAILWIND",
+    name: "Tailwind CSS",
+    metricLabel: "PRODUCTION ATOMIC PURGE",
+    metricValue: "6.4 KB GZIP",
+    progress: 96,
+    statusNote: "TOKEN HARMONY: DETERMINISTIC",
+    statusBadge: "JIT PURGED",
+    svgType: "tailwind",
+    assetFile: "/Assets/Tailwind_CSS_Logo.svg",
+    accentColor: "#38bdf8"
+  },
+  {
+    plateNumber: "PLATE 05",
+    shortName: "REACT",
+    name: "React Architecture",
+    metricLabel: "CONCURRENT FIBER RECONCILIATION",
+    metricValue: "PURE DIFF",
+    progress: 95,
+    statusNote: "STATE FLOW: MONOTONIC STREAM",
+    statusBadge: "OPTIMAL",
+    svgType: "react",
+    assetFile: "/Assets/React.svg",
+    accentColor: "#61dafb"
+  },
+  {
+    plateNumber: "PLATE 06",
+    shortName: "NEXT.JS",
+    name: "Next.js Platform",
+    metricLabel: "EDGE TIME TO FIRST BYTE (TTFB)",
+    metricValue: "< 45ms",
+    progress: 94,
+    statusNote: "ROUTING: DISTRIBUTED RSC TREE",
+    statusBadge: "STREAMING",
+    svgType: "nextjs",
+    assetFile: "/Assets/nextjs.svg",
+    accentColor: "#1a1a1a"
+  },
+  {
+    plateNumber: "PLATE 07",
+    shortName: "NODE.JS",
+    name: "Node.js Runtime",
+    metricLabel: "NON-BLOCKING I/O THROUGHPUT",
+    metricValue: "10K+ REQ/S",
+    progress: 93,
+    statusNote: "THREAD POOL: LIBUV TUNED",
+    statusBadge: "ASYNC I/O",
+    svgType: "nodejs",
+    assetFile: "/Assets/node-js.svg",
+    accentColor: "#8cc84b"
+  },
+  {
+    plateNumber: "PLATE 08",
+    shortName: "MONGODB",
+    name: "MongoDB Atlas",
+    metricLabel: "COMPOUND B-TREE QUERY TIME",
+    metricValue: "< 2.4ms",
+    progress: 91,
+    statusNote: "REPLICATION: MULTI-REGION ATLAS",
+    statusBadge: "BSON INDEX",
+    svgType: "mongodb",
+    assetFile: "/Assets/mongodb.svg",
+    accentColor: "#47a248"
+  },
+  {
+    plateNumber: "PLATE 09",
+    shortName: "SUPABASE",
+    name: "Supabase Cloud Core",
+    metricLabel: "POSTGRES ENGINE RESPONSE",
+    metricValue: "< 8.0ms",
+    progress: 95,
+    statusNote: "REPLICATION: REALTIME WAL STREAM",
+    statusBadge: "POSTGRES RLS",
+    svgType: "supabase",
+    assetFile: "/Assets/supabase.svg",
+    accentColor: "#3ecf8e"
+  }
+];
+---
+
+<section 
+  class="foundry-metrics-wrapper" 
+  id="technical-atelier" 
+  aria-labelledby="atelier-heading"
+>
+  <!-- Architectural Top Framing Hairline Strip -->
+  <div class="atelier-sub-bar" aria-label="Atelier Monograph Technical Registry">
+    <div class="atelier-container">
+      <div class="meta-grid">
+        <div class="meta-item meta-title">
+          <span class="meta-strong">SECTION 02</span>
+          <span class="meta-divider">—</span>
+          <span>FOUNDRY METRICS REGISTRY</span>
+        </div>
+
+        <div class="meta-item meta-disciplines">
+          <span class="meta-label">DISCIPLINES:</span>
+          <span class="meta-strong">09 SYSTEM PLATES</span>
+        </div>
+
+        <div class="meta-item meta-standards">
+          <span class="meta-label">STANDARDS:</span>
+          <span class="meta-strong">W3C • TC39 • WHATWG</span>
+        </div>
+
+        <div class="meta-item meta-status">
+          <span class="meta-label">STATUS:</span>
+          <span class="meta-badge-pulse">PRODUCTION GRADE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Atelier Content Container -->
+  <div class="atelier-main-body">
+    <div class="atelier-container">
+
+      <!-- ========================================== -->
+      <!-- SECTION HEADER: HIGH-CONTRAST DIDONE SERIF -->
+      <!-- ========================================== -->
+      <div class="atelier-header-block">
+        <div class="header-left">
+          <!-- Subhead Tag -->
+          <div class="tag-row">
+            <span class="olive-tag">
+              <span class="tag-dot" aria-hidden="true"></span>
+              SECTION 02 // FOUNDRY METRICS
+            </span>
+          </div>
+
+          <!-- Main Headline -->
+          <h2 id="atelier-heading" class="atelier-headline">
+            THE TECHNICAL ATELIER
+          </h2>
+
+          <div class="header-sub-tagline">
+            <span>ARCHITECTURAL INVENTORY &amp; CORE STACK PROFICIENCY</span>
+          </div>
+        </div>
+
+        <!-- Accompanying Italicized Editorial Aside -->
+        <div class="header-right">
+          <blockquote class="editorial-aside">
+            <p>
+              “Nine foundational disciplines crafted with absolute precision. No transient fads; only durable, hyper-optimized core web and system architectures.”
+            </p>
+          </blockquote>
+          <div class="editorial-citation">
+            <span class="citation-folio">VOL. XIV • ARCHIVAL REGISTRY</span>
+            <span class="citation-dot">•</span>
+            <span>SYSTEM STABILITY: VERIFIED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- EXHIBITION STATUS & MOTION BAR             -->
+      <!-- ========================================== -->
+      <div class="atelier-toolbar-bar">
+        <div class="toolbar-left">
+          <span class="toolbar-label">EXHIBITION INTERFACE:</span>
+          <span class="toolbar-mode-badge">
+            <span class="btn-icon" aria-hidden="true">◎</span>
+            <span>3D IMAGE WHEEL</span>
+          </span>
+        </div>
+
+        <div class="toolbar-right">
+          <div class="motion-badge-chip">
+            <span class="pulse-indicator" aria-hidden="true"></span>
+            <span>MOTION ENGINE // SPRING KINEMATICS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- THE INTERACTIVE 3D IMAGE WHEEL STAGE       -->
+      <!-- ========================================== -->
+      <div class="wheel-view-container" id="wheel-view-wrapper">
+        
+        <div class="wheel-stage-wrapper">
+          
+          <!-- Instructions overlay hint -->
+          <div class="wheel-interaction-hint" aria-hidden="true">
+            <span class="hint-arrow">←</span>
+            <span>CLICK ADJACENT PLATES OR DRAG TO ROTATE // INTERACTIVE 3D DEPTH</span>
+            <span class="hint-arrow">→</span>
+          </div>
+
+          <!-- The 3D Stage -->
+          <div 
+            class="wheel-3d-stage" 
+            id="wheel-stage" 
+            role="region" 
+            aria-label="3D Technical Atelier Image Wheel"
+            tabindex="0"
+          >
+            <!-- Circular Ground Orbit Markings (Floor Turntable) -->
+            <div class="wheel-ground-orbit" aria-hidden="true">
+              <div class="orbit-ring outer"></div>
+              <div class="orbit-ring inner"></div>
+              <div class="orbit-cross cross-h"></div>
+              <div class="orbit-cross cross-v"></div>
+              <div class="orbit-center-pin"></div>
+            </div>
+
+            <!-- The Rotating Cylinder containing the 9 Plates -->
+            <div class="wheel-cylinder" id="wheel-cylinder">
+              {plates.map((plate, index) => (
+                <article 
+                  class={`wheel-card ${index === 0 ? 'is-active-front' : index === 1 ? 'is-flanking is-flanking-next' : index === 8 ? 'is-flanking is-flanking-prev' : 'is-distant'}`}
+                  data-index={index}
+                  data-plate-id={plate.plateNumber}
+                  style={`--accent-color: ${plate.accentColor};`}
+                >
+                  <!-- Flanking Navigation Cues -->
+                  <div class="card-flank-cue flank-cue-prev" aria-hidden="true">
+                    <span class="cue-arrow">←</span>
+                    <span class="cue-label">PREV</span>
+                  </div>
+                  <div class="card-flank-cue flank-cue-next" aria-hidden="true">
+                    <span class="cue-label">NEXT</span>
+                    <span class="cue-arrow">→</span>
+                  </div>
+
+                  <div class="wheel-card-inner">
+                    <!-- Specular Glare Layer -->
+                    <div class="card-glare" aria-hidden="true"></div>
+
+                    <!-- Corner Architectural Marks -->
+                    <span class="card-corner top-left" aria-hidden="true">⌜</span>
+                    <span class="card-corner top-right" aria-hidden="true">⌝</span>
+                    <span class="card-corner bottom-left" aria-hidden="true">⌞</span>
+                    <span class="card-corner bottom-right" aria-hidden="true">⌟</span>
+
+                    <!-- Card Header: Plate Pill & Mini Status -->
+                    <div class="card-header">
+                      <span class="card-pill">{plate.plateNumber}</span>
+                      <span class="card-mini-badge">{plate.statusBadge}</span>
+                    </div>
+
+                    <!-- Central Image Frame: Authentic SVG from Assets folder -->
+                    <div class="card-image-pedestal">
+                      <div class="pedestal-halo" aria-hidden="true"></div>
+                      <img 
+                        src={plate.assetFile} 
+                        alt={`${plate.name} logo`} 
+                        class="card-tech-image" 
+                        loading="eager"
+                        draggable="false"
+                      />
+                    </div>
+
+                    <!-- Card Title (Skill name only) -->
+                    <div class="card-content">
+                      <h3 class="card-title">{plate.name}</h3>
+                    </div>
+
+                    <!-- Card Mini Metric Footer -->
+                    <div class="card-metric-footer">
+                      <div class="card-metric-line">
+                        <span class="metric-lbl">{plate.metricLabel}</span>
+                        <span class="metric-val">{plate.metricValue}</span>
+                      </div>
+                      <div class="card-gauge-track">
+                        <div class="card-gauge-bar" style={`width: ${plate.progress}%;`}></div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <!-- Wheel Center Counter & Navigation Controls -->
+          <div class="wheel-controls-strip">
+            <button 
+              type="button" 
+              class="wheel-nav-btn prev" 
+              id="wheel-btn-prev" 
+              aria-label="Previous specimen plate"
+            >
+              <span class="nav-arrow" aria-hidden="true">←</span>
+              <span class="nav-text">PREV</span>
+            </button>
+
+            <div class="wheel-center-counter">
+              <span class="counter-curr" id="counter-current">PLATE 01</span>
+              <span class="counter-sep">/</span>
+              <span class="counter-total">09 SPECIMENS</span>
+            </div>
+
+            <button 
+              type="button" 
+              class="wheel-nav-btn next" 
+              id="wheel-btn-next" 
+              aria-label="Next specimen plate"
+            >
+              <span class="nav-text">NEXT</span>
+              <span class="nav-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <!-- Quick Navigation Bar: 9 Plate Pills -->
+          <div class="wheel-pagination-strip" role="tablist" aria-label="Jump to specific plate">
+            {plates.map((plate, index) => (
+              <button
+                type="button"
+                class={`pagination-pill ${index === 0 ? 'is-active' : ''}`}
+                data-target-index={index}
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+                aria-label={`View ${plate.name}`}
+              >
+                <span class="pill-num">0{index + 1}</span>
+                <span class="pill-name">{plate.shortName}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ========================================== -->
+      <!-- ATELIER COLOPHON SUMMARY STRIP             -->
+      <!-- ========================================== -->
+      <div class="atelier-colophon-strip">
+        <div class="colophon-col">
+          <span class="colophon-strong">09 / 09</span>
+          <span class="colophon-caption">DISCIPLINES COMPILED</span>
+          <span class="colophon-sub">Zero Inessential Abstractions</span>
+        </div>
+
+        <div class="colophon-col">
+          <span class="colophon-strong">100<span class="colophon-unit">%</span></span>
+          <span class="colophon-caption">CORE SEMANTIC COHESION</span>
+          <span class="colophon-sub">Universal Browser Compatibility</span>
+        </div>
+
+        <div class="colophon-col">
+          <span class="colophon-strong">&lt; 50<span class="colophon-unit">ms</span></span>
+          <span class="colophon-caption">AVERAGE EDGE DISPATCH</span>
+          <span class="colophon-sub">Distributed Cache Invalidation</span>
+        </div>
+
+        <div class="colophon-col">
+          <span class="colophon-strong">0.0<span class="colophon-unit">kb</span></span>
+          <span class="colophon-caption">RUNTIME OVERHEAD</span>
+          <span class="colophon-sub">Zero-Lockin Architecture</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- JSON Serialized Plates Data for Client Scripts -->
+<script type="application/json" id="plates-json" set:html={JSON.stringify(plates)} />
+
+<!-- ========================================== -->
+<!-- CLIENT SCRIPT: MOTION IMAGE WHEEL & 3D TILT-->
+<!-- ========================================== -->
+<script>
+  import { animate } from 'motion';
+
+  // Read data
+  const platesDataElement = document.getElementById('plates-json');
+  const platesData = platesDataElement ? JSON.parse(platesDataElement.textContent || '[]') : [];
+  const TOTAL_PLATES = platesData.length || 9;
+  const STEP_DEGREES = 360 / TOTAL_PLATES; // 40 degrees
+
+  // Elements
+  const stage = document.getElementById('wheel-stage');
+  const cylinder = document.getElementById('wheel-cylinder');
+  const cards = Array.from(document.querySelectorAll('.wheel-card')) as HTMLElement[];
+  const counterCurrent = document.getElementById('counter-current');
+  const paginationPills = Array.from(document.querySelectorAll('.pagination-pill')) as HTMLElement[];
+  const prevBtn = document.getElementById('wheel-btn-prev');
+  const nextBtn = document.getElementById('wheel-btn-next');
+
+  // Kinematic State
+  let currentRotation = 0;
+  let activeIndex = 0;
+  let animControls: any = null;
+  const isAutoSpinning = true; // Auto-spin active by default
+  let autoTimer: any = null;
+
+  // Compute 3D Radius responsive to viewport
+  function computeRadius(): number {
+    const width = window.innerWidth;
+    if (width < 480) return 210;
+    if (width < 768) return 260;
+    if (width < 1024) return 310;
+    return 380;
+  }
+
+  let currentRadius = computeRadius();
+
+  // Position cards in 3D circular cylinder
+  function positionCards() {
+    currentRadius = computeRadius();
+    cards.forEach((card, idx) => {
+      const angle = idx * STEP_DEGREES;
+      card.style.transform = `rotateY(${angle}deg) translateZ(${currentRadius}px)`;
+    });
+  }
+
+  // Apply cylinder rotation and calculate angular perspective/focus
+  function applyRotation(rot: number) {
+    if (!cylinder) return;
+    cylinder.style.transform = `rotateX(-3.5deg) rotateY(${rot}deg)`;
+
+    // Calculate normalized active index facing the camera
+    const normalized = ((-rot % 360) + 360) % 360;
+    const currIdx = (Math.round(normalized / STEP_DEGREES) % TOTAL_PLATES + TOTAL_PLATES) % TOTAL_PLATES;
+
+    // Update each card's visual depth & flanking directions
+    cards.forEach((card, idx) => {
+      let diff = (idx * STEP_DEGREES - (-rot)) % 360;
+      if (diff > 180) diff -= 360;
+      if (diff < -180) diff += 360;
+      const absDiff = Math.abs(diff);
+
+      if (absDiff < 20) {
+        card.classList.add('is-active-front');
+        card.classList.remove('is-flanking', 'is-flanking-prev', 'is-flanking-next', 'is-distant');
+        card.style.opacity = '1';
+        card.style.zIndex = '30';
+      } else if (absDiff < 65) {
+        card.classList.remove('is-active-front', 'is-distant');
+        card.classList.add('is-flanking');
+        if (diff < 0) {
+          card.classList.add('is-flanking-prev');
+          card.classList.remove('is-flanking-next');
+          card.setAttribute('aria-label', `Previous specimen plate: ${platesData[idx]?.name || ''}`);
+        } else {
+          card.classList.add('is-flanking-next');
+          card.classList.remove('is-flanking-prev');
+          card.setAttribute('aria-label', `Next specimen plate: ${platesData[idx]?.name || ''}`);
+        }
+        card.style.opacity = '0.78';
+        card.style.zIndex = '15';
+      } else {
+        card.classList.remove('is-active-front', 'is-flanking', 'is-flanking-prev', 'is-flanking-next');
+        card.classList.add('is-distant');
+        const depthOpacity = Math.max(0.18, 0.52 - (absDiff / 180) * 0.38);
+        card.style.opacity = depthOpacity.toFixed(2);
+        card.style.zIndex = '5';
+      }
+    });
+
+    if (currIdx !== activeIndex) {
+      activeIndex = currIdx;
+      updateActiveSpecimen(activeIndex);
+    }
+  }
+
+  // Smooth Motion Kinematics
+  function animateToAngle(targetAngle: number, duration: number = 0.8) {
+    if (animControls) {
+      animControls.stop();
+      animControls = null;
+    }
+    const startAngle = currentRotation;
+    animControls = animate(startAngle, targetAngle, {
+      duration,
+      ease: [0.16, 1, 0.3, 1], // Architectural spring-like cubic bezier
+      onUpdate: (latest: number) => {
+        currentRotation = latest;
+        applyRotation(currentRotation);
+      }
+    });
+  }
+
+  // Direct rotation to a specific plate index (shortest path)
+  function rotateToPlate(targetIndex: number) {
+    const currentNorm = ((-currentRotation % 360) + 360) % 360;
+    const targetNorm = targetIndex * STEP_DEGREES;
+    let diff = targetNorm - currentNorm;
+    if (diff > 180) diff -= 360;
+    if (diff < -180) diff += 360;
+    const targetAngle = currentRotation - diff;
+    animateToAngle(targetAngle, 0.85);
+  }
+
+  // Update synchronized active specimen status & pills
+  let lastActiveIdx = -1;
+  function updateActiveSpecimen(idx: number) {
+    if (idx === lastActiveIdx) return;
+    lastActiveIdx = idx;
+    const specimen = platesData[idx];
+    if (!specimen) return;
+
+    // Update Counter
+    if (counterCurrent) counterCurrent.textContent = specimen.plateNumber;
+
+    // Update Quick Nav Pills
+    paginationPills.forEach((pill, i) => {
+      const isSelected = i === idx;
+      pill.classList.toggle('is-active', isSelected);
+      pill.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+    });
+  }
+
+  // Ambient Auto-Spin kinematics (runs by default)
+  function startAutoSpin() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = setInterval(() => {
+      if (isAutoSpinning && !isDragging) {
+        const nextTarget = currentRotation - STEP_DEGREES;
+        animateToAngle(nextTarget, 1.1);
+      }
+    }, 4200);
+  }
+
+  function pauseAutoSpin() {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+  }
+
+  // Pointer / Touch Gestures Dragging vs Clicking
+  let isPointerDown = false;
+  let isDragging = false;
+  let wasDragging = false;
+  let pointerStartX = 0;
+  let pointerStartY = 0;
+  let dragStartRotation = 0;
+  let lastClientX = 0;
+  let lastTimestamp = 0;
+  let dragVelocity = 0;
+  const DRAG_THRESHOLD = 7; // Pixels to distinguish click from drag
+
+  if (stage) {
+    stage.addEventListener('pointerdown', (e: PointerEvent) => {
+      // Allow primary pointer only
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+      isPointerDown = true;
+      isDragging = false;
+      pointerStartX = e.clientX;
+      pointerStartY = e.clientY;
+      dragStartRotation = currentRotation;
+      lastClientX = e.clientX;
+      lastTimestamp = performance.now();
+      dragVelocity = 0;
+
+      pauseAutoSpin();
+    });
+
+    stage.addEventListener('pointermove', (e: PointerEvent) => {
+      if (!isPointerDown) return;
+
+      const deltaX = e.clientX - pointerStartX;
+      const deltaY = e.clientY - pointerStartY;
+      const dist = Math.hypot(deltaX, deltaY);
+
+      if (!isDragging && dist > DRAG_THRESHOLD) {
+        isDragging = true;
+        stage.classList.add('is-dragging');
+        if (animControls) {
+          animControls.stop();
+          animControls = null;
+        }
+        try {
+          stage.setPointerCapture(e.pointerId);
+        } catch (_) {}
+      }
+
+      if (isDragging) {
+        const now = performance.now();
+        const dt = now - lastTimestamp;
+        if (dt > 0) {
+          dragVelocity = (e.clientX - lastClientX) / dt;
+        }
+        lastClientX = e.clientX;
+        lastTimestamp = now;
+
+        currentRotation = dragStartRotation + deltaX * 0.36;
+        applyRotation(currentRotation);
+      }
+    });
+
+    const handlePointerUp = (e: PointerEvent) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+
+      if (isDragging) {
+        isDragging = false;
+        wasDragging = true;
+        setTimeout(() => { wasDragging = false; }, 80);
+
+        stage.classList.remove('is-dragging');
+        try {
+          if (stage.hasPointerCapture(e.pointerId)) {
+            stage.releasePointerCapture(e.pointerId);
+          }
+        } catch (_) {}
+
+        // Calculate inertia release
+        const momentumTarget = currentRotation + dragVelocity * 140;
+        const snapped = Math.round(momentumTarget / STEP_DEGREES) * STEP_DEGREES;
+        animateToAngle(snapped, 0.75);
+
+        if (isAutoSpinning) {
+          startAutoSpin();
+        }
+      } else {
+        // Pure click: do NOT snap back, click handler will execute
+        if (isAutoSpinning) {
+          startAutoSpin();
+        }
+      }
+    };
+
+    stage.addEventListener('pointerup', handlePointerUp);
+    stage.addEventListener('pointercancel', handlePointerUp);
+
+    // Pause auto-spin on hover, resume on leave
+    stage.addEventListener('mouseenter', pauseAutoSpin);
+    stage.addEventListener('mouseleave', () => {
+      if (isAutoSpinning && !isDragging) {
+        startAutoSpin();
+      }
+    });
+
+    // Delegated click handler on stage to catch card clicks
+    stage.addEventListener('click', (e: MouseEvent) => {
+      if (isDragging || wasDragging) return;
+      const cardEl = (e.target as HTMLElement).closest('.wheel-card') as HTMLElement;
+      if (cardEl) {
+        const idx = parseInt(cardEl.getAttribute('data-index') || '-1', 10);
+        if (idx >= 0 && idx < TOTAL_PLATES) {
+          pauseAutoSpin();
+          rotateToPlate(idx);
+          if (isAutoSpinning) startAutoSpin();
+        }
+      }
+    });
+  }
+
+  // =========================================================================
+  // 3D CARD CURSOR TRACKING: LISTEN TO CURSOR MOVEMENT (LEFT, RIGHT, UP, DOWN)
+  // =========================================================================
+  cards.forEach((card, idx) => {
+    const cardInner = card.querySelector('.wheel-card-inner') as HTMLElement;
+    if (!cardInner) return;
+
+    let rafId: number | null = null;
+    let targetTiltX = 0;
+    let targetTiltY = 0;
+    let targetGlareX = 50;
+    let targetGlareY = 50;
+
+    const handleCardPointerMove = (e: PointerEvent) => {
+      // Avoid tilt fighting when user is actively dragging the carousel
+      if (isDragging) return;
+
+      const rect = card.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+
+      // Normalized coordinates from -1 to 1 (-1 = left/top, +1 = right/bottom)
+      const normX = ((mouseX / rect.width) - 0.5) * 2;
+      const normY = ((mouseY / rect.height) - 0.5) * 2;
+
+      // Maximum tilt angles in degrees
+      const MAX_TILT_X = 22; // Pitch on horizontal axis (Up / Down)
+      const MAX_TILT_Y = 24; // Yaw on vertical axis (Left / Right)
+
+      // Directional 3D response
+      targetTiltX = -normY * MAX_TILT_X;
+      targetTiltY = normX * MAX_TILT_Y;
+
+      targetGlareX = (mouseX / rect.width) * 100;
+      targetGlareY = (mouseY / rect.height) * 100;
+
+      card.classList.remove('is-leaving');
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          cardInner.style.setProperty('--card-tilt-x', `${targetTiltX.toFixed(2)}deg`);
+          cardInner.style.setProperty('--card-tilt-y', `${targetTiltY.toFixed(2)}deg`);
+          cardInner.style.setProperty('--card-lift-z', '18px');
+          cardInner.style.setProperty('--glare-x', `${targetGlareX.toFixed(1)}%`);
+          cardInner.style.setProperty('--glare-y', `${targetGlareY.toFixed(1)}%`);
+          cardInner.style.setProperty('--glare-opacity', '0.65');
+          rafId = null;
+        });
+      }
+    };
+
+    const handleCardPointerLeave = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      card.classList.add('is-leaving');
+      cardInner.style.setProperty('--card-tilt-x', '0deg');
+      cardInner.style.setProperty('--card-tilt-y', '0deg');
+      cardInner.style.setProperty('--card-lift-z', '0px');
+      cardInner.style.setProperty('--glare-opacity', '0');
+    };
+
+    const handleCardPointerEnter = (e: PointerEvent) => {
+      card.classList.remove('is-leaving');
+      handleCardPointerMove(e);
+    };
+
+    // Card Cursor movement event listeners
+    card.addEventListener('pointermove', handleCardPointerMove);
+    card.addEventListener('pointerenter', handleCardPointerEnter);
+    card.addEventListener('pointerleave', handleCardPointerLeave);
+
+    // Click direct card on wheel to bring it to front (handles next, prev, or any plate)
+    card.addEventListener('click', (e) => {
+      if (isDragging || wasDragging) return;
+      e.stopPropagation();
+      pauseAutoSpin();
+      rotateToPlate(idx);
+      if (isAutoSpinning) startAutoSpin();
+    });
+  });
+
+  // Previous & Next navigation buttons
+  prevBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pauseAutoSpin();
+    const targetIdx = (activeIndex - 1 + TOTAL_PLATES) % TOTAL_PLATES;
+    rotateToPlate(targetIdx);
+    if (isAutoSpinning) startAutoSpin();
+  });
+
+  nextBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    pauseAutoSpin();
+    const targetIdx = (activeIndex + 1) % TOTAL_PLATES;
+    rotateToPlate(targetIdx);
+    if (isAutoSpinning) startAutoSpin();
+  });
+
+  // Pagination Quick Jump
+  paginationPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      pauseAutoSpin();
+      const targetIdx = parseInt(pill.getAttribute('data-target-index') || '0', 10);
+      rotateToPlate(targetIdx);
+      if (isAutoSpinning) startAutoSpin();
+    });
+  });
+
+  // Handle Resize
+  window.addEventListener('resize', () => {
+    positionCards();
+    applyRotation(currentRotation);
+  });
+
+  // Keyboard navigation
+  stage?.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      pauseAutoSpin();
+      rotateToPlate((activeIndex - 1 + TOTAL_PLATES) % TOTAL_PLATES);
+      if (isAutoSpinning) startAutoSpin();
+    } else if (e.key === 'ArrowRight') {
+      pauseAutoSpin();
+      rotateToPlate((activeIndex + 1) % TOTAL_PLATES);
+      if (isAutoSpinning) startAutoSpin();
+    }
+  });
+
+  // Initialize
+  positionCards();
+  applyRotation(0);
+  updateActiveSpecimen(0);
+  if (isAutoSpinning) {
+    startAutoSpin();
+  }
+</script>
+
+<style>
+  /* ==========================================================================
+     ATELIER SECTION VARIABLES & TOKENS (Matching High-Fashion Monograph Spec)
+     ========================================================================== */
+  .foundry-metrics-wrapper {
+    --atelier-bg: #f4f1ea;
+    --atelier-bg-card: #ffffff;
+    --atelier-bg-card-subtle: #fcfbf9;
+    --atelier-bg-dark: #ebe6da;
+    --atelier-charcoal: #1a1a1a;
+    --atelier-charcoal-muted: rgba(26, 26, 26, 0.65);
+    --atelier-hairline: rgba(26, 26, 26, 0.16);
+    --atelier-hairline-bold: rgba(26, 26, 26, 0.32);
+    --atelier-olive: #858b73;
+    --atelier-olive-dark: #5a6351;
+    --atelier-olive-tint: rgba(133, 139, 115, 0.14);
+
+    background-color: var(--atelier-bg);
+    color: var(--atelier-charcoal);
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid var(--atelier-hairline);
+    background-image: radial-gradient(rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .atelier-container {
+    max-width: var(--container-max-width, 1540px);
+    margin: 0 auto;
+    padding: 0 var(--container-padding, clamp(1.25rem, 3.2vw, 2.5rem));
+  }
+
+  /* ==========================================================================
+     TOP METADATA REGISTRY SUB-BAR
+     ========================================================================== */
+  .atelier-sub-bar {
+    width: 100%;
+    border-bottom: 1px solid var(--atelier-hairline);
+    background-color: rgba(235, 230, 218, 0.45);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--atelier-charcoal);
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .meta-item {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-right: 1px solid var(--atelier-hairline);
+  }
+
+  .meta-item:last-child {
+    border-right: none;
+    justify-content: flex-end;
+  }
+
+  .meta-disciplines {
+    justify-content: center;
+  }
+
+  .meta-standards {
+    justify-content: center;
+  }
+
+  .meta-strong {
+    font-weight: 700;
+    color: var(--atelier-charcoal);
+  }
+
+  .meta-divider {
+    color: var(--atelier-hairline);
+  }
+
+  .meta-label {
+    color: var(--atelier-charcoal-muted);
+  }
+
+  .meta-badge-pulse {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--atelier-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.4);
+    color: var(--atelier-olive-dark);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  /* ==========================================================================
+     SECTION BODY & PADDING
+     ========================================================================== */
+  .atelier-main-body {
+    padding: 4.5rem 0 5.5rem;
+  }
+
+  /* ==========================================================================
+     SECTION HEADER
+     ========================================================================== */
+  .atelier-header-block {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(360px, 460px);
+    gap: clamp(2rem, 3.5vw, 4rem);
+    align-items: end;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid var(--atelier-hairline);
+    margin-bottom: 2.5rem;
+  }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tag-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .olive-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.65rem;
+    background-color: var(--atelier-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.35);
+    color: var(--atelier-olive-dark);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--atelier-olive-dark);
+  }
+
+  .atelier-headline {
+    margin: 0;
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(2.5rem, 5.2vw, 4.75rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    line-height: 0.94;
+    color: var(--atelier-charcoal);
+  }
+
+  .header-sub-tagline {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    color: var(--atelier-charcoal-muted);
+    text-transform: uppercase;
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .editorial-aside {
+    margin: 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 2px solid var(--atelier-olive);
+  }
+
+  .editorial-aside p {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: clamp(1.1rem, 1.45vw, 1.35rem);
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--atelier-charcoal);
+    margin: 0;
+  }
+
+  .editorial-citation {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    color: var(--atelier-charcoal-muted);
+    text-transform: uppercase;
+    padding-left: 1.25rem;
+  }
+
+  .citation-folio {
+    color: var(--atelier-olive-dark);
+    font-weight: 700;
+  }
+
+  .citation-dot {
+    color: var(--atelier-hairline);
+  }
+
+  /* ==========================================================================
+     ATELIER TOOLBAR / EXHIBITION MODE STRIP
+     ========================================================================== */
+  .atelier-toolbar-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    background-color: rgba(235, 230, 218, 0.4);
+    border: 1px solid var(--atelier-hairline);
+    margin-bottom: 2.5rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .toolbar-left,
+  .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    color: var(--atelier-charcoal-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .toolbar-mode-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--atelier-charcoal);
+    color: #ffffff;
+    padding: 0.35rem 0.8rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-icon {
+    font-size: 0.75rem;
+  }
+
+  .motion-badge-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--atelier-olive-dark);
+    text-transform: uppercase;
+    background-color: var(--atelier-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.3);
+    padding: 0.35rem 0.65rem;
+  }
+
+  .pulse-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--atelier-olive);
+    animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes radar-ping {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+
+  /* ==========================================================================
+     3D IMAGE WHEEL COMPONENT
+     ========================================================================== */
+  .wheel-view-container {
+    width: 100%;
+  }
+
+  .wheel-stage-wrapper {
+    background-color: rgba(251, 249, 245, 0.75);
+    border: 1px solid var(--atelier-hairline);
+    position: relative;
+    padding: 2rem 1.5rem 2.25rem;
+    overflow: hidden;
+    box-shadow: 0 10px 40px -15px rgba(26, 26, 26, 0.05);
+  }
+
+  .wheel-interaction-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    color: var(--atelier-charcoal-muted);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    user-select: none;
+    text-align: center;
+  }
+
+  .hint-arrow {
+    color: var(--atelier-olive);
+    font-weight: 700;
+  }
+
+  /* 3D Wheel Viewport Stage */
+  .wheel-3d-stage {
+    width: 100%;
+    height: 525px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    perspective-origin: 50% 50%;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .wheel-3d-stage.is-dragging {
+    cursor: grabbing;
+  }
+
+  /* Turntable Ground Circular Marking */
+  .wheel-ground-orbit {
+    position: absolute;
+    width: 620px;
+    height: 620px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(80deg);
+    pointer-events: none;
+    opacity: 0.45;
+  }
+
+  .orbit-ring.outer {
+    position: absolute;
+    inset: 0;
+    border: 1px dashed rgba(26, 26, 26, 0.22);
+    border-radius: 50%;
+  }
+
+  .orbit-ring.inner {
+    position: absolute;
+    inset: 80px;
+    border: 1px solid rgba(26, 26, 26, 0.14);
+    border-radius: 50%;
+  }
+
+  .orbit-cross.cross-h {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgba(26, 26, 26, 0.12);
+  }
+
+  .orbit-cross.cross-v {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(26, 26, 26, 0.12);
+  }
+
+  .orbit-center-pin {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--atelier-olive);
+    border-radius: 50%;
+    background-color: var(--atelier-bg);
+  }
+
+  /* Rotating 3D Cylinder */
+  .wheel-cylinder {
+    position: relative;
+    width: 0;
+    height: 0;
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: none;
+  }
+
+  /* Individual Card on the Wheel */
+  .wheel-card {
+    position: absolute;
+    width: 250px;
+    height: 330px;
+    left: -125px;
+    top: -165px;
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+    cursor: pointer;
+    perspective: 1000px;
+    transition: 
+      opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      z-index 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* 3D Tilting Inner Container responding to Cursor Movement */
+  .wheel-card-inner {
+    width: 100%;
+    height: 100%;
+    background-color: var(--atelier-bg-card);
+    border: 1px solid var(--atelier-hairline);
+    padding: 1.35rem 1.25rem;
+    box-shadow: 0 12px 35px -8px rgba(26, 26, 26, 0.1);
+    transform-style: preserve-3d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    transform: rotateX(var(--card-tilt-x, 0deg)) rotateY(var(--card-tilt-y, 0deg)) translateZ(var(--card-lift-z, 0px));
+    transition: 
+      border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.08s ease-out;
+    will-change: transform;
+  }
+
+  /* Smooth return to resting orientation on cursor exit */
+  .wheel-card.is-leaving .wheel-card-inner {
+    transition: 
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+      box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .wheel-card.is-active-front .wheel-card-inner {
+    border-color: var(--atelier-charcoal);
+    box-shadow: 
+      0 24px 60px -12px rgba(26, 26, 26, 0.28),
+      0 0 0 1px var(--atelier-charcoal),
+      0 0 25px -4px rgba(133, 139, 115, 0.35);
+  }
+
+  .wheel-card.is-flanking .wheel-card-inner {
+    border-color: rgba(26, 26, 26, 0.22);
+  }
+
+  .wheel-card.is-flanking {
+    cursor: pointer;
+  }
+
+  .wheel-card.is-flanking:hover {
+    opacity: 0.96 !important;
+  }
+
+  .wheel-card.is-flanking:hover .wheel-card-inner {
+    border-color: var(--atelier-olive);
+    box-shadow: 0 16px 45px -8px rgba(26, 26, 26, 0.2);
+  }
+
+  .wheel-card:hover .wheel-card-inner {
+    border-color: var(--atelier-olive-dark);
+  }
+
+  /* Flanking Interactive Navigation Cues */
+  .card-flank-cue {
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--atelier-charcoal);
+    color: var(--atelier-bg);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    padding: 0.35rem 0.65rem;
+    border-radius: 9999px;
+    align-items: center;
+    gap: 0.35rem;
+    pointer-events: none;
+    z-index: 35;
+    box-shadow: 0 4px 14px rgba(26, 26, 26, 0.25);
+    white-space: nowrap;
+    opacity: 0.88;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .wheel-card.is-flanking-prev .card-flank-cue.flank-cue-prev {
+    display: inline-flex;
+    left: -16px;
+  }
+
+  .wheel-card.is-flanking-next .card-flank-cue.flank-cue-next {
+    display: inline-flex;
+    right: -16px;
+  }
+
+  .wheel-card.is-flanking-prev:hover .card-flank-cue.flank-cue-prev {
+    opacity: 1;
+    background-color: var(--atelier-olive-dark);
+    transform: translateY(-50%) translateX(-3px);
+  }
+
+  .wheel-card.is-flanking-next:hover .card-flank-cue.flank-cue-next {
+    opacity: 1;
+    background-color: var(--atelier-olive-dark);
+    transform: translateY(-50%) translateX(3px);
+  }
+
+  /* Dynamic Specular Sheen Glare following Cursor */
+  .card-glare {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 220px at var(--glare-x, 50%) var(--glare-y, 50%),
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(255, 255, 255, 0) 75%
+    );
+    opacity: var(--glare-opacity, 0);
+    transition: opacity 0.25s ease;
+    mix-blend-mode: overlay;
+    z-index: 10;
+  }
+
+  /* Card Architectural Corner Marks */
+  .card-corner {
+    position: absolute;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    color: rgba(26, 26, 26, 0.3);
+    user-select: none;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .card-corner.top-left { top: 0.4rem; left: 0.4rem; }
+  .card-corner.top-right { top: 0.4rem; right: 0.4rem; }
+  .card-corner.bottom-left { bottom: 0.4rem; left: 0.4rem; }
+  .card-corner.bottom-right { bottom: 0.4rem; right: 0.4rem; }
+
+  /* Card Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+    padding-bottom: 0.65rem;
+    transform: translateZ(14px);
+  }
+
+  .card-pill {
+    background-color: var(--atelier-charcoal);
+    color: var(--atelier-bg);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+  }
+
+  .card-mini-badge {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    font-weight: 700;
+    color: var(--atelier-olive-dark);
+    letter-spacing: 0.08em;
+  }
+
+  /* Central Asset Pedestal / Frame with 3D Parallax Depth */
+  .card-image-pedestal {
+    width: 90px;
+    height: 90px;
+    margin: 0.75rem auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #faf8f5;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
+    transform: translateZ(26px);
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+  }
+
+  .card-tech-image {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.08));
+    transform: translateZ(12px);
+    transition: transform 0.3s ease;
+  }
+
+  .wheel-card.is-active-front .card-tech-image {
+    transform: translateZ(18px) scale(1.08);
+  }
+
+  /* Card Typography (Title only, no description) */
+  .card-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(16px);
+    padding: 0.25rem 0;
+  }
+
+  .card-title {
+    margin: 0;
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: 1.18rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--atelier-charcoal);
+    line-height: 1.2;
+  }
+
+  /* Card Metric Line */
+  .card-metric-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.08);
+    background-color: rgba(244, 241, 234, 0.45);
+    padding: 0.45rem 0.5rem;
+    transform: translateZ(14px);
+  }
+
+  .card-metric-line {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .metric-lbl {
+    color: var(--atelier-charcoal-muted);
+  }
+
+  .metric-val {
+    color: var(--atelier-charcoal);
+    font-weight: 700;
+  }
+
+  .card-gauge-track {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(26, 26, 26, 0.1);
+  }
+
+  .card-gauge-bar {
+    height: 100%;
+    background-color: var(--atelier-olive);
+  }
+
+  /* ==========================================================================
+     WHEEL CENTER COUNTER STRIP & NAVIGATION CONTROLS
+     ========================================================================== */
+  .wheel-controls-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.25rem;
+    border-top: 1px solid var(--atelier-hairline);
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    position: relative;
+    z-index: 40;
+  }
+
+  .wheel-nav-btn {
+    background-color: var(--atelier-bg-card);
+    border: 1px solid var(--atelier-hairline);
+    color: var(--atelier-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 0.45rem 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    border-radius: 2px;
+  }
+
+  .wheel-nav-btn:hover {
+    background-color: var(--atelier-charcoal);
+    border-color: var(--atelier-charcoal);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.12);
+  }
+
+  .wheel-nav-btn:active {
+    transform: translateY(0);
+  }
+
+  .wheel-nav-btn .nav-arrow {
+    color: var(--atelier-olive);
+    font-weight: 700;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .wheel-nav-btn:hover .nav-arrow {
+    color: #ffffff;
+  }
+
+  .wheel-nav-btn.prev:hover .nav-arrow {
+    transform: translateX(-2px);
+  }
+
+  .wheel-nav-btn.next:hover .nav-arrow {
+    transform: translateX(2px);
+  }
+
+  .wheel-center-counter {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background-color: var(--atelier-bg-card);
+    border: 1px solid var(--atelier-hairline);
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.04);
+  }
+
+  .counter-curr {
+    font-weight: 700;
+    color: var(--atelier-charcoal);
+  }
+
+  .counter-sep {
+    color: var(--atelier-hairline-bold);
+  }
+
+  .counter-total {
+    color: var(--atelier-charcoal-muted);
+  }
+
+  /* Quick Jump Pagination Strip */
+  .wheel-pagination-strip {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .pagination-pill {
+    background-color: transparent;
+    border: 1px solid var(--atelier-hairline);
+    padding: 0.35rem 0.65rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
+    color: var(--atelier-charcoal-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+  }
+
+  .pagination-pill:hover {
+    border-color: var(--atelier-charcoal);
+    color: var(--atelier-charcoal);
+  }
+
+  .pagination-pill.is-active {
+    background-color: var(--atelier-charcoal);
+    border-color: var(--atelier-charcoal);
+    color: #ffffff;
+  }
+
+  .pill-num {
+    opacity: 0.6;
+    font-weight: 400;
+  }
+
+  .pill-name {
+    font-weight: 700;
+  }
+
+  /* ==========================================================================
+     ATELIER SUMMARY COLOPHON STRIP
+     ========================================================================== */
+  .atelier-colophon-strip {
+    margin-top: 3.5rem;
+    background-color: rgba(251, 249, 245, 0.85);
+    border: 1px solid var(--atelier-hairline);
+    padding: 1.5rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+  }
+
+  .colophon-col {
+    padding: 0 1rem;
+    border-right: 1px solid var(--atelier-hairline);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .colophon-col:last-child {
+    border-right: none;
+  }
+
+  .colophon-strong {
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(1.85rem, 2.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--atelier-charcoal);
+  }
+
+  .colophon-unit {
+    font-size: 1rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-weight: 400;
+    color: var(--atelier-olive-dark);
+    margin-left: 2px;
+  }
+
+  .colophon-caption {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--atelier-charcoal);
+    margin-top: 0.4rem;
+  }
+
+  .colophon-sub {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-style: italic;
+    font-size: 0.6875rem;
+    color: var(--atelier-charcoal-muted);
+    margin-top: 0.15rem;
+  }
+
+  /* ==========================================================================
+     RESPONSIVE BREAKPOINTS
+     ========================================================================== */
+  @media (max-width: 1200px) {
+    .meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meta-item:nth-child(2) {
+      border-right: none;
+    }
+
+    .meta-item:nth-child(3) {
+      border-top: 1px solid var(--atelier-hairline);
+      border-right: 1px solid var(--atelier-hairline);
+    }
+
+    .meta-item:nth-child(4) {
+      border-top: 1px solid var(--atelier-hairline);
+    }
+
+    .atelier-colophon-strip {
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 1.5rem;
+    }
+
+    .colophon-col:nth-child(2) {
+      border-right: none;
+    }
+
+    .colophon-col:nth-child(3),
+    .colophon-col:nth-child(4) {
+      border-top: 1px solid var(--atelier-hairline);
+      padding-top: 1rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .atelier-header-block {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .editorial-aside {
+      padding-left: 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .atelier-main-body {
+      padding: 3rem 0 4rem;
+    }
+
+    .atelier-container {
+      padding: 0 1.25rem;
+    }
+
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .meta-item {
+      border-right: none !important;
+      border-top: 1px solid var(--atelier-hairline);
+      justify-content: flex-start !important;
+      padding: 0.5rem 0;
+    }
+
+    .meta-item:first-child {
+      border-top: none;
+    }
+
+    .wheel-3d-stage {
+      height: 440px;
+    }
+
+    .card-flank-cue {
+      display: none !important;
+    }
+
+    .wheel-controls-strip {
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+    }
+
+    .wheel-card {
+      width: 200px;
+      height: 290px;
+      left: -100px;
+      top: -145px;
+    }
+
+    .wheel-card-inner {
+      padding: 1rem 0.85rem;
+    }
+
+    .card-image-pedestal {
+      width: 70px;
+      height: 70px;
+      margin: 0.5rem auto;
+    }
+
+    .card-tech-image {
+      width: 44px;
+      height: 44px;
+    }
+
+    .card-title {
+      font-size: 1rem;
+    }
+
+    .atelier-colophon-strip {
+      grid-template-columns: 1fr;
+      row-gap: 1.25rem;
+    }
+
+    .colophon-col {
+      border-right: none !important;
+      border-top: 1px solid var(--atelier-hairline);
+      padding-top: 1rem;
+    }
+
+    .colophon-col:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+</style>

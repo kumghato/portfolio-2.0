@@ -1,0 +1,1846 @@
+---
+interface Props {
+  studioEmail?: string;
+  studioLocation?: string;
+  presentYear?: number;
+}
+
+const {
+  studioEmail = "kumghatokhala32@gmail.com",
+  studioLocation = "Kohima, Nagaland, 797001",
+  presentYear = new Date().getFullYear(),
+} = Astro.props;
+---
+
+<section 
+  class="commissions-dialogue-wrapper" 
+  id="commissions-dialogue" 
+  aria-labelledby="commissions-heading"
+>
+  <!-- Bookmark Anchor for existing Navbar and Hero Links -->
+  <div id="colophon-inquiries" class="anchor-offset" aria-hidden="true"></div>
+
+  <!-- ========================================== -->
+  <!-- ARCHITECTURAL TOP SUB-BAR: REGISTRY STRIP  -->
+  <!-- ========================================== -->
+  <div class="commissions-sub-bar" aria-label="Commissions & Inquiries Archival Registry">
+    <div class="commissions-container">
+      <div class="meta-grid">
+        <div class="meta-item meta-title">
+          <span class="meta-strong">SECTION 04</span>
+          <span class="meta-divider">—</span>
+          <span>COMMISSIONS &amp; DIALOGUE</span>
+        </div>
+
+        <div class="meta-item meta-wire">
+          <span class="meta-label">DESK:</span>
+          <span class="meta-strong">DIRECT EDITORIAL WIRE</span>
+        </div>
+
+        <div class="meta-item meta-window">
+          <span class="meta-label">CADENCE:</span>
+          <span class="meta-strong">Q1 / Q2 {presentYear} APPOINTMENTS</span>
+        </div>
+
+        <div class="meta-item meta-status">
+          <span class="meta-label">STATUS:</span>
+          <span class="meta-badge-pulse">DISPATCH READY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- MAIN COMMISSIONS CONTENT BODY              -->
+  <!-- ========================================== -->
+  <div class="commissions-main-body">
+    <div class="commissions-container">
+      <div class="commissions-asymmetric-split">
+
+        <!-- ======================================== -->
+        <!-- LEFT COLUMN: EDITORIAL INFO & DIRECT WIRE -->
+        <!-- ======================================== -->
+        <div class="editorial-info-column">
+          <!-- Tiny Subhead / Tag -->
+          <div class="tag-row">
+            <span class="olive-tag">
+              <span class="tag-dot" aria-hidden="true"></span>
+              SECTION 04 // COMMISSIONS &amp; DIALOGUE
+            </span>
+          </div>
+
+          <!-- Main Headline (High-Contrast Didone Serif) -->
+          <h2 id="commissions-heading" class="commissions-headline">
+            INQUIRIES &amp; EDITORIAL DESK
+          </h2>
+
+          <div class="header-sub-tagline">
+            <span>ARCHITECTURAL ADVISORY • BESPOKE DESIGN SYSTEMS • CRITICAL DISPATCH</span>
+          </div>
+
+       
+
+          <!-- DIRECT WIRE BLOCK -->
+          <div class="direct-wire-card" role="region" aria-label="Direct Telegraph Wire Block">
+            <span class="card-corner top-left" aria-hidden="true">⌜</span>
+            <span class="card-corner top-right" aria-hidden="true">⌝</span>
+            <span class="card-corner bottom-left" aria-hidden="true">⌞</span>
+            <span class="card-corner bottom-right" aria-hidden="true">⌟</span>
+
+            <div class="wire-card-header">
+              <div class="wire-protocol-badge">
+                <span class="wire-pulse" aria-hidden="true"></span>
+                <span>PRIMARY RETURN TELEGRAPH WIRE</span>
+              </div>
+              <span class="wire-channel-code">CHANNEL // 04-DISP</span>
+            </div>
+
+            <!-- Email Wire Item -->
+            <div class="wire-channel-body">
+              <div class="wire-row">
+                <div class="wire-label-group">
+                  <span class="wire-micro-tag">ENCRYPTED WIRE:</span>
+                  <a 
+                    href={`mailto:${studioEmail}`} 
+                    class="direct-wire-email" 
+                    id="primary-wire-link"
+                    aria-label={`Send correspondence to ${studioEmail}`}
+                  >
+                    {studioEmail}
+                  </a>
+                </div>
+                
+                <button 
+                  type="button" 
+                  class="wire-copy-button" 
+                  id="wire-copy-btn" 
+                  data-email={studioEmail}
+                  aria-label="Copy direct telegraph email to clipboard"
+                  title="Copy email address"
+                >
+                  <span class="copy-text">COPY WIRE</span>
+                  <span class="copy-icon" aria-hidden="true">⎘</span>
+                </button>
+              </div>
+
+              <div class="copy-toast" id="wire-copy-toast" aria-live="polite">
+                ✓ ADDRESS COPIED TO CLIPBOARD
+              </div>
+            </div>
+
+            <!-- ATELIER BASE Section -->
+            <div class="atelier-base-section">
+              <div class="atelier-base-header">
+                <span class="atelier-label-strong">ATELIER BASE</span>
+                <span class="atelier-divider">—</span>
+                <span class="atelier-mode">PHYSICAL RESIDENCE &amp; REMOTE DIRECTION</span>
+              </div>
+
+              <div class="atelier-content">
+                <div class="atelier-location-row">
+                  <span class="location-icon" aria-hidden="true">❖</span>
+                  <p class="atelier-physical-address">
+                    {studioLocation}
+                  </p>
+                </div>
+
+             
+
+                <div class="atelier-telemetry-strip">
+                  <div class="telemetry-pill">
+                    <span class="telemetry-k">ZONE:</span>
+                    <span class="telemetry-v">UTC+05:30 (NAGALANDS)</span>
+                  </div>
+                  <div class="telemetry-pill">
+                    <span class="telemetry-k">COORDINATES:</span>
+                    <span class="telemetry-v"> 25°40′N 94°07′E</span>
+                  </div>
+                  <div class="telemetry-pill">
+                    <span class="telemetry-k">TELEGRAPH:</span>
+                    <span class="telemetry-v">OPEN</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARCHIVAL SEAL -->
+          <div class="archival-seal-block" aria-label="Archival Seal N° 04-2024">
+            <div class="seal-badge-container">
+              <svg class="seal-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Concentric Ornamental Engraving Circles -->
+                <circle cx="40" cy="40" r="38" stroke="#1a1a1a" stroke-width="1.2" stroke-dasharray="3 2" />
+                <circle cx="40" cy="40" r="34" stroke="#858b73" stroke-width="0.8" opacity="0.6" />
+                <circle cx="40" cy="40" r="26" stroke="#1a1a1a" stroke-width="0.75" />
+                <circle cx="40" cy="40" r="24.5" stroke="#858b73" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
+                
+                <!-- Crosshairs / Compass Grid -->
+                <line x1="40" y1="6" x2="40" y2="74" stroke="#858b73" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.7" />
+                <line x1="6" y1="40" x2="74" y2="40" stroke="#858b73" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.7" />
+                
+                <!-- Craftsman Monogram -->
+                <text x="40" y="32" font-family="'Space Mono', monospace" font-size="5.5" font-weight="700" text-anchor="middle" fill="#5a6351" letter-spacing="0.22em">SEAL</text>
+                <text x="40" y="47" font-family="'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif" font-size="16" font-weight="900" text-anchor="middle" fill="#1a1a1a" letter-spacing="0.04em">KK</text>
+                <text x="40" y="58" font-family="'Space Mono', monospace" font-size="4.5" font-weight="700" text-anchor="middle" fill="#5a6351" letter-spacing="0.28em">MMXXIV</text>
+              </svg>
+            </div>
+
+            <div class="seal-details">
+              <div class="seal-primary-caption">
+                ARCHIVAL SEAL N° 04-{presentYear} / VERIFIED CRAFTSMAN RECORD
+              </div>
+              <div class="seal-sub-caption">
+                GOVERNED UNDER EDITORIAL GUILD SPECIFICATIONS • STRICT BASELINE PRECISION
+              </div>
+              <div class="seal-hash-strip">
+                <span class="hash-tag">REGISTRY SPEC:</span>
+                <span class="hash-code">0x4B68616C61 // VERIFIED CRAFTSMAN</span>
+                <span class="hash-dot">•</span>
+                <span class="hash-audited">AUDIT PASSED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================================== -->
+        <!-- RIGHT COLUMN: INTERACTIVE DISPATCH FORM   -->
+        <!-- ======================================== -->
+        <div class="dispatch-form-column">
+          <div class="dispatch-form-card" role="region" aria-label="Interactive Commission Dispatch Form">
+            <!-- Architectural Corner Registration Marks -->
+            <span class="card-corner top-left" aria-hidden="true">⌜</span>
+            <span class="card-corner top-right" aria-hidden="true">⌝</span>
+            <span class="card-corner bottom-left" aria-hidden="true">⌞</span>
+            <span class="card-corner bottom-right" aria-hidden="true">⌟</span>
+
+            <!-- Form Framing Header -->
+            <div class="form-card-header">
+              <div class="form-header-title-wrap">
+                <span class="form-pulse-dot" aria-hidden="true"></span>
+                <span class="form-header-title">COMMISSION DISPATCH LEDGER</span>
+              </div>
+              <span class="form-header-ref">FORM // MOD-04</span>
+            </div>
+
+            <form id="editorial-dispatch-form" class="editorial-dispatch-form" novalidate>
+              <!-- ========================================== -->
+              <!-- 01. CLASSIFICATION OF ENGAGEMENT           -->
+              <!-- ========================================== -->
+              <div class="form-group-block">
+                <div class="group-label-row">
+                  <label class="monospace-group-label" id="engagement-classification-label">
+                    <span class="label-idx">01.</span>
+                    <span class="label-heading">CLASSIFICATION OF ENGAGEMENT</span>
+                  </label>
+                  <span class="multi-select-badge">(MULTI-SELECT ENABLED)</span>
+                </div>
+
+                <div 
+                  class="engagement-selector-grid" 
+                  role="group" 
+                  aria-labelledby="engagement-classification-label"
+                >
+                  <!-- Button 1: Default Active in Solid Black -->
+                  <button 
+                    type="button" 
+                    class="engagement-choice-pill is-active" 
+                    data-classification="FRONTEND ARCHITECTURE"
+                    role="checkbox"
+                    aria-checked="true"
+                    tabindex="0"
+                  >
+                    <span class="choice-indicator" aria-hidden="true">■</span>
+                    <span class="choice-text">FRONTEND ARCHITECTURE</span>
+                  </button>
+
+                  <!-- Button 2 -->
+                  <button 
+                    type="button" 
+                    class="engagement-choice-pill" 
+                    data-classification="BESPOKE DESIGN SYSTEM"
+                    role="checkbox"
+                    aria-checked="false"
+                    tabindex="0"
+                  >
+                    <span class="choice-indicator" aria-hidden="true">□</span>
+                    <span class="choice-text">BESPOKE DESIGN SYSTEM</span>
+                  </button>
+
+                  <!-- Button 3 -->
+                  <button 
+                    type="button" 
+                    class="engagement-choice-pill" 
+                    data-classification="PERFORMANCE & CORE VITALS AUDIT"
+                    role="checkbox"
+                    aria-checked="false"
+                    tabindex="0"
+                  >
+                    <span class="choice-indicator" aria-hidden="true">□</span>
+                    <span class="choice-text">PERFORMANCE &amp; CORE VITALS AUDIT</span>
+                  </button>
+
+                  <!-- Button 4 -->
+                  <button 
+                    type="button" 
+                    class="engagement-choice-pill" 
+                    data-classification="EXECUTION CONSULTATION"
+                    role="checkbox"
+                    aria-checked="false"
+                    tabindex="0"
+                  >
+                    <span class="choice-indicator" aria-hidden="true">□</span>
+                    <span class="choice-text">EXECUTION CONSULTATION</span>
+                  </button>
+                </div>
+
+                <!-- Hidden form input to preserve selected classifications -->
+                <input 
+                  type="hidden" 
+                  id="selected-classifications-input" 
+                  name="selected_classifications" 
+                  value="FRONTEND ARCHITECTURE" 
+                />
+              </div>
+
+              <!-- ========================================== -->
+              <!-- 02. NAME // REPRESENTING ORGANIZATION      -->
+              <!-- ========================================== -->
+              <div class="form-group-block">
+                <label class="monospace-group-label" for="client-name">
+                  <span class="label-idx">02.</span>
+                  <span class="label-heading">NAME // REPRESENTING ORGANIZATION</span>
+                </label>
+                <div class="input-container">
+                  <input 
+                    type="text" 
+                    id="client-name" 
+                    name="client_name" 
+                    class="editorial-form-input" 
+                    placeholder="e.g. Virgil" 
+                    required 
+                    autocomplete="name"
+                  />
+                  <span class="input-decor-bracket" aria-hidden="true">↵</span>
+                </div>
+              </div>
+
+              <!-- ========================================== -->
+              <!-- 03. RETURN TELEGRAPH // EMAIL ADDRESS      -->
+              <!-- ========================================== -->
+              <div class="form-group-block">
+                <label class="monospace-group-label" for="client-email">
+                  <span class="label-idx">03.</span>
+                  <span class="label-heading">RETURN TELEGRAPH // EMAIL ADDRESS</span>
+                </label>
+                <div class="input-container">
+                  <input 
+                    type="email" 
+                    id="client-email" 
+                    name="client_email" 
+                    class="editorial-form-input" 
+                    placeholder="e.g. e.virg@gmail.com" 
+                    required 
+                    autocomplete="email"
+                  />
+                  <span class="input-decor-bracket" aria-hidden="true">@</span>
+                </div>
+              </div>
+
+              <!-- ========================================== -->
+              <!-- 04. SCOPE SPECIFICATION & TIMELINE         -->
+              <!-- ========================================== -->
+              <div class="form-group-block">
+                <label class="monospace-group-label" for="scope-specification">
+                  <span class="label-idx">04.</span>
+                  <span class="label-heading">SCOPE SPECIFICATION &amp; TIMELINE</span>
+                </label>
+                <div class="input-container">
+                  <textarea 
+                    id="scope-specification" 
+                    name="scope_specification" 
+                    class="editorial-form-textarea" 
+                    rows="4" 
+                    placeholder="Outline the technical challenges, expected milestone deliveries, and infrastructural parameters..." 
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- ========================================== -->
+              <!-- SUBMIT ACTION: TRANSMIT EDITORIAL DISPATCH -->
+              <!-- ========================================== -->
+              <div class="form-action-block">
+                <button 
+                  type="submit" 
+                  class="submit-dispatch-button" 
+                  id="submit-dispatch-btn"
+                >
+                  <span class="button-label">TRANSMIT EDITORIAL DISPATCH</span>
+                  <span class="button-arrow" aria-hidden="true">➔</span>
+                </button>
+              </div>
+
+              <!-- Form Security & Transmission Protocol Footnote -->
+              <div class="form-footnote-strip">
+                <span class="footnote-bullet" aria-hidden="true">◆</span>
+                <span>DIRECT ROUTING TO EDITORIAL DESK • STRICT APPOINTMENT PROTOCOL • ZERO TELEMETRY TRACKING</span>
+              </div>
+            </form>
+
+            <!-- ========================================== -->
+            <!-- DYNAMIC SUBMISSION RECEIPT BANNER (INLINE)  -->
+            <!-- ========================================== -->
+            <div 
+              id="dispatch-success-receipt" 
+              class="dispatch-receipt-panel" 
+              style="display: none;" 
+              role="status" 
+              aria-live="polite"
+            >
+              <div class="receipt-inner">
+                <div class="receipt-header-strip">
+                  <div class="receipt-stamp-badge">
+                    <span class="receipt-check" aria-hidden="true">✓</span>
+                    <span>TRANSMISSION CONFIRMED</span>
+                  </div>
+                  <span class="receipt-log-ref" id="receipt-docket-id">DOCKET #2025-04A</span>
+                </div>
+
+                <h3 class="receipt-headline">
+                  EDITORIAL DISPATCH TRANSFERRED
+                </h3>
+
+                <p class="receipt-body-text">
+                  Your project specifications and parameters have been recorded into the studio inquiry docket. Direct telegraph response typically issued within 24 to 48 hours.
+                </p>
+
+                <div class="receipt-summary-matrix">
+                  <div class="matrix-cell">
+                    <span class="cell-label">DESIGNATED DESK:</span>
+                    <span class="cell-val">KUMGHATO KHALA</span>
+                  </div>
+                  <div class="matrix-cell">
+                    <span class="cell-label">ROUTED TO:</span>
+                    <span class="cell-val">{studioEmail}</span>
+                  </div>
+                  <div class="matrix-cell">
+                    <span class="cell-label">APPOINTMENT WINDOW:</span>
+                    <span class="cell-val">Q1 / Q2 {presentYear}</span>
+                  </div>
+                  <div class="matrix-cell">
+                    <span class="cell-label">STATUS:</span>
+                    <span class="cell-val val-green">ACKNOWLEDGED</span>
+                  </div>
+                </div>
+
+                <div class="receipt-actions">
+                  <button type="button" class="receipt-reset-button" id="receipt-new-dispatch-btn">
+                    <span>TRANSMIT ANOTHER DISPATCH [↺]</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ARCHIVAL COLOPHON & MONOGRAPH BOTTOM STRIP -->
+  <!-- ========================================== -->
+  <footer class="monograph-colophon-bar" aria-label="Portfolio Monograph Colophon">
+    <div class="commissions-container">
+      <div class="colophon-grid">
+        <div class="colophon-left">
+          <span class="colophon-monogram">KK</span>
+          <div class="colophon-meta">
+            <span class="colophon-title">KUMGHATO KHALA // DIGITAL ATELIER</span>
+            <span class="colophon-copy">EDITION MMXXIV–MMXXV • PERSONAL PORTFOLIO MONOGRAPH</span>
+          </div>
+        </div>
+
+        <div class="colophon-center">
+          <span class="colophon-type-note">
+               copyright &copy; {presentYear} • Kumghato Khala
+          </span>
+        </div>
+
+        <div class="colophon-right">
+          <a href="#cover-feature" class="colophon-return-top" aria-label="Return to top of page">
+            <span>RETURN TO COVER</span>
+            <span class="return-arrow" aria-hidden="true">↑</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</section>
+
+<!-- ========================================== -->
+<!-- CLIENT SCRIPT: INTERACTION & ACCESSIBILITY -->
+<!-- ========================================== -->
+<script>
+  // ==========================================
+  // 1. MULTI-SELECT ENGAGEMENT CLASSIFICATION
+  // ==========================================
+  const choiceButtons = Array.from(
+    document.querySelectorAll('.engagement-choice-pill')
+  ) as HTMLButtonElement[];
+  const hiddenInput = document.getElementById(
+    'selected-classifications-input'
+  ) as HTMLInputElement | null;
+
+  function updateClassificationsInput() {
+    if (!hiddenInput) return;
+    const activeValues = choiceButtons
+      .filter((btn) => btn.classList.contains('is-active'))
+      .map((btn) => btn.getAttribute('data-classification') || '')
+      .filter(Boolean);
+
+    hiddenInput.value = activeValues.join(', ');
+  }
+
+  choiceButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const isCurrentlyActive = btn.classList.contains('is-active');
+      const activeCount = choiceButtons.filter((b) => b.classList.contains('is-active')).length;
+
+      // Allow toggling, but maintain at least one selection for clarity
+      if (isCurrentlyActive && activeCount <= 1) {
+        // Provide subtle bounce indication
+        btn.classList.add('shake-subtle');
+        setTimeout(() => btn.classList.remove('shake-subtle'), 400);
+        return;
+      }
+
+      if (isCurrentlyActive) {
+        btn.classList.remove('is-active');
+        btn.setAttribute('aria-checked', 'false');
+        const indicator = btn.querySelector('.choice-indicator');
+        if (indicator) indicator.textContent = '□';
+      } else {
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-checked', 'true');
+        const indicator = btn.querySelector('.choice-indicator');
+        if (indicator) indicator.textContent = '■';
+      }
+
+      updateClassificationsInput();
+    });
+  });
+
+  // ==========================================
+  // 2. DIRECT WIRE EMAIL COPY-TO-CLIPBOARD
+  // ==========================================
+  const copyBtn = document.getElementById('wire-copy-btn');
+  const copyToast = document.getElementById('wire-copy-toast');
+
+  copyBtn?.addEventListener('click', async () => {
+    const emailToCopy = copyBtn.getAttribute('data-email') || 'alex@revue-editions.com';
+    try {
+      await navigator.clipboard.writeText(emailToCopy);
+      if (copyToast) {
+        copyToast.classList.add('is-visible');
+        const copyTextEl = copyBtn.querySelector('.copy-text');
+        if (copyTextEl) copyTextEl.textContent = 'COPIED ↗';
+
+        setTimeout(() => {
+          copyToast.classList.remove('is-visible');
+          if (copyTextEl) copyTextEl.textContent = 'COPY WIRE';
+        }, 2800);
+      }
+    } catch {
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea');
+      textArea.value = emailToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      if (copyToast) {
+        copyToast.classList.add('is-visible');
+        setTimeout(() => copyToast.classList.remove('is-visible'), 2800);
+      }
+    }
+  });
+
+  // ==========================================
+  // 3. EDITORIAL DISPATCH FORM SUBMISSION
+  // ==========================================
+  const dispatchForm = document.getElementById(
+    'editorial-dispatch-form'
+  ) as HTMLFormElement | null;
+  const submitBtn = document.getElementById(
+    'submit-dispatch-btn'
+  ) as HTMLButtonElement | null;
+  const receiptPanel = document.getElementById('dispatch-success-receipt');
+  const receiptDocket = document.getElementById('receipt-docket-id');
+  const resetBtn = document.getElementById('receipt-new-dispatch-btn');
+
+  dispatchForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Check validity
+    if (!dispatchForm.checkValidity()) {
+      dispatchForm.reportValidity();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      const label = submitBtn.querySelector('.button-label');
+      if (label) label.textContent = 'TRANSMITTING DISPATCH...';
+    }
+
+    // Generate random docket number for realistic archival feel
+    const randomDocket = Math.floor(1000 + Math.random() * 9000);
+    if (receiptDocket) {
+      receiptDocket.textContent = `DOCKET #${new Date().getFullYear()}-${randomDocket}`;
+    }
+
+    // Simulate graceful transmission delay
+    setTimeout(() => {
+      if (dispatchForm) dispatchForm.style.display = 'none';
+      if (receiptPanel) {
+        receiptPanel.style.display = 'block';
+        receiptPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }, 600);
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    if (dispatchForm) {
+      dispatchForm.reset();
+      dispatchForm.style.display = 'block';
+    }
+    if (receiptPanel) {
+      receiptPanel.style.display = 'none';
+    }
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      const label = submitBtn.querySelector('.button-label');
+      if (label) label.textContent = 'TRANSMITTING EDITORIAL DISPATCH';
+    }
+
+    // Reset classifications to default
+    choiceButtons.forEach((btn, idx) => {
+      const shouldBeActive = idx === 0;
+      btn.classList.toggle('is-active', shouldBeActive);
+      btn.setAttribute('aria-checked', shouldBeActive ? 'true' : 'false');
+      const indicator = btn.querySelector('.choice-indicator');
+      if (indicator) indicator.textContent = shouldBeActive ? '■' : '□';
+    });
+    updateClassificationsInput();
+  });
+</script>
+
+<style>
+  /* ==========================================================================
+     COMMISSIONS & DIALOGUE TOKENS (Matching High-Fashion Monograph Language)
+     ========================================================================== */
+  .commissions-dialogue-wrapper {
+    --commissions-bg: #f4f1ea;
+    --commissions-bg-card: #ffffff;
+    --commissions-bg-card-subtle: #fcfbf9;
+    --commissions-bg-dark: #ebe6da;
+    --commissions-charcoal: #1a1a1a;
+    --commissions-charcoal-muted: rgba(26, 26, 26, 0.65);
+    --commissions-hairline: rgba(26, 26, 26, 0.16);
+    --commissions-hairline-bold: rgba(26, 26, 26, 0.32);
+    --commissions-olive: #858b73;
+    --commissions-olive-dark: #5a6351;
+    --commissions-olive-tint: rgba(133, 139, 115, 0.14);
+
+    background-color: var(--commissions-bg);
+    color: var(--commissions-charcoal);
+    width: 100%;
+    position: relative;
+    border-top: 1px solid var(--commissions-hairline);
+    scroll-margin-top: 70px;
+    background-image: radial-gradient(rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .anchor-offset {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .commissions-container {
+    max-width: var(--container-max-width, 1540px);
+    margin: 0 auto;
+    padding: 0 var(--container-padding, clamp(1.25rem, 3.2vw, 2.5rem));
+  }
+
+  /* ==========================================================================
+     ARCHITECTURAL SUB-BAR (Matching Section 02 & 03 Registries)
+     ========================================================================== */
+  .commissions-sub-bar {
+    width: 100%;
+    border-bottom: 1px solid var(--commissions-hairline);
+    background-color: rgba(235, 230, 218, 0.45);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal);
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .meta-item {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-right: 1px solid var(--commissions-hairline);
+  }
+
+  .meta-item:last-child {
+    border-right: none;
+    justify-content: flex-end;
+  }
+
+  .meta-wire {
+    justify-content: center;
+  }
+
+  .meta-window {
+    justify-content: center;
+  }
+
+  .meta-strong {
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  .meta-divider {
+    color: var(--commissions-hairline);
+  }
+
+  .meta-label {
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .meta-badge-pulse {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--commissions-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.4);
+    color: var(--commissions-olive-dark);
+    padding: 0.2rem 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  /* ==========================================================================
+     MAIN SECTION BODY & ASYMMETRIC TWO-COLUMN SPLIT
+     ========================================================================== */
+  .commissions-main-body {
+    padding: 4.5rem 0 5.5rem;
+  }
+
+  .commissions-asymmetric-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+
+  /* ==========================================================================
+     LEFT COLUMN: EDITORIAL INFO & DIRECT WIRE
+     ========================================================================== */
+  .editorial-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .tag-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .olive-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.65rem;
+    background-color: var(--commissions-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.35);
+    color: var(--commissions-olive-dark);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--commissions-olive-dark);
+    animation: pulseGlow 2.5s infinite ease-in-out;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.5; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .commissions-headline {
+    margin: 0;
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(2.25rem, 4.2vw, 3.85rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    line-height: 0.98;
+    color: var(--commissions-charcoal);
+  }
+
+  .header-sub-tagline {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.71875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal-muted);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--commissions-hairline);
+  }
+
+  .editorial-lead-in {
+    margin: 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--commissions-olive);
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--commissions-charcoal);
+  }
+
+  .editorial-lead-in p {
+    margin: 0;
+  }
+
+  /* --------------------------------------------------------------------------
+     DIRECT WIRE BLOCK CONTAINER
+     -------------------------------------------------------------------------- */
+  .direct-wire-card {
+    position: relative;
+    background-color: var(--commissions-bg-card-subtle);
+    border: 1px solid var(--commissions-hairline);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 4px 20px rgba(26, 26, 26, 0.03);
+  }
+
+  /* Architectural Registration Corner Marks */
+  .card-corner {
+    position: absolute;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.8125rem;
+    line-height: 1;
+    color: rgba(26, 26, 26, 0.35);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .card-corner.top-left { top: 6px; left: 6px; }
+  .card-corner.top-right { top: 6px; right: 6px; }
+  .card-corner.bottom-left { bottom: 6px; left: 6px; }
+  .card-corner.bottom-right { bottom: 6px; right: 6px; }
+
+  .wire-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--commissions-hairline);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .wire-protocol-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  .wire-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--commissions-olive-dark);
+    display: inline-block;
+  }
+
+  .wire-channel-code {
+    color: var(--commissions-olive-dark);
+    font-weight: 600;
+  }
+
+  .wire-channel-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .wire-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: #ffffff;
+    border: 1px solid var(--commissions-hairline);
+    padding: 0.85rem 1.15rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .wire-row:hover {
+    border-color: var(--commissions-charcoal);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.05);
+  }
+
+  .wire-label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .wire-micro-tag {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .direct-wire-email {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: clamp(0.9375rem, 1.25vw, 1.1875rem);
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  .direct-wire-email:hover {
+    color: var(--commissions-olive-dark);
+  }
+
+  .wire-copy-button {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    background-color: transparent;
+    border: 1px solid var(--commissions-hairline-bold);
+    color: var(--commissions-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.65625rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .wire-copy-button:hover {
+    background-color: var(--commissions-charcoal);
+    color: #ffffff;
+    border-color: var(--commissions-charcoal);
+  }
+
+  .copy-icon {
+    font-size: 0.8125rem;
+    line-height: 1;
+  }
+
+  .copy-toast {
+    display: none;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--commissions-olive-dark);
+    padding: 0.2rem 0;
+  }
+
+  .copy-toast.is-visible {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --------------------------------------------------------------------------
+     ATELIER BASE SECTION
+     -------------------------------------------------------------------------- */
+  .atelier-base-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--commissions-hairline);
+  }
+
+  .atelier-base-header {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.65625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    flex-wrap: wrap;
+  }
+
+  .atelier-label-strong {
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  .atelier-divider {
+    color: var(--commissions-hairline);
+  }
+
+  .atelier-mode {
+    color: var(--commissions-olive-dark);
+    font-weight: 600;
+  }
+
+  .atelier-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .atelier-location-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .location-icon {
+    color: var(--commissions-olive-dark);
+    font-size: 0.75rem;
+  }
+
+  .atelier-physical-address {
+    margin: 0;
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: 1.0625rem;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--commissions-charcoal);
+    letter-spacing: 0.01em;
+  }
+
+  .atelier-remote-note {
+    margin: 0;
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .atelier-telemetry-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.25rem;
+  }
+
+  .telemetry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.5rem;
+    background-color: rgba(235, 230, 218, 0.6);
+    border: 1px solid var(--commissions-hairline);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.59375rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .telemetry-k {
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .telemetry-v {
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  /* --------------------------------------------------------------------------
+     ARCHIVAL SEAL BLOCK
+     -------------------------------------------------------------------------- */
+  .archival-seal-block {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background-color: rgba(235, 230, 218, 0.35);
+    border: 1px solid var(--commissions-hairline);
+    margin-top: 0.5rem;
+  }
+
+  .seal-badge-container {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+  }
+
+  .seal-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 2px 4px rgba(26, 26, 26, 0.04));
+  }
+
+  .seal-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .seal-primary-caption {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.71875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal);
+    line-height: 1.35;
+  }
+
+  .seal-sub-caption {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal-muted);
+    line-height: 1.3;
+  }
+
+  .seal-hash-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+    flex-wrap: wrap;
+  }
+
+  .hash-tag {
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .hash-code {
+    font-weight: 700;
+    color: var(--commissions-olive-dark);
+  }
+
+  .hash-dot {
+    color: var(--commissions-hairline);
+  }
+
+  .hash-audited {
+    color: var(--commissions-olive-dark);
+    font-weight: 700;
+  }
+
+  /* ==========================================================================
+     RIGHT COLUMN: INTERACTIVE DISPATCH FORM CARD
+     ========================================================================== */
+  .dispatch-form-column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dispatch-form-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid var(--commissions-hairline);
+    padding: clamp(1.75rem, 3.2vw, 2.75rem);
+    box-shadow: 0 10px 35px rgba(26, 26, 26, 0.05);
+  }
+
+  .form-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--commissions-hairline);
+    margin-bottom: 2rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .form-header-title-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  .form-pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--commissions-olive-dark);
+  }
+
+  .form-header-ref {
+    color: var(--commissions-olive-dark);
+    font-weight: 700;
+  }
+
+  .editorial-dispatch-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .form-group-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .group-label-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .monospace-group-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.71875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal);
+  }
+
+  .label-idx {
+    color: var(--commissions-olive-dark);
+  }
+
+  .label-heading {
+    color: var(--commissions-charcoal);
+  }
+
+  .multi-select-badge {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--commissions-olive-dark);
+    font-weight: 600;
+  }
+
+  /* --------------------------------------------------------------------------
+     MULTI-SELECT ENGAGEMENT PILLS
+     -------------------------------------------------------------------------- */
+  .engagement-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.65rem;
+  }
+
+  .engagement-choice-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    background-color: var(--commissions-bg-card-subtle);
+    border: 1px solid var(--commissions-hairline);
+    color: var(--commissions-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    user-select: none;
+  }
+
+  .engagement-choice-pill:hover {
+    border-color: var(--commissions-charcoal);
+    background-color: #ffffff;
+    box-shadow: 0 2px 6px rgba(26, 26, 26, 0.06);
+  }
+
+  /* Active state in solid black */
+  .engagement-choice-pill.is-active {
+    background-color: var(--commissions-charcoal);
+    color: #f4f1ea;
+    border-color: var(--commissions-charcoal);
+    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2);
+  }
+
+  .choice-indicator {
+    font-size: 0.75rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .engagement-choice-pill.is-active .choice-indicator {
+    color: #f4f1ea;
+  }
+
+  .choice-text {
+    line-height: 1.35;
+  }
+
+  .shake-subtle {
+    animation: subtleShake 0.35s ease;
+  }
+
+  @keyframes subtleShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  /* --------------------------------------------------------------------------
+     INPUTS & TEXTAREA
+     -------------------------------------------------------------------------- */
+  .input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .editorial-form-input,
+  .editorial-form-textarea {
+    width: 100%;
+    background-color: #faf9f6;
+    border: 1px solid var(--commissions-hairline);
+    color: var(--commissions-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    padding: 0.95rem 1.15rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0;
+    -webkit-appearance: none;
+  }
+
+  .editorial-form-input {
+    padding-right: 2.5rem;
+  }
+
+  .editorial-form-textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.55;
+  }
+
+  .editorial-form-input::placeholder,
+  .editorial-form-textarea::placeholder {
+    color: rgba(26, 26, 26, 0.42);
+    font-style: italic;
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: 0.9375rem;
+    letter-spacing: 0.01em;
+  }
+
+  .editorial-form-input:focus,
+  .editorial-form-textarea:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: var(--commissions-charcoal);
+    box-shadow: inset 0 0 0 1px var(--commissions-charcoal);
+  }
+
+  .input-decor-bracket {
+    position: absolute;
+    right: 1.15rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.8125rem;
+    color: var(--commissions-charcoal-muted);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* --------------------------------------------------------------------------
+     SUBMIT ACTION: TRANSMIT EDITORIAL DISPATCH
+     -------------------------------------------------------------------------- */
+  .form-action-block {
+    margin-top: 0.5rem;
+  }
+
+  .submit-dispatch-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 1.25rem 2rem;
+    background-color: var(--commissions-charcoal);
+    color: #f4f1ea;
+    border: 1px solid var(--commissions-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.78125rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(26, 26, 26, 0.15);
+  }
+
+  .submit-dispatch-button:hover {
+    background-color: #000000;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(26, 26, 26, 0.28);
+    transform: translateY(-2px);
+  }
+
+  .submit-dispatch-button:hover .button-arrow {
+    transform: translateX(5px);
+  }
+
+  .submit-dispatch-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.18);
+  }
+
+  .submit-dispatch-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+  }
+
+  .button-arrow {
+    font-size: 0.9375rem;
+    line-height: 1;
+    transition: transform 0.25s ease;
+  }
+
+  .form-footnote-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal-muted);
+    text-align: center;
+    padding-top: 0.25rem;
+  }
+
+  .footnote-bullet {
+    color: var(--commissions-olive-dark);
+    font-size: 0.5rem;
+  }
+
+  /* --------------------------------------------------------------------------
+     SUBMISSION CONFIRMATION PANEL (INLINE RECEIPT)
+     -------------------------------------------------------------------------- */
+  .dispatch-receipt-panel {
+    background-color: var(--commissions-bg-card-subtle);
+    border: 1px solid var(--commissions-hairline);
+    padding: 2rem;
+    animation: fadeInReceipt 0.4s ease;
+  }
+
+  @keyframes fadeInReceipt {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .receipt-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .receipt-header-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--commissions-hairline);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .receipt-stamp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    color: var(--commissions-olive-dark);
+  }
+
+  .receipt-check {
+    font-weight: 900;
+  }
+
+  .receipt-log-ref {
+    color: var(--commissions-charcoal);
+    font-weight: 700;
+  }
+
+  .receipt-headline {
+    margin: 0;
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal);
+  }
+
+  .receipt-body-text {
+    margin: 0;
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--commissions-charcoal);
+    font-style: italic;
+  }
+
+  .receipt-summary-matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    background-color: #ffffff;
+    border: 1px solid var(--commissions-hairline);
+    padding: 1.15rem;
+  }
+
+  .matrix-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .cell-label {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal-muted);
+  }
+
+  .cell-val {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+    letter-spacing: 0.04em;
+  }
+
+  .val-green {
+    color: var(--commissions-olive-dark);
+  }
+
+  .receipt-actions {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+  }
+
+  .receipt-reset-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background-color: transparent;
+    border: 1px solid var(--commissions-charcoal);
+    color: var(--commissions-charcoal);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .receipt-reset-button:hover {
+    background-color: var(--commissions-charcoal);
+    color: #ffffff;
+  }
+
+  /* ==========================================================================
+     ARCHIVAL COLOPHON & MONOGRAPH BOTTOM STRIP
+     ========================================================================== */
+  .monograph-colophon-bar {
+    width: 100%;
+    border-top: 1px solid var(--commissions-hairline);
+    background-color: rgba(235, 230, 218, 0.45);
+    padding: 1.5rem 0;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--commissions-charcoal);
+  }
+
+  .colophon-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .colophon-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .colophon-monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--commissions-hairline-bold);
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-weight: 900;
+    font-size: 0.875rem;
+    color: var(--commissions-charcoal);
+    background-color: #ffffff;
+  }
+
+  .colophon-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .colophon-title {
+    font-weight: 700;
+    color: var(--commissions-charcoal);
+  }
+
+  .colophon-copy {
+    font-size: 0.59375rem;
+    color: var(--commissions-charcoal-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .colophon-center {
+    color: var(--commissions-charcoal-muted);
+    font-size: 0.625rem;
+  }
+
+  .colophon-right {
+    display: flex;
+    align-items: center;
+  }
+
+  .colophon-return-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    text-decoration: none;
+    color: var(--commissions-charcoal);
+    font-weight: 700;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--commissions-hairline);
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+  }
+
+  .colophon-return-top:hover {
+    background-color: var(--commissions-charcoal);
+    color: #ffffff;
+    border-color: var(--commissions-charcoal);
+  }
+
+  .return-arrow {
+    font-size: 0.75rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .colophon-return-top:hover .return-arrow {
+    transform: translateY(-2px);
+  }
+
+  /* ==========================================================================
+     RESPONSIVE MEDIA QUERIES
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .commissions-asymmetric-split {
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meta-item:nth-child(2) {
+      border-right: none;
+    }
+
+    .meta-item:nth-child(3) {
+      border-top: 1px solid var(--commissions-hairline);
+    }
+
+    .meta-item:nth-child(4) {
+      border-top: 1px solid var(--commissions-hairline);
+      border-right: none;
+    }
+
+    .colophon-grid {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .commissions-main-body {
+      padding: 3rem 0 4rem;
+    }
+
+    .direct-wire-card,
+    .dispatch-form-card {
+      padding: 1.25rem;
+    }
+
+    .wire-card-header,
+    .form-card-header {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .direct-wire-email {
+      font-size: 0.8125rem;
+      word-break: break-all;
+      white-space: normal;
+    }
+
+    .atelier-telemetry-strip {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.4rem;
+    }
+
+    .telemetry-pill {
+      justify-content: flex-start;
+      width: 100%;
+    }
+
+    .form-footnote-strip {
+      flex-wrap: wrap;
+      text-align: left;
+      justify-content: flex-start;
+      line-height: 1.4;
+    }
+
+    .engagement-selector-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .meta-item {
+      border-right: none !important;
+      border-bottom: 1px solid var(--commissions-hairline);
+      justify-content: flex-start !important;
+    }
+
+    .meta-item:last-child {
+      border-bottom: none;
+    }
+
+    .wire-row {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    .wire-copy-button {
+      align-self: flex-start;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .receipt-summary-matrix {
+      grid-template-columns: 1fr;
+    }
+
+    .archival-seal-block {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1.25rem;
+    }
+
+    .colophon-grid {
+      align-items: stretch;
+    }
+
+    .colophon-right {
+      width: 100%;
+    }
+
+    .colophon-return-top {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

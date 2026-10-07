@@ -1,0 +1,1051 @@
+---
+interface Props {
+  name?: string;
+  role?: string;
+  headlineTop?: string;
+  headlineBottom?: string;
+  bioHook?: string;
+}
+const presentYear = new Date().getFullYear();
+
+const {
+  name = "Kumghato Khala",
+  role = "Web Developer",
+  headlineTop = "THE ART OF",
+  headlineBottom = "Creation.",
+  bioHook = `“${role} ${name} on craft, zero-dependency purity, and radical web performance.”`
+} = Astro.props;
+---
+
+
+<div class="editorial-hero-wrapper" id="cover-feature">
+  <!-- ========================================== -->
+  <!-- SUB-HEADER BAR: METADATA, ISSUE & PRICING -->
+  <!-- ========================================== -->
+  <aside class="sub-header-bar" aria-label="Editorial Monograph Metadata">
+    <div class="hero-container">
+      <div class="meta-grid">
+        <div class="meta-item meta-issue">
+          <span class="meta-strong">VOL. XIV</span>
+          <span class="meta-divider">—</span>
+          <span>ISSUE 08 / {presentYear}</span>
+        </div>
+
+        <div class="meta-item meta-cities">
+          <span>NAGALAND • KOHIMA </span>
+        </div>
+
+        <div class="meta-item meta-circulation">
+          <span class="meta-label">CIRCULATION:</span>
+          <span class="meta-strong">12,400 COPIES</span>
+        </div>
+
+        <div class="meta-item meta-pricing">
+          <span class="meta-label">INDEX:</span>
+          <span class="meta-strong">$24.00 USD</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- MAIN HERO SECTION: ASYMMETRIC GRID        -->
+  <!-- ========================================== -->
+  <section class="editorial-hero-section">
+    <div class="hero-container">
+      <div class="asymmetric-layout">
+
+        <!-- ======================================== -->
+        <!-- LEFT COLUMN: EDITORIAL CORE              -->
+        <!-- ======================================== -->
+        <div class="editorial-core">
+          
+          <!-- Category Accent Tag -->
+          <div class="tag-row">
+            <span class="olive-tag">
+              <span class="tag-dot" aria-hidden="true"></span>
+              DEVELOPER PROFILE &amp; RETROSPECTIVE
+            </span>
+          </div>
+
+          <!-- Massive High-Contrast Serif Headline -->
+          <h1 class="editorial-headline">
+            <span class="headline-bold">{headlineTop}</span>
+            <span class="headline-italic">
+              {headlineBottom.replace('.', '')}<span class="headline-dot">.</span>
+            </span>
+          </h1>
+
+          <!-- Monograph Lead Hook / Bio -->
+          <blockquote class="bio-hook">
+            <p>{bioHook}</p>
+          </blockquote>
+
+          <!-- Section Index / Salient Theses List -->
+          <div class="theses-block">
+            <div class="theses-header">
+              <span class="theses-caption">SALIENT THESES &amp; MONOGRAPH OUTLINE</span>
+              <span class="theses-vol">CHAPTER COMPILATION</span>
+            </div>
+
+            <ol class="theses-list">
+              <!-- Item 01 -->
+              <li class="thesis-item">
+                <a href="#technical-atelier" class="thesis-link">
+                  <div class="thesis-title-group">
+                    <span class="thesis-number">01.</span>
+                    <span class="thesis-name">Architectonics of the Modern Viewport</span>
+                  </div>
+                  <div class="thesis-meta-group">
+                   
+                    <span class="thesis-page">P. 016</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Item 02 -->
+              <li class="thesis-item">
+                <a href="#selected-works" class="thesis-link">
+                  <div class="thesis-title-group">
+                    <span class="thesis-number">02.</span>
+                    <span class="thesis-name">Architectural Parallax: Kinetic Micro-Interactions</span>
+                  </div>
+                  <div class="thesis-meta-group">
+                  
+                    <span class="thesis-page">P. 028</span>
+                  </div>
+                </a>
+              </li>
+
+              <!-- Item 03 -->
+              <li class="thesis-item">
+                <a href="#colophon-inquiries" class="thesis-link">
+                  <div class="thesis-title-group">
+                    <span class="thesis-number">03.</span>
+                    <span class="thesis-name">Heuristics of Minimalist Systems</span>
+                  </div>
+                  <div class="thesis-meta-group">
+                   
+                    <span class="thesis-page">P. 042</span>
+                  </div>
+                </a>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Action Buttons Array -->
+          <div class="actions-strip">
+            <!-- Primary Action -->
+            <a href="#selected-works" class="btn btn-primary">
+              <span class="btn-text">READ DEVELOPER STORY</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </a>
+
+            <!-- Secondary Outline Action -->
+            <a href="#technical-atelier" class="btn btn-outline">
+              <span class="btn-text">INSPECT TECHNICAL ATELIER</span>
+              <span class="btn-badge">[EXP. 4]</span>
+            </a>
+
+            <!-- Olive Accent Action -->
+            <a href="#colophon-inquiries" class="btn btn-olive">
+              <span class="btn-text">COMMISSION PROJECT</span>
+              <span class="btn-status">Q1 AVAILABLE</span>
+            </a>
+          </div>
+
+          <!-- Editorial Colophon Micro-Stamps -->
+          <div class="editorial-footnote">
+            <span>ORIGINAL CURATION: {name.toUpperCase()} ARCHIVES</span>
+            <span class="dot-separator">•</span>
+            <span>TYPESET IN BODONI &amp; NEWSREADER</span>
+            <span class="dot-separator">•</span>
+            <span>FOLIO NO. 14-88A</span>
+          </div>
+
+        </div>
+
+        <!-- ======================================== -->
+        <!-- RIGHT COLUMN: MONOGRAPH PLATE            -->
+        <!-- ======================================== -->
+        <div class="monograph-plate-col">
+          
+          <!-- Polaroid / Archival Plate Card Frame -->
+          <div class="plate-card">
+            <!-- Registration Corner Marks -->
+            <span class="corner-mark top-left" aria-hidden="true">⌜</span>
+            <span class="corner-mark top-right" aria-hidden="true">⌝</span>
+            <span class="corner-mark bottom-left" aria-hidden="true">⌞</span>
+            <span class="corner-mark bottom-right" aria-hidden="true">⌟</span>
+
+            <!-- Top Plate Header -->
+            <div class="plate-meta-top">
+              <span>ARCHIVE RECORD • PLATE 01</span>
+              <span>FIG. 4.2 / STUDIO WORKSTATION</span>
+            </div>
+
+            <!-- Framed Photograph -->
+            <div class="plate-image-frame">
+              <img 
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=85" 
+                alt={`${name} at the studio drafting console`}
+                class="plate-image"
+                loading="eager"
+              />
+              <div class="plate-image-gradient" aria-hidden="true"></div>
+
+              <!-- Overlaid Physical Archive Stamp -->
+              <div class="plate-badge-bottom-left">
+                {name.split(' ').map(n => n[0]).join('')} // ARCHIVES
+              </div>
+              <div class="plate-badge-bottom-right">
+                35MM DUPONT NEGATIVE
+              </div>
+            </div>
+
+            <!-- Plate Caption Block Underneath -->
+            <div class="plate-caption-block">
+              <div class="plate-caption-header">
+                <span class="plate-caption-tag">PLATE I — COVER FEATURE</span>
+                <span class="plate-caption-date">{presentYear}</span>
+              </div>
+              <p class="plate-caption-text">
+                Architectural study of viewport kinetics, structural layout containment, and minimal web runtime paradigms.
+              </p>
+
+              <!-- Barcode Graphic & ISBN Tracking Number -->
+              <div class="plate-barcode-footer">
+                <div class="barcode-container">
+                  <svg class="barcode-svg" viewBox="0 0 176 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-label="Monograph tracking barcode">
+                    <rect x="0" y="0" width="2" height="30" />
+                    <rect x="4" y="0" width="1" height="30" />
+                    <rect x="7" y="0" width="3" height="30" />
+                    <rect x="12" y="0" width="1" height="30" />
+                    <rect x="15" y="0" width="4" height="30" />
+                    <rect x="21" y="0" width="2" height="30" />
+                    <rect x="25" y="0" width="1" height="30" />
+                    <rect x="28" y="0" width="3" height="30" />
+                    <rect x="33" y="0" width="2" height="30" />
+                    <rect x="37" y="0" width="4" height="30" />
+                    <rect x="43" y="0" width="1" height="30" />
+                    <rect x="46" y="0" width="3" height="30" />
+                    <rect x="51" y="0" width="2" height="30" />
+                    <rect x="55" y="0" width="2" height="30" />
+                    <rect x="59" y="0" width="1" height="30" />
+                    <rect x="62" y="0" width="4" height="30" />
+                    <rect x="68" y="0" width="2" height="30" />
+                    <rect x="72" y="0" width="1" height="30" />
+                    <rect x="75" y="0" width="3" height="30" />
+                    <rect x="80" y="0" width="2" height="30" />
+                    <rect x="84" y="0" width="1" height="30" />
+                    <rect x="87" y="0" width="3" height="30" />
+                    <rect x="92" y="0" width="4" height="30" />
+                    <rect x="98" y="0" width="1" height="30" />
+                    <rect x="101" y="0" width="3" height="30" />
+                    <rect x="106" y="0" width="2" height="30" />
+                    <rect x="110" y="0" width="1" height="30" />
+                    <rect x="113" y="0" width="4" height="30" />
+                    <rect x="119" y="0" width="2" height="30" />
+                    <rect x="123" y="0" width="1" height="30" />
+                    <rect x="126" y="0" width="3" height="30" />
+                    <rect x="131" y="0" width="2" height="30" />
+                    <rect x="135" y="0" width="4" height="30" />
+                    <rect x="141" y="0" width="1" height="30" />
+                    <rect x="144" y="0" width="3" height="30" />
+                    <rect x="149" y="0" width="2" height="30" />
+                    <rect x="153" y="0" width="3" height="30" />
+                    <rect x="158" y="0" width="1" height="30" />
+                    <rect x="161" y="0" width="4" height="30" />
+                    <rect x="167" y="0" width="2" height="30" />
+                    <rect x="171" y="0" width="1" height="30" />
+                    <rect x="174" y="0" width="2" height="30" />
+                  </svg>
+                  <span class="isbn-text">ISBN 978-0-201-63361-0 • REF: DOM-ARCH-2024-C</span>
+                </div>
+
+                <div class="verified-seal">
+                  <span>VERIFIED SPECIMEN</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Statistics Strip -->
+          <div class="stats-strip">
+            <div class="stat-col">
+              <span class="stat-number">03</span>
+              <span class="stat-label">YEARS IN CRAFT</span>
+              <span class="stat-sub">Staff / Architect</span>
+            </div>
+
+            <div class="stat-col">
+              <span class="stat-number">100<span class="stat-unit">%</span></span>
+              <span class="stat-label">SEMANTIC VITALS</span>
+              <span class="stat-sub">Lighthouse Clean</span>
+            </div>
+
+            <div class="stat-col">
+              <span class="stat-number">0.0<span class="stat-unit-mono">kb</span></span>
+              <span class="stat-label">RUNTIME WASTE</span>
+              <span class="stat-sub">Zero-Lockin Core</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const audioBtn = document.getElementById('hero-audio-toggle');
+  const waveBars = document.getElementById('wave-bars');
+  const audioText = document.getElementById('hero-audio-text');
+  let isPlaying = true;
+
+  audioBtn?.addEventListener('click', () => {
+    isPlaying = !isPlaying;
+    if (isPlaying) {
+      waveBars?.classList.remove('paused');
+      if (audioText) audioText.textContent = 'AUDIO ISSUE [04:18]';
+    } else {
+      waveBars?.classList.add('paused');
+      if (audioText) audioText.textContent = 'AUDIO PAUSED';
+    }
+  });
+</script>
+
+<style>
+  /* Base Variables matching the High-Fashion Editorial Spec */
+  .editorial-hero-wrapper {
+    --hero-bg: #f4f1ea;
+    --hero-bg-light: #fcfbf9;
+    --hero-bg-dark: #ebe6da;
+    --hero-charcoal: #1a1a1a;
+    --hero-charcoal-muted: rgba(26, 26, 26, 0.65);
+    --hero-hairline: rgba(26, 26, 26, 0.16);
+    --hero-olive: #858b73;
+    --hero-olive-dark: #5a6351;
+    --hero-olive-tint: rgba(133, 139, 115, 0.14);
+    
+    background-color: var(--hero-bg);
+    color: var(--hero-charcoal);
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid var(--hero-hairline);
+    background-image: radial-gradient(rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .hero-container {
+    max-width: var(--container-max-width, 1540px);
+    margin: 0 auto;
+    padding: 0 var(--container-padding, clamp(1.25rem, 3.2vw, 2.5rem));
+  }
+
+  /* Sub-header Bar */
+  .sub-header-bar {
+    width: 100%;
+    border-bottom: 1px solid var(--hero-hairline);
+    background-color: rgba(235, 230, 218, 0.4);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hero-charcoal);
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .meta-item {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-right: 1px solid var(--hero-hairline);
+  }
+
+  .meta-item:last-child {
+    border-right: none;
+    justify-content: flex-end;
+  }
+
+  .meta-cities {
+    justify-content: center;
+  }
+
+  .meta-circulation {
+    justify-content: center;
+  }
+
+  .meta-strong {
+    font-weight: 700;
+    color: var(--hero-charcoal);
+  }
+
+  .meta-divider {
+    color: var(--hero-hairline);
+  }
+
+  .meta-label {
+    color: var(--hero-charcoal-muted);
+  }
+
+  .meta-subprice {
+    color: var(--hero-charcoal-muted);
+  }
+
+  /* Audio Issue Toggle Button */
+  .audio-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid rgba(26, 26, 26, 0.25);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    color: var(--hero-charcoal);
+    letter-spacing: 0.08em;
+    transition: all 0.2s ease;
+  }
+
+  .audio-toggle-btn:hover {
+    background-color: rgba(26, 26, 26, 0.06);
+    border-color: var(--hero-charcoal);
+  }
+
+  .wave-icon {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 12px;
+    width: 12px;
+  }
+
+  .wave-bar {
+    width: 2px;
+    background-color: var(--hero-charcoal);
+    display: inline-block;
+  }
+
+  @keyframes wave-anim {
+    0%, 100% { height: 3px; }
+    50% { height: 12px; }
+  }
+
+  .wb-1 { animation: wave-anim 1.1s ease-in-out infinite; }
+  .wb-2 { animation: wave-anim 0.8s ease-in-out infinite 0.2s; }
+  .wb-3 { animation: wave-anim 1.4s ease-in-out infinite 0.4s; }
+  .wb-4 { animation: wave-anim 0.9s ease-in-out infinite 0.1s; }
+
+  .paused .wave-bar {
+    animation-play-state: paused;
+    height: 3px;
+  }
+
+  /* Main Editorial Hero Section */
+  .editorial-hero-section {
+    padding: 4.5rem 0 5.5rem;
+  }
+
+  .asymmetric-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(380px, 460px);
+    gap: clamp(2.5rem, 3.5vw, 4rem);
+    align-items: start;
+  }
+
+  /* Left Column: Editorial Core */
+  .editorial-core {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .tag-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .olive-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.65rem;
+    background-color: var(--hero-olive-tint);
+    border: 1px solid rgba(133, 139, 115, 0.35);
+    color: var(--hero-olive-dark);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tag-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--hero-olive-dark);
+  }
+
+  /* Massive Serif Headline */
+  .editorial-headline {
+    margin: 0;
+    line-height: 0.92;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  .headline-bold {
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(3.5rem, 7.5vw, 6.75rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: var(--hero-charcoal);
+  }
+
+  .headline-italic {
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(3rem, 6.5vw, 5.85rem);
+    font-weight: 400;
+    font-style: italic;
+    letter-spacing: -0.02em;
+    color: var(--color-secondary, #5A6351);
+    margin-top: 0.25rem;
+  }
+
+  .headline-dot {
+    font-style: normal;
+    color: var(--color-secondary, #5A6351);
+    font-weight: 300;
+  }
+
+  /* Bio Hook */
+  .bio-hook {
+    margin: 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 2px solid var(--hero-olive);
+  }
+
+  .bio-hook p {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--hero-charcoal);
+    margin: 0;
+    max-width: 650px;
+  }
+
+  /* Theses Block */
+  .theses-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .theses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--hero-hairline);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .theses-caption {
+    font-weight: 700;
+  }
+
+  .theses-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thesis-item {
+    border-bottom: 1px solid var(--hero-hairline);
+  }
+
+  .thesis-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.85rem 0.5rem;
+    margin: 0 -0.5rem;
+    text-decoration: none;
+    color: var(--hero-charcoal);
+    transition: background-color 0.2s ease;
+  }
+
+  .thesis-link:hover {
+    background-color: rgba(235, 230, 218, 0.45);
+  }
+
+  .thesis-title-group {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .thesis-number {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--hero-olive-dark);
+  }
+
+  .thesis-name {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--hero-charcoal);
+    transition: color 0.2s ease;
+  }
+
+  .thesis-link:hover .thesis-name {
+    color: var(--hero-olive-dark);
+  }
+
+  .thesis-meta-group {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .thesis-detail {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.6875rem;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .thesis-page {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--hero-charcoal);
+  }
+
+  /* Action Buttons */
+  .actions-strip {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.65rem;
+    padding-top: 0.5rem;
+    width: 100%;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    padding: 0.85rem 1.15rem;
+    white-space: nowrap;
+    flex: 0 1 auto;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .btn-primary {
+    background-color: var(--hero-charcoal);
+    color: var(--hero-bg);
+    border: 1px solid var(--hero-charcoal);
+    gap: 0.75rem;
+  }
+
+  .btn-primary:hover {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .btn-primary:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  .btn-outline {
+    background-color: rgba(251, 249, 245, 0.45);
+    color: var(--hero-charcoal);
+    border: 1px solid var(--hero-charcoal);
+    gap: 0.5rem;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--hero-charcoal);
+    color: var(--hero-bg);
+  }
+
+  .btn-badge {
+    font-size: 0.625rem;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .btn-outline:hover .btn-badge {
+    color: var(--hero-bg);
+  }
+
+  .btn-olive {
+    background-color: var(--hero-olive);
+    color: #ffffff;
+    border: 1px solid var(--hero-olive);
+    gap: 0.5rem;
+  }
+
+  .btn-olive:hover {
+    background-color: var(--hero-olive-dark);
+    border-color: var(--hero-olive-dark);
+  }
+
+  .btn-status {
+    font-size: 0.5625rem;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 0.15rem 0.35rem;
+    border-radius: 2px;
+  }
+
+  /* Editorial Footnote */
+  .editorial-footnote {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+    color: var(--hero-charcoal-muted);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+    padding-top: 0.5rem;
+  }
+
+  .dot-separator {
+    color: var(--hero-hairline);
+  }
+
+  /* Right Column: Monograph Plate */
+  .monograph-plate-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .plate-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border: 1px solid var(--hero-hairline);
+    box-shadow: 0 14px 40px -10px rgba(26, 26, 26, 0.12);
+    position: relative;
+  }
+
+  /* Architectural Crop Marks */
+  .corner-mark {
+    position: absolute;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    color: rgba(26, 26, 26, 0.3);
+    user-select: none;
+    line-height: 1;
+  }
+
+  .top-left { top: 0.5rem; left: 0.5rem; }
+  .top-right { top: 0.5rem; right: 0.5rem; }
+  .bottom-left { bottom: 0.5rem; left: 0.5rem; }
+  .bottom-right { bottom: 0.5rem; right: 0.5rem; }
+
+  .plate-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .plate-image-frame {
+    position: relative;
+    aspect-ratio: 4 / 4.8;
+    overflow: hidden;
+    background-color: rgba(26, 26, 26, 0.04);
+    border: 1px solid rgba(26, 26, 26, 0.12);
+  }
+
+  .plate-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: grayscale(100%) contrast(110%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .plate-image-frame:hover .plate-image {
+    transform: scale(1.03);
+  }
+
+  .plate-image-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.45) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .plate-badge-bottom-left {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+  }
+
+  .plate-badge-bottom-right {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    padding: 0.15rem 0.4rem;
+  }
+
+  .plate-caption-block {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .plate-caption-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .plate-caption-tag {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--hero-olive-dark);
+  }
+
+  .plate-caption-date {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .plate-caption-text {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--hero-charcoal);
+    margin: 0;
+  }
+
+  .plate-barcode-footer {
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.08);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .barcode-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .barcode-svg {
+    height: 1.75rem;
+    width: 10.5rem;
+    color: var(--hero-charcoal);
+  }
+
+  .isbn-text {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    color: var(--hero-charcoal-muted);
+  }
+
+  .verified-seal span {
+    display: inline-block;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid var(--hero-olive);
+    color: var(--hero-olive-dark);
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  /* Bottom Statistics Strip */
+  .stats-strip {
+    background-color: rgba(251, 249, 245, 0.85);
+    border: 1px solid var(--hero-hairline);
+    padding: 1.25rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    divide-x: 1px solid var(--hero-hairline);
+    text-align: center;
+  }
+
+  .stat-col {
+    padding: 0 0.5rem;
+    border-right: 1px solid var(--hero-hairline);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-col:last-child {
+    border-right: none;
+  }
+
+  .stat-number {
+    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
+    font-size: clamp(1.85rem, 2.5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--hero-charcoal);
+  }
+
+  .stat-unit {
+    font-size: 1rem;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: var(--hero-olive-dark);
+  }
+
+  .stat-unit-mono {
+    font-size: 0.875rem;
+    font-family: var(--font-label, 'Space Mono', monospace);
+    color: var(--hero-olive-dark);
+  }
+
+  .stat-label {
+    font-family: var(--font-label, 'Space Mono', monospace);
+    font-size: 0.5625rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--hero-charcoal);
+    margin-top: 0.4rem;
+  }
+
+  .stat-sub {
+    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
+    font-style: italic;
+    font-size: 0.6875rem;
+    color: var(--hero-charcoal-muted);
+    margin-top: 0.15rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1120px) {
+    .asymmetric-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .monograph-plate-col {
+      max-width: 580px;
+    }
+
+    .meta-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .meta-item:nth-child(2) {
+      border-right: none;
+    }
+
+    .meta-item:nth-child(3) {
+      border-top: 1px solid var(--hero-hairline);
+      border-right: 1px solid var(--hero-hairline);
+    }
+
+    .meta-item:nth-child(4) {
+      border-top: 1px solid var(--hero-hairline);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-container {
+      padding: 0 1.25rem;
+    }
+
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .meta-item {
+      border-right: none !important;
+      border-top: 1px solid var(--hero-hairline);
+      justify-content: flex-start !important;
+      padding: 0.5rem 0;
+    }
+
+    .meta-item:first-child {
+      border-top: none;
+    }
+
+    .actions-strip {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.65rem;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .theses-meta-group .thesis-detail {
+      display: none;
+    }
+  }
+</style>

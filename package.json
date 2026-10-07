@@ -12,7 +12,13 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.5"
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/newsreader": "^5.3.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "astro": "^7.3.5",
+    "motion": "^14.0.0"
   },
   "allowScripts": {
     "esbuild": true

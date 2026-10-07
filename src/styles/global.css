@@ -1,0 +1,109 @@
+/* Font Imports via Fontsource */
+@import '@fontsource-variable/bodoni-moda';
+@import '@fontsource/bodoni-moda';
+@import '@fontsource-variable/newsreader';
+@import '@fontsource/newsreader';
+@import '@fontsource/space-mono';
+@import '@fontsource/space-mono/700.css';
+
+:root {
+  /* Layout & Width Tokens */
+  --container-max-width: 1540px;
+  --container-padding: clamp(1.25rem, 3.2vw, 2.5rem);
+
+  /* Colors */
+  --color-primary: #1a1a1a;
+  --color-secondary: #5A6351;
+  --color-tertiary: #5A6351;
+  --color-neutral: #f4f1ea;
+
+  /* Editorial Theme Palette */
+  --color-bg: #f4f1ea;
+  --color-bg-light: #fcfbf9;
+  --color-bg-dark: #ebe6da;
+  --color-surface: #FFFFFF;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-muted: rgba(26, 26, 26, 0.65);
+  --color-hairline: rgba(26, 26, 26, 0.16);
+  --color-olive: #858b73;
+  --color-olive-dark: #5a6351;
+  --color-olive-tint: rgba(133, 139, 115, 0.14);
+
+  /* Semantic Theme Tokens */
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+  --color-text-muted: var(--color-charcoal-muted);
+  --color-border: var(--color-hairline);
+
+  /* Typography */
+  --font-headline: 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif;
+  --font-body: 'Newsreader Variable', 'Newsreader', Georgia, serif;
+  --font-label: 'Space Mono', monospace;
+}
+
+/* Document level defaults */
+html {
+  box-sizing: border-box;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  background-image: radial-gradient(rgba(26, 26, 26, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings (Headline font: Bodoni Moda) */
+h1, h2, h3, h4, h5, h6,
+.font-headline {
+  font-family: var(--font-headline);
+  color: var(--color-primary);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Body Text (Body font: Newsreader) */
+p, li, article,
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Labels & Monospace (Label font: Space Mono) */
+label,
+code,
+pre,
+kbd,
+samp,
+.font-label,
+.label {
+  font-family: var(--font-label);
+}
+
+/* Color Utility Classes */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-tertiary { color: var(--color-tertiary); }
+.text-neutral { color: var(--color-neutral); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-tertiary { background-color: var(--color-tertiary); }
+.bg-neutral { background-color: var(--color-neutral); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-tertiary { border-color: var(--color-tertiary); }
+.border-neutral { border-color: var(--color-neutral); }
