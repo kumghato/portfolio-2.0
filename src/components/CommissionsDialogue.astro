@@ -1,4 +1,6 @@
 ---
+import SealLogo from './SealLogo.astro';
+
 interface Props {
   studioEmail?: string;
   studioLocation?: string;
@@ -18,11 +20,11 @@ const web3FormsKey =
 
 <section 
   class="commissions-dialogue-wrapper" 
-  id="commissions-dialogue" 
+  id="colophon-inquiries" 
   aria-labelledby="commissions-heading"
 >
-  <!-- Bookmark Anchor for existing Navbar and Hero Links -->
-  <div id="colophon-inquiries" class="anchor-offset" aria-hidden="true"></div>
+  <!-- Bookmark Anchor for compatibility -->
+  <div id="commissions-dialogue" class="anchor-offset" aria-hidden="true"></div>
 
   <!-- ========================================== -->
   <!-- ARCHITECTURAL TOP SUB-BAR: REGISTRY STRIP  -->
@@ -418,7 +420,9 @@ const web3FormsKey =
     <div class="commissions-container">
       <div class="colophon-grid">
         <div class="colophon-left">
-          <span class="colophon-monogram">KK</span>
+          <a href="#cover-feature" class="colophon-seal-link" aria-label="Return to cover feature">
+            <SealLogo size={36} class="colophon-seal-logo" />
+          </a>
           <div class="colophon-meta">
             <span class="colophon-title">KUMGHATO KHALA // DIGITAL ATELIER</span>
             <span class="colophon-copy">EDITION MMXXIV–MMXXV • PERSONAL PORTFOLIO MONOGRAPH</span>
@@ -1529,18 +1533,23 @@ const web3FormsKey =
     gap: 0.85rem;
   }
 
-  .colophon-monogram {
+  .colophon-seal-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border: 1px solid var(--commissions-hairline-bold);
-    font-family: var(--font-headline, 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif);
-    font-weight: 900;
-    font-size: 0.875rem;
-    color: var(--commissions-charcoal);
-    background-color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  }
+
+  .colophon-seal-link:hover {
+    transform: rotate(15deg) scale(1.08);
+    opacity: 0.85;
+  }
+
+  .colophon-seal-logo {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
   }
 
   .colophon-meta {

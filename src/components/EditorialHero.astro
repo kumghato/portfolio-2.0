@@ -1,4 +1,6 @@
 ---
+import SealLogo from './SealLogo.astro';
+
 interface Props {
   name?: string;
   role?: string;
@@ -19,6 +21,13 @@ const {
 
 
 <div class="editorial-hero-wrapper" id="cover-feature">
+  <!-- Archival Watermark Seal Design in Hero Background -->
+  <div class="hero-watermark-wrapper" aria-hidden="true">
+    <div class="hero-watermark-aura"></div>
+    <div class="hero-watermark-outer-ring"></div>
+    <SealLogo size="100%" class="hero-watermark-svg" />
+  </div>
+
   <!-- ========================================== -->
   <!-- SUB-HEADER BAR: METADATA, ISSUE & PRICING -->
   <!-- ========================================== -->
@@ -308,20 +317,67 @@ const {
     color: var(--hero-charcoal);
     width: 100%;
     position: relative;
+    overflow: hidden;
+    scroll-margin-top: 72px;
     border-bottom: 1px solid var(--hero-hairline);
     background-image: radial-gradient(rgba(26, 26, 26, 0.04) 1px, transparent 1px);
     background-size: 24px 24px;
+  }
+
+  /* Archival Watermark Seal Background */
+  .hero-watermark-wrapper {
+    position: absolute;
+    top: 53%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotate(-8deg);
+    width: clamp(520px, 52vw, 840px);
+    height: clamp(520px, 52vw, 840px);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.075;
+    transition: opacity 0.3s ease;
+  }
+
+  .hero-watermark-aura {
+    position: absolute;
+    inset: -14%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(133, 139, 115, 0.15) 0%, rgba(244, 241, 234, 0) 70%);
+    pointer-events: none;
+  }
+
+  .hero-watermark-outer-ring {
+    position: absolute;
+    inset: -4%;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(26, 26, 26, 0.35);
+    pointer-events: none;
+  }
+
+  .hero-watermark-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    filter: drop-shadow(0 0 1px rgba(26, 26, 26, 0.15));
   }
 
   .hero-container {
     max-width: var(--container-max-width, 1540px);
     margin: 0 auto;
     padding: 0 var(--container-padding, clamp(1.25rem, 3.2vw, 2.5rem));
+    position: relative;
+    z-index: 1;
   }
 
   /* Sub-header Bar */
   .sub-header-bar {
     width: 100%;
+    position: relative;
+    z-index: 1;
     border-bottom: 1px solid var(--hero-hairline);
     background-color: rgba(235, 230, 218, 0.4);
     font-family: var(--font-label, 'Space Mono', monospace);
@@ -928,6 +984,14 @@ const {
   }
 
   @media (max-width: 1024px) {
+    .hero-watermark-wrapper {
+      top: 32%;
+      left: 50%;
+      width: clamp(340px, 80vw, 560px);
+      height: clamp(340px, 80vw, 560px);
+      opacity: 0.07;
+    }
+
     .asymmetric-layout {
       grid-template-columns: 1fr;
       gap: 3.5rem;
@@ -990,6 +1054,13 @@ const {
   }
 
   @media (max-width: 640px) {
+    .hero-watermark-wrapper {
+      top: 25%;
+      width: clamp(280px, 88vw, 420px);
+      height: clamp(280px, 88vw, 420px);
+      opacity: 0.065;
+    }
+
     .editorial-hero-section {
       padding: 3rem 0 4rem;
     }
