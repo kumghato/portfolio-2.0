@@ -10,6 +10,11 @@ const {
   studioLocation = "Kohima, Nagaland, 797001",
   presentYear = new Date().getFullYear(),
 } = Astro.props;
+
+const web3FormsKey =
+  import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ||
+  import.meta.env.WEB3FORMS_ACCESS_KEY ||
+  "52fb86e6-5a62-4bcd-ba41-6006bb11514b";
 ---
 
 <section 
@@ -222,84 +227,37 @@ const {
               <span class="form-header-ref">FORM // MOD-04</span>
             </div>
 
-            <form id="editorial-dispatch-form" class="editorial-dispatch-form" novalidate>
+            <form 
+              id="editorial-dispatch-form" 
+              class="editorial-dispatch-form" 
+              action="https://api.web3forms.com/submit" 
+              method="POST" 
+              novalidate
+            >
+              <!-- Web3Forms Configuration -->
+              <input type="hidden" name="access_key" value={web3FormsKey} />
+              <input type="hidden" name="from_name" value="Kumghato Digital Atelier Monograph" />
+              <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
+
               <!-- ========================================== -->
-              <!-- 01. CLASSIFICATION OF ENGAGEMENT           -->
+              <!-- 01. SUBJECT // INQUIRY FOCUS               -->
               <!-- ========================================== -->
               <div class="form-group-block">
-                <div class="group-label-row">
-                  <label class="monospace-group-label" id="engagement-classification-label">
-                    <span class="label-idx">01.</span>
-                    <span class="label-heading">CLASSIFICATION OF ENGAGEMENT</span>
-                  </label>
-                  <span class="multi-select-badge">(MULTI-SELECT ENABLED)</span>
+                <label class="monospace-group-label" for="client-subject">
+                  <span class="label-idx">01.</span>
+                  <span class="label-heading">SUBJECT // INQUIRY FOCUS</span>
+                </label>
+                <div class="input-container">
+                  <input 
+                    type="text" 
+                    id="client-subject" 
+                    name="subject" 
+                    class="editorial-form-input" 
+                    placeholder="e.g. Design Systems, Frontend Architecture, or Monograph Commission" 
+                    required 
+                  />
+                  <span class="input-decor-bracket" aria-hidden="true">↵</span>
                 </div>
-
-                <div 
-                  class="engagement-selector-grid" 
-                  role="group" 
-                  aria-labelledby="engagement-classification-label"
-                >
-                  <!-- Button 1: Default Active in Solid Black -->
-                  <button 
-                    type="button" 
-                    class="engagement-choice-pill is-active" 
-                    data-classification="FRONTEND ARCHITECTURE"
-                    role="checkbox"
-                    aria-checked="true"
-                    tabindex="0"
-                  >
-                    <span class="choice-indicator" aria-hidden="true">■</span>
-                    <span class="choice-text">FRONTEND ARCHITECTURE</span>
-                  </button>
-
-                  <!-- Button 2 -->
-                  <button 
-                    type="button" 
-                    class="engagement-choice-pill" 
-                    data-classification="BESPOKE DESIGN SYSTEM"
-                    role="checkbox"
-                    aria-checked="false"
-                    tabindex="0"
-                  >
-                    <span class="choice-indicator" aria-hidden="true">□</span>
-                    <span class="choice-text">BESPOKE DESIGN SYSTEM</span>
-                  </button>
-
-                  <!-- Button 3 -->
-                  <button 
-                    type="button" 
-                    class="engagement-choice-pill" 
-                    data-classification="PERFORMANCE & CORE VITALS AUDIT"
-                    role="checkbox"
-                    aria-checked="false"
-                    tabindex="0"
-                  >
-                    <span class="choice-indicator" aria-hidden="true">□</span>
-                    <span class="choice-text">PERFORMANCE &amp; CORE VITALS AUDIT</span>
-                  </button>
-
-                  <!-- Button 4 -->
-                  <button 
-                    type="button" 
-                    class="engagement-choice-pill" 
-                    data-classification="EXECUTION CONSULTATION"
-                    role="checkbox"
-                    aria-checked="false"
-                    tabindex="0"
-                  >
-                    <span class="choice-indicator" aria-hidden="true">□</span>
-                    <span class="choice-text">EXECUTION CONSULTATION</span>
-                  </button>
-                </div>
-
-                <!-- Hidden form input to preserve selected classifications -->
-                <input 
-                  type="hidden" 
-                  id="selected-classifications-input" 
-                  name="selected_classifications" 
-                  value="FRONTEND ARCHITECTURE" 
-                />
               </div>
 
               <!-- ========================================== -->
@@ -314,7 +272,7 @@ const {
                   <input 
                     type="text" 
                     id="client-name" 
-                    name="client_name" 
+                    name="name" 
                     class="editorial-form-input" 
                     placeholder="e.g. Virgil" 
                     required 
@@ -336,7 +294,7 @@ const {
                   <input 
                     type="email" 
                     id="client-email" 
-                    name="client_email" 
+                    name="email" 
                     class="editorial-form-input" 
                     placeholder="e.g. e.virg@gmail.com" 
                     required 
@@ -357,7 +315,7 @@ const {
                 <div class="input-container">
                   <textarea 
                     id="scope-specification" 
-                    name="scope_specification" 
+                    name="message" 
                     class="editorial-form-textarea" 
                     rows="4" 
                     placeholder="Outline the technical challenges, expected milestone deliveries, and infrastructural parameters..." 
@@ -378,6 +336,12 @@ const {
                   <span class="button-label">TRANSMIT EDITORIAL DISPATCH</span>
                   <span class="button-arrow" aria-hidden="true">➔</span>
                 </button>
+              </div>
+
+              <!-- Transmission Error Notice (Inline) -->
+              <div id="dispatch-error-notice" class="dispatch-error-notice" style="display: none;" role="alert">
+                <span class="error-glyph" aria-hidden="true">!</span>
+                <span id="dispatch-error-text" class="error-text">Transmission failed. Please check your submission and try again.</span>
               </div>
 
               <!-- Form Security & Transmission Protocol Footnote -->
@@ -484,56 +448,7 @@ const {
 <!-- ========================================== -->
 <script>
   // ==========================================
-  // 1. MULTI-SELECT ENGAGEMENT CLASSIFICATION
-  // ==========================================
-  const choiceButtons = Array.from(
-    document.querySelectorAll('.engagement-choice-pill')
-  ) as HTMLButtonElement[];
-  const hiddenInput = document.getElementById(
-    'selected-classifications-input'
-  ) as HTMLInputElement | null;
-
-  function updateClassificationsInput() {
-    if (!hiddenInput) return;
-    const activeValues = choiceButtons
-      .filter((btn) => btn.classList.contains('is-active'))
-      .map((btn) => btn.getAttribute('data-classification') || '')
-      .filter(Boolean);
-
-    hiddenInput.value = activeValues.join(', ');
-  }
-
-  choiceButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const isCurrentlyActive = btn.classList.contains('is-active');
-      const activeCount = choiceButtons.filter((b) => b.classList.contains('is-active')).length;
-
-      // Allow toggling, but maintain at least one selection for clarity
-      if (isCurrentlyActive && activeCount <= 1) {
-        // Provide subtle bounce indication
-        btn.classList.add('shake-subtle');
-        setTimeout(() => btn.classList.remove('shake-subtle'), 400);
-        return;
-      }
-
-      if (isCurrentlyActive) {
-        btn.classList.remove('is-active');
-        btn.setAttribute('aria-checked', 'false');
-        const indicator = btn.querySelector('.choice-indicator');
-        if (indicator) indicator.textContent = '□';
-      } else {
-        btn.classList.add('is-active');
-        btn.setAttribute('aria-checked', 'true');
-        const indicator = btn.querySelector('.choice-indicator');
-        if (indicator) indicator.textContent = '■';
-      }
-
-      updateClassificationsInput();
-    });
-  });
-
-  // ==========================================
-  // 2. DIRECT WIRE EMAIL COPY-TO-CLIPBOARD
+  // 1. DIRECT WIRE EMAIL COPY-TO-CLIPBOARD
   // ==========================================
   const copyBtn = document.getElementById('wire-copy-btn');
   const copyToast = document.getElementById('wire-copy-toast');
@@ -569,7 +484,7 @@ const {
   });
 
   // ==========================================
-  // 3. EDITORIAL DISPATCH FORM SUBMISSION
+  // 2. EDITORIAL DISPATCH FORM (WEB3FORMS)
   // ==========================================
   const dispatchForm = document.getElementById(
     'editorial-dispatch-form'
@@ -580,9 +495,15 @@ const {
   const receiptPanel = document.getElementById('dispatch-success-receipt');
   const receiptDocket = document.getElementById('receipt-docket-id');
   const resetBtn = document.getElementById('receipt-new-dispatch-btn');
+  const errorNotice = document.getElementById('dispatch-error-notice');
+  const errorText = document.getElementById('dispatch-error-text');
 
-  dispatchForm?.addEventListener('submit', (e) => {
+  dispatchForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    if (errorNotice) {
+      errorNotice.style.display = 'none';
+    }
 
     // Check validity
     if (!dispatchForm.checkValidity()) {
@@ -590,26 +511,73 @@ const {
       return;
     }
 
+    const label = submitBtn?.querySelector('.button-label');
+    const originalLabel = label?.textContent || 'TRANSMIT EDITORIAL DISPATCH';
+
     if (submitBtn) {
       submitBtn.disabled = true;
-      const label = submitBtn.querySelector('.button-label');
       if (label) label.textContent = 'TRANSMITTING DISPATCH...';
     }
 
-    // Generate random docket number for realistic archival feel
-    const randomDocket = Math.floor(1000 + Math.random() * 9000);
-    if (receiptDocket) {
-      receiptDocket.textContent = `DOCKET #${new Date().getFullYear()}-${randomDocket}`;
-    }
-
-    // Simulate graceful transmission delay
-    setTimeout(() => {
-      if (dispatchForm) dispatchForm.style.display = 'none';
-      if (receiptPanel) {
-        receiptPanel.style.display = 'block';
-        receiptPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    try {
+      const formData = new FormData(dispatchForm);
+      if (!formData.get('access_key')) {
+        formData.set(
+          'access_key',
+          import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY || '52fb86e6-5a62-4bcd-ba41-6006bb11514b'
+        );
       }
-    }, 600);
+
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json,
+      });
+
+      const result = await response.json();
+
+      if (response.status === 200 && result.success) {
+        // Generate random docket number for realistic archival feel
+        const randomDocket = Math.floor(1000 + Math.random() * 9000);
+        if (receiptDocket) {
+          receiptDocket.textContent = `DOCKET #${new Date().getFullYear()}-${randomDocket}`;
+        }
+
+        if (dispatchForm) dispatchForm.style.display = 'none';
+        if (receiptPanel) {
+          receiptPanel.style.display = 'block';
+          receiptPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        const errorMsg = result.message || 'Transmission failed. Please check form entries and try again.';
+        if (errorNotice && errorText) {
+          errorText.textContent = errorMsg;
+          errorNotice.style.display = 'flex';
+        } else {
+          alert(errorMsg);
+        }
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+      const networkMsg = 'A network transmission error occurred. Please verify your connection or telegraph directly via email.';
+      if (errorNotice && errorText) {
+        errorText.textContent = networkMsg;
+        errorNotice.style.display = 'flex';
+      } else {
+        alert(networkMsg);
+      }
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        if (label) label.textContent = originalLabel;
+      }
+    }
   });
 
   resetBtn?.addEventListener('click', () => {
@@ -620,21 +588,14 @@ const {
     if (receiptPanel) {
       receiptPanel.style.display = 'none';
     }
+    if (errorNotice) {
+      errorNotice.style.display = 'none';
+    }
     if (submitBtn) {
       submitBtn.disabled = false;
       const label = submitBtn.querySelector('.button-label');
-      if (label) label.textContent = 'TRANSMITTING EDITORIAL DISPATCH';
+      if (label) label.textContent = 'TRANSMIT EDITORIAL DISPATCH';
     }
-
-    // Reset classifications to default
-    choiceButtons.forEach((btn, idx) => {
-      const shouldBeActive = idx === 0;
-      btn.classList.toggle('is-active', shouldBeActive);
-      btn.setAttribute('aria-checked', shouldBeActive ? 'true' : 'false');
-      const indicator = btn.querySelector('.choice-indicator');
-      if (indicator) indicator.textContent = shouldBeActive ? '■' : '□';
-    });
-    updateClassificationsInput();
   });
 </script>
 
@@ -1276,79 +1237,37 @@ const {
     color: var(--commissions-charcoal);
   }
 
-  .multi-select-badge {
-    font-family: var(--font-label, 'Space Mono', monospace);
-    font-size: 0.625rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--commissions-olive-dark);
-    font-weight: 600;
-  }
-
   /* --------------------------------------------------------------------------
-     MULTI-SELECT ENGAGEMENT PILLS
+     DISPATCH TRANSMISSION ERROR NOTICE
      -------------------------------------------------------------------------- */
-  .engagement-selector-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.65rem;
-  }
-
-  .engagement-choice-pill {
+  .dispatch-error-notice {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.65rem;
     padding: 0.85rem 1rem;
-    background-color: var(--commissions-bg-card-subtle);
-    border: 1px solid var(--commissions-hairline);
-    color: var(--commissions-charcoal);
+    background-color: #fdf2f2;
+    border: 1px solid #d9534f;
+    color: #a94442;
     font-family: var(--font-label, 'Space Mono', monospace);
     font-size: 0.6875rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.18s ease;
-    user-select: none;
+    line-height: 1.4;
   }
 
-  .engagement-choice-pill:hover {
-    border-color: var(--commissions-charcoal);
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(26, 26, 26, 0.06);
-  }
-
-  /* Active state in solid black */
-  .engagement-choice-pill.is-active {
-    background-color: var(--commissions-charcoal);
-    color: #f4f1ea;
-    border-color: var(--commissions-charcoal);
-    box-shadow: 0 4px 12px rgba(26, 26, 26, 0.2);
-  }
-
-  .choice-indicator {
+  .dispatch-error-notice .error-glyph {
+    font-weight: 700;
+    color: #d9534f;
+    border: 1px solid #d9534f;
+    border-radius: 50%;
+    width: 1.15rem;
+    height: 1.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     font-size: 0.75rem;
-    line-height: 1;
     flex-shrink: 0;
-  }
-
-  .engagement-choice-pill.is-active .choice-indicator {
-    color: #f4f1ea;
-  }
-
-  .choice-text {
-    line-height: 1.35;
-  }
-
-  .shake-subtle {
-    animation: subtleShake 0.35s ease;
-  }
-
-  @keyframes subtleShake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
   }
 
   /* --------------------------------------------------------------------------
@@ -1788,10 +1707,6 @@ const {
       text-align: left;
       justify-content: flex-start;
       line-height: 1.4;
-    }
-
-    .engagement-selector-grid {
-      grid-template-columns: 1fr;
     }
 
     .meta-grid {
