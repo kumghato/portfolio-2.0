@@ -379,9 +379,11 @@ const plates: FoundryPlate[] = [
   // Compute 3D Radius responsive to viewport
   function computeRadius(): number {
     const width = window.innerWidth;
-    if (width < 480) return 210;
-    if (width < 768) return 260;
-    if (width < 1024) return 310;
+    if (width < 380) return 240;
+    if (width < 480) return 265;
+    if (width < 768) return 305;
+    if (width < 1024) return 340;
+    if (width >= 2560) return 480;
     return 380;
   }
 
@@ -1678,7 +1680,52 @@ const plates: FoundryPlate[] = [
     }
   }
 
-  @media (max-width: 900px) {
+  @media (min-width: 2560px) {
+    .atelier-headline {
+      font-size: clamp(4.5rem, 4vw, 6.5rem);
+    }
+
+    .editorial-aside p {
+      font-size: 1.55rem;
+    }
+
+    .wheel-3d-stage {
+      height: 640px;
+    }
+
+    .wheel-card {
+      width: 280px;
+      height: 380px;
+      left: -140px;
+      top: -190px;
+    }
+
+    .wheel-card-inner {
+      padding: 1.75rem 1.5rem;
+    }
+
+    .card-image-pedestal {
+      width: 120px;
+      height: 120px;
+      margin: 1.25rem auto;
+    }
+
+    .card-tech-image {
+      width: 76px;
+      height: 76px;
+    }
+
+    .card-title {
+      font-size: 1.45rem;
+    }
+
+    .wheel-ground-orbit {
+      width: 860px;
+      height: 860px;
+    }
+  }
+
+  @media (max-width: 1024px) {
     .atelier-header-block {
       grid-template-columns: 1fr;
       gap: 2rem;
@@ -1686,6 +1733,21 @@ const plates: FoundryPlate[] = [
 
     .editorial-aside {
       padding-left: 1rem;
+    }
+
+    .wheel-card {
+      width: 220px;
+      height: 300px;
+      left: -110px;
+      top: -150px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wheel-card.is-distant {
+      opacity: 0 !important;
+      visibility: hidden;
+      pointer-events: none;
     }
   }
 
@@ -1695,7 +1757,7 @@ const plates: FoundryPlate[] = [
     }
 
     .atelier-container {
-      padding: 0 1.25rem;
+      padding: 0 var(--container-padding, 1.25rem);
     }
 
     .meta-grid {
@@ -1714,7 +1776,7 @@ const plates: FoundryPlate[] = [
     }
 
     .wheel-3d-stage {
-      height: 440px;
+      height: 430px;
     }
 
     .card-flank-cue {
@@ -1728,10 +1790,10 @@ const plates: FoundryPlate[] = [
     }
 
     .wheel-card {
-      width: 200px;
-      height: 290px;
-      left: -100px;
-      top: -145px;
+      width: 190px;
+      height: 275px;
+      left: -95px;
+      top: -137.5px;
     }
 
     .wheel-card-inner {
@@ -1739,8 +1801,8 @@ const plates: FoundryPlate[] = [
     }
 
     .card-image-pedestal {
-      width: 70px;
-      height: 70px;
+      width: 68px;
+      height: 68px;
       margin: 0.5rem auto;
     }
 
@@ -1751,6 +1813,11 @@ const plates: FoundryPlate[] = [
 
     .card-title {
       font-size: 1rem;
+    }
+
+    .wheel-ground-orbit {
+      width: 480px;
+      height: 480px;
     }
 
     .atelier-colophon-strip {
@@ -1767,6 +1834,84 @@ const plates: FoundryPlate[] = [
     .colophon-col:first-child {
       border-top: none;
       padding-top: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .wheel-3d-stage {
+      height: 400px;
+    }
+
+    .wheel-card {
+      width: 165px;
+      height: 245px;
+      left: -82.5px;
+      top: -122.5px;
+    }
+
+    .wheel-card-inner {
+      padding: 0.85rem 0.75rem;
+    }
+
+    .card-image-pedestal {
+      width: 60px;
+      height: 60px;
+      margin: 0.4rem auto;
+    }
+
+    .card-tech-image {
+      width: 38px;
+      height: 38px;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+    }
+
+    .wheel-ground-orbit {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .atelier-headline {
+      font-size: clamp(1.85rem, 8vw, 2.3rem);
+    }
+
+    .wheel-3d-stage {
+      height: 380px;
+    }
+
+    .wheel-card {
+      width: 145px;
+      height: 220px;
+      left: -72.5px;
+      top: -110px;
+    }
+
+    .wheel-card-inner {
+      padding: 0.75rem 0.6rem;
+    }
+
+    .card-image-pedestal {
+      width: 50px;
+      height: 50px;
+      margin: 0.35rem auto;
+    }
+
+    .card-tech-image {
+      width: 32px;
+      height: 32px;
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+    }
+
+    .wheel-ground-orbit {
+      width: 340px;
+      height: 340px;
     }
   }
 </style>

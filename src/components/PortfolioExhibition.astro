@@ -2170,6 +2170,37 @@ const projects: Project[] = [
   /* ==========================================================================
      RESPONSIVE MEDIA QUERIES
      ========================================================================== */
+  @media (min-width: 2560px) {
+    .exhibition-headline {
+      font-size: clamp(4.5rem, 4vw, 6.5rem);
+    }
+
+    .editorial-aside p {
+      font-size: 1.55rem;
+    }
+
+    .mock-viewport {
+      height: 320px;
+    }
+
+    .card-body {
+      padding: 2.25rem 2.5rem;
+      gap: 1.5rem;
+    }
+
+    .card-project-title {
+      font-size: 2.4rem;
+    }
+
+    .card-project-description {
+      font-size: 1.25rem;
+    }
+
+    .case-study-dialog {
+      max-width: 1100px;
+    }
+  }
+
   @media (max-width: 1024px) {
     .exhibition-header-block {
       grid-template-columns: 1fr;
@@ -2180,14 +2211,16 @@ const projects: Project[] = [
       grid-template-columns: repeat(2, 1fr);
     }
 
-    .meta-item:nth-child(2) {
+    .meta-item:nth-child(odd) {
+      justify-content: flex-start;
+    }
+
+    .meta-item:nth-child(even) {
       border-right: none;
+      justify-content: flex-end;
     }
 
-    .meta-item:nth-child(3) {
-      border-top: 1px solid var(--exhibition-hairline);
-    }
-
+    .meta-item:nth-child(3),
     .meta-item:nth-child(4) {
       border-top: 1px solid var(--exhibition-hairline);
     }
@@ -2221,7 +2254,7 @@ const projects: Project[] = [
     }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     .meta-grid {
       grid-template-columns: 1fr;
     }
@@ -2229,6 +2262,33 @@ const projects: Project[] = [
     .meta-item {
       border-right: none !important;
       border-top: 1px solid var(--exhibition-hairline);
+      justify-content: flex-start !important;
+      padding: 0.5rem 0;
+    }
+
+    .meta-item:first-child {
+      border-top: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .exhibition-main-body {
+      padding: 3rem 0 4rem;
+    }
+
+    .exhibition-headline {
+      font-size: clamp(2.3rem, 9.5vw, 4.2rem);
+    }
+
+    .meta-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .meta-item {
+      border-right: none !important;
+      border-top: 1px solid var(--exhibition-hairline);
+      justify-content: flex-start !important;
+      padding: 0.5rem 0;
     }
 
     .meta-item:first-child {
@@ -2278,6 +2338,48 @@ const projects: Project[] = [
 
     .dialog-benchmarks-grid {
       grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .exhibition-headline {
+      font-size: clamp(1.85rem, 8vw, 2.3rem);
+    }
+
+    .mock-viewport {
+      height: 180px;
+    }
+
+    .card-body {
+      padding: 1rem 0.85rem;
+    }
+
+    .card-project-title {
+      font-size: 1.3rem;
+    }
+
+    .card-project-description {
+      font-size: 0.95rem;
+    }
+
+    .dialog-body {
+      padding: 1.25rem 0.85rem;
+    }
+
+    .dialog-title {
+      font-size: 1.5rem;
+    }
+
+    .dialog-footer-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.65rem;
+    }
+
+    .dialog-action-primary,
+    .dialog-action-secondary {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>

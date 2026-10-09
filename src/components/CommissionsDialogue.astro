@@ -431,13 +431,6 @@ const web3FormsKey =
                copyright &copy; {presentYear} • Kumghato Khala
           </span>
         </div>
-
-        <div class="colophon-right">
-          <a href="#cover-feature" class="colophon-return-top" aria-label="Return to top of page">
-            <span>RETURN TO COVER</span>
-            <span class="return-arrow" aria-hidden="true">↑</span>
-          </a>
-        </div>
       </div>
     </div>
   </footer>
@@ -1602,43 +1595,36 @@ const web3FormsKey =
     font-size: 0.625rem;
   }
 
-  .colophon-right {
-    display: flex;
-    align-items: center;
-  }
-
-  .colophon-return-top {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    text-decoration: none;
-    color: var(--commissions-charcoal);
-    font-weight: 700;
-    padding: 0.35rem 0.65rem;
-    border: 1px solid var(--commissions-hairline);
-    background-color: #ffffff;
-    transition: all 0.2s ease;
-  }
-
-  .colophon-return-top:hover {
-    background-color: var(--commissions-charcoal);
-    color: #ffffff;
-    border-color: var(--commissions-charcoal);
-  }
-
-  .return-arrow {
-    font-size: 0.75rem;
-    line-height: 1;
-    transition: transform 0.2s ease;
-  }
-
-  .colophon-return-top:hover .return-arrow {
-    transform: translateY(-2px);
-  }
-
   /* ==========================================================================
      RESPONSIVE MEDIA QUERIES
      ========================================================================== */
+  @media (min-width: 2560px) {
+    .commissions-asymmetric-split {
+      gap: 6.5rem;
+    }
+
+    .direct-wire-card {
+      padding: 2.5rem;
+    }
+
+    .dispatch-form-card {
+      padding: 3.5rem;
+    }
+
+    .editorial-headline-large {
+      font-size: clamp(3.5rem, 3.8vw, 5.5rem);
+    }
+
+    .editorial-deck {
+      font-size: 1.45rem;
+    }
+
+    .submit-dispatch-button {
+      padding: 1.5rem 2.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
   @media (max-width: 1024px) {
     .commissions-asymmetric-split {
       grid-template-columns: 1fr;
@@ -1674,6 +1660,10 @@ const web3FormsKey =
       padding: 3rem 0 4rem;
     }
 
+    .commissions-container {
+      padding: 0 var(--container-padding, 1.25rem);
+    }
+
     .direct-wire-card,
     .dispatch-form-card {
       padding: 1.25rem;
@@ -1689,6 +1679,14 @@ const web3FormsKey =
       font-size: 0.8125rem;
       word-break: break-all;
       white-space: normal;
+    }
+
+    .editorial-headline-large {
+      font-size: clamp(2.2rem, 9.5vw, 3.5rem);
+    }
+
+    .editorial-deck {
+      font-size: 1.15rem;
     }
 
     .atelier-telemetry-strip {
@@ -1746,16 +1744,42 @@ const web3FormsKey =
     }
 
     .colophon-grid {
-      align-items: stretch;
-    }
-
-    .colophon-right {
-      width: 100%;
-    }
-
-    .colophon-return-top {
-      width: 100%;
+      align-items: center;
+      text-align: center;
       justify-content: center;
+      width: 100%;
+    }
+
+    .colophon-left {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .direct-wire-card,
+    .dispatch-form-card {
+      padding: 1rem 0.85rem;
+    }
+
+    .monospace-group-label {
+      font-size: 0.65rem;
+    }
+
+    .submit-dispatch-button {
+      padding: 1rem 0.75rem;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+    }
+
+    .archival-seal-block {
+      padding: 1rem 0.85rem;
+    }
+
+    .seal-badge-container {
+      width: 56px;
+      height: 56px;
     }
   }
 </style>
