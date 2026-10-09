@@ -1,12 +1,6 @@
 ---
 import SealLogo from './SealLogo.astro';
 
-interface Props {
-  currentPath?: string;
-}
-
-const { currentPath = Astro.url.pathname } = Astro.props;
-
 const navLinks = [
   { num: '01', label: 'Cover Feature', href: '#cover-feature' },
   { num: '02', label: 'Technical Atelier', href: '#technical-atelier' },

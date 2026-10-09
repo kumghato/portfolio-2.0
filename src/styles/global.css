@@ -130,18 +130,3 @@ samp,
   font-family: var(--font-label);
 }
 
-/* Color Utility Classes */
-.text-primary { color: var(--color-primary); }
-.text-secondary { color: var(--color-secondary); }
-.text-tertiary { color: var(--color-tertiary); }
-.text-neutral { color: var(--color-neutral); }
-
-.bg-primary { background-color: var(--color-primary); }
-.bg-secondary { background-color: var(--color-secondary); }
-.bg-tertiary { background-color: var(--color-tertiary); }
-.bg-neutral { background-color: var(--color-neutral); }
-
-.border-primary { border-color: var(--color-primary); }
-.border-secondary { border-color: var(--color-secondary); }
-.border-tertiary { border-color: var(--color-tertiary); }
-.border-neutral { border-color: var(--color-neutral); }

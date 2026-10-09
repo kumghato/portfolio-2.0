@@ -13,8 +13,7 @@ const {
 
 const web3FormsKey =
   import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ||
-  import.meta.env.WEB3FORMS_ACCESS_KEY ||
-  "52fb86e6-5a62-4bcd-ba41-6006bb11514b";
+  import.meta.env.WEB3FORMS_ACCESS_KEY 
 ---
 
 <section 
@@ -777,21 +776,6 @@ const web3FormsKey =
     border-bottom: 1px solid var(--commissions-hairline);
   }
 
-  .editorial-lead-in {
-    margin: 0;
-    padding-left: 1.25rem;
-    border-left: 2px solid var(--commissions-olive);
-    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
-    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--commissions-charcoal);
-  }
-
-  .editorial-lead-in p {
-    margin: 0;
-  }
 
   /* --------------------------------------------------------------------------
      DIRECT WIRE BLOCK CONTAINER
@@ -1023,13 +1007,6 @@ const web3FormsKey =
     letter-spacing: 0.01em;
   }
 
-  .atelier-remote-note {
-    margin: 0;
-    font-family: var(--font-body, 'Newsreader Variable', 'Newsreader', Georgia, serif);
-    font-size: 0.9375rem;
-    line-height: 1.5;
-    color: var(--commissions-charcoal-muted);
-  }
 
   .atelier-telemetry-strip {
     display: flex;
@@ -1202,13 +1179,6 @@ const web3FormsKey =
     gap: 0.65rem;
   }
 
-  .group-label-row {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
 
   .monospace-group-label {
     display: inline-flex;
@@ -1611,14 +1581,6 @@ const web3FormsKey =
       padding: 3.5rem;
     }
 
-    .editorial-headline-large {
-      font-size: clamp(3.5rem, 3.8vw, 5.5rem);
-    }
-
-    .editorial-deck {
-      font-size: 1.45rem;
-    }
-
     .submit-dispatch-button {
       padding: 1.5rem 2.5rem;
       font-size: 0.95rem;
@@ -1681,13 +1643,6 @@ const web3FormsKey =
       white-space: normal;
     }
 
-    .editorial-headline-large {
-      font-size: clamp(2.2rem, 9.5vw, 3.5rem);
-    }
-
-    .editorial-deck {
-      font-size: 1.15rem;
-    }
 
     .atelier-telemetry-strip {
       flex-direction: column;
