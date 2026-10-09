@@ -1,12 +1,9 @@
-<svg class="seal-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-  <!-- Primary background matching project background token -->
-  <rect width="80" height="80" fill="#f4f1ea" />
-  
+<svg class="seal-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <!-- Concentric Ornamental Engraving Circles -->
-  <circle cx="40" cy="40" r="38" stroke="#1a1a1a" stroke-width="1.2" stroke-dasharray="3 2" fill="none" />
-  <circle cx="40" cy="40" r="34" stroke="#858b73" stroke-width="0.8" opacity="0.6" fill="none" />
-  <circle cx="40" cy="40" r="26" stroke="#1a1a1a" stroke-width="0.75" fill="none" />
-  <circle cx="40" cy="40" r="24.5" stroke="#858b73" stroke-width="0.5" stroke-dasharray="1.5 1.5" fill="none" />
+  <circle cx="40" cy="40" r="38" stroke="#1a1a1a" stroke-width="1.2" stroke-dasharray="3 2" />
+  <circle cx="40" cy="40" r="34" stroke="#858b73" stroke-width="0.8" opacity="0.6" />
+  <circle cx="40" cy="40" r="26" stroke="#1a1a1a" stroke-width="0.75" />
+  <circle cx="40" cy="40" r="24.5" stroke="#858b73" stroke-width="0.5" stroke-dasharray="1.5 1.5" />
   
   <!-- Crosshairs / Compass Grid -->
   <line x1="40" y1="6" x2="40" y2="74" stroke="#858b73" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.7" />

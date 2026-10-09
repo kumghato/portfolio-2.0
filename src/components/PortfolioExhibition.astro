@@ -243,7 +243,7 @@ const projects: Project[] = [
         <div class="header-right">
           <blockquote class="editorial-aside">
             <p>
-              “FOUR PRODUCTION CASE STUDIES (2024)”
+              “The gallery of creation.”
             </p>
           </blockquote>
           <div class="editorial-citation">
@@ -254,36 +254,6 @@ const projects: Project[] = [
         </div>
       </div>
 
-      <!-- ========================================== -->
-      <!-- EXHIBITION TOOLBAR / CURATION STRIP        -->
-      <!-- ========================================== -->
-      <div class="exhibition-toolbar-bar">
-        <div class="toolbar-left">
-          <span class="toolbar-label">ARCHIVE INDEX:</span>
-          <div class="filter-pills-list" role="tablist" aria-label="Filter case studies by category">
-            <button type="button" class="filter-pill is-active" data-filter="all" role="tab" aria-selected="true">
-              <span class="filter-dot" aria-hidden="true"></span>
-              <span>ALL WORKS (04)</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="systems" role="tab" aria-selected="false">
-              <span>SYSTEMS &amp; REALTIME</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="typography" role="tab" aria-selected="false">
-              <span>TYPOGRAPHY &amp; SHADERS</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="editorial" role="tab" aria-selected="false">
-              <span>EDITORIAL &amp; COMMERCE</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="toolbar-right">
-          <div class="curation-badge-chip">
-            <span class="pulse-indicator" aria-hidden="true"></span>
-            <span>PRODUCTION DEPLOYMENTS // LIVE CODEBASES</span>
-          </div>
-        </div>
-      </div>
 
       <!-- ========================================== -->
       <!-- 2X2 PROJECT SHOWCASE GRID                  -->
@@ -606,122 +576,7 @@ const projects: Project[] = [
 <!-- JSON Serialized Projects Data for Dialog Client Script -->
 <script type="application/json" id="projects-data-json" set:html={JSON.stringify(projects)} />
 
-<!-- ========================================== -->
-<!-- CLIENT SCRIPT: FILTERING & CASE STUDY MODAL -->
-<!-- ========================================== -->
-<script>
-  // Read serialized project data
-  const projectsDataEl = document.getElementById('projects-data-json');
-  const projectsData = projectsDataEl ? JSON.parse(projectsDataEl.textContent || '[]') : [];
 
-  // Filter Buttons Interactivity
-  const filterPills = Array.from(document.querySelectorAll('.filter-pill')) as HTMLButtonElement[];
-  const projectCards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
-
-  filterPills.forEach((pill) => {
-    pill.addEventListener('click', () => {
-      filterPills.forEach(p => {
-        p.classList.remove('is-active');
-        p.setAttribute('aria-selected', 'false');
-      });
-      pill.classList.add('is-active');
-      pill.setAttribute('aria-selected', 'true');
-
-      const filterVal = pill.getAttribute('data-filter') || 'all';
-
-      projectCards.forEach(card => {
-        const cardCat = card.getAttribute('data-category') || '';
-        if (filterVal === 'all' || cardCat === filterVal) {
-          card.style.display = 'flex';
-          card.style.opacity = '1';
-          card.style.transform = 'translateY(0)';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // Accessible Modal Handlers
-  const modal = document.getElementById('case-study-modal') as HTMLDialogElement | null;
-  const modalCloseBtn = document.getElementById('modal-close-btn');
-  const modalDismissBtn = document.getElementById('modal-dismiss-btn');
-  const backdrop = document.getElementById('dialog-backdrop-area');
-
-  const modalBadge = document.getElementById('modal-project-badge');
-  const modalChronology = document.getElementById('modal-project-chronology');
-  const modalCategory = document.getElementById('modal-project-category');
-  const modalTitle = document.getElementById('dialog-title');
-  const modalThesis = document.getElementById('modal-project-thesis');
-  const modalHighlights = document.getElementById('modal-project-highlights');
-  const modalBenchmarks = document.getElementById('modal-project-benchmarks');
-  const modalGitLink = document.getElementById('modal-git-link') as HTMLAnchorElement | null;
-
-  function openCaseStudy(projectId: string) {
-    const project = projectsData.find((p: any) => p.id === projectId);
-    if (!project || !modal) return;
-
-    if (modalBadge) modalBadge.textContent = project.badge;
-    if (modalChronology) modalChronology.textContent = project.chronology;
-    if (modalCategory) modalCategory.textContent = project.category;
-    if (modalTitle) modalTitle.textContent = project.title;
-    if (modalThesis && project.deepDive) modalThesis.textContent = project.deepDive.thesis;
-
-    if (modalHighlights && project.deepDive) {
-      modalHighlights.innerHTML = '';
-      project.deepDive.architecturalHighlights.forEach((hl: string) => {
-        const li = document.createElement('li');
-        li.className = 'highlight-list-item';
-        li.innerHTML = `<span class="bullet" aria-hidden="true">■</span><span>${hl}</span>`;
-        modalHighlights.appendChild(li);
-      });
-    }
-
-    if (modalBenchmarks && project.deepDive) {
-      modalBenchmarks.innerHTML = '';
-      project.deepDive.benchmarkMetrics.forEach((m: { label: string; value: string }) => {
-        const cell = document.createElement('div');
-        cell.className = 'benchmark-cell';
-        cell.innerHTML = `
-          <span class="bench-label">${m.label}</span>
-          <span class="bench-value">${m.value}</span>
-        `;
-        modalBenchmarks.appendChild(cell);
-      });
-    }
-
-    if (modalGitLink) {
-      modalGitLink.href = project.gitSpecUrl;
-      modalGitLink.setAttribute('aria-label', `Inspect ${project.title} repository`);
-    }
-
-    modal.showModal();
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    if (!modal) return;
-    modal.close();
-    document.body.style.overflow = '';
-  }
-
-  // Trigger buttons
-  document.querySelectorAll('[data-modal-target]').forEach(trigger => {
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = trigger.getAttribute('data-modal-target');
-      if (targetId) openCaseStudy(targetId);
-    });
-  });
-
-  modalCloseBtn?.addEventListener('click', closeModal);
-  modalDismissBtn?.addEventListener('click', closeModal);
-  backdrop?.addEventListener('click', closeModal);
-
-  modal?.addEventListener('cancel', () => {
-    document.body.style.overflow = '';
-  });
-</script>
 
 <style>
   /* ==========================================================================

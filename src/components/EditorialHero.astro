@@ -9,11 +9,11 @@ interface Props {
 const presentYear = new Date().getFullYear();
 
 const {
-  name = "Kumghato Khala",
+  name = "Kumghato K Khala",
   role = "Web Developer",
   headlineTop = "THE ART OF",
   headlineBottom = "Creation.",
-  bioHook = `“${role} ${name} on craft, zero-dependency purity, and radical web performance.”`
+  bioHook = `“A Web developer with a foundational background in Civil engineering and professional Audio production. I bring a rigorous, system-level mindset to the web, building scalable, high-efficiency digital products rooted in structural integrity and clean, zero-dependency code.”`
 } = Astro.props;
 ---
 
@@ -36,13 +36,13 @@ const {
         </div>
 
         <div class="meta-item meta-circulation">
-          <span class="meta-label">CIRCULATION:</span>
-          <span class="meta-strong">12,400 COPIES</span>
+          <span class="meta-label">STACK:</span>
+          <span class="meta-strong">MERN · NEXT</span>
         </div>
 
         <div class="meta-item meta-pricing">
-          <span class="meta-label">INDEX:</span>
-          <span class="meta-strong">$24.00 USD</span>
+          <span class="meta-label">STATUS:</span>
+          <span class="meta-strong">AVAILABLE</span>
         </div>
       </div>
     </div>
@@ -210,7 +210,7 @@ const {
                 <span class="plate-caption-date">{presentYear}</span>
               </div>
               <p class="plate-caption-text">
-                Architectural study of viewport kinetics, structural layout containment, and minimal web runtime paradigms.
+               {role} {name} on craft, zero-dependency purity, and radical web performance.”
               </p>
 
               <!-- Barcode Graphic & ISBN Tracking Number -->
@@ -278,10 +278,10 @@ const {
               <span class="stat-sub">Staff / Architect</span>
             </div>
 
-            <div class="stat-col">
+        <div class="stat-col">
               <span class="stat-number">100<span class="stat-unit">%</span></span>
-              <span class="stat-label">SEMANTIC VITALS</span>
-              <span class="stat-sub">Lighthouse Clean</span>
+              <span class="stat-label">RESPONSIVE WEB</span>
+              <span class="stat-sub">Adaptive Layouts</span>
             </div>
 
             <div class="stat-col">
@@ -298,23 +298,7 @@ const {
   </section>
 </div>
 
-<script>
-  const audioBtn = document.getElementById('hero-audio-toggle');
-  const waveBars = document.getElementById('wave-bars');
-  const audioText = document.getElementById('hero-audio-text');
-  let isPlaying = true;
 
-  audioBtn?.addEventListener('click', () => {
-    isPlaying = !isPlaying;
-    if (isPlaying) {
-      waveBars?.classList.remove('paused');
-      if (audioText) audioText.textContent = 'AUDIO ISSUE [04:18]';
-    } else {
-      waveBars?.classList.add('paused');
-      if (audioText) audioText.textContent = 'AUDIO PAUSED';
-    }
-  });
-</script>
 
 <style>
   /* Base Variables matching the High-Fashion Editorial Spec */
