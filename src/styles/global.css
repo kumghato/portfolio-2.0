@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* Font Imports via Fontsource */
 @import '@fontsource-variable/bodoni-moda';
 @import '@fontsource/bodoni-moda';
@@ -5,6 +7,32 @@
 @import '@fontsource/newsreader';
 @import '@fontsource/space-mono';
 @import '@fontsource/space-mono/700.css';
+
+/* Modular Tailwind Design Styles */
+@import './foundry-metrics.css';
+@import './portfolio-exhibition.css';
+@import './commissions-dialogue.css';
+
+@theme {
+  --color-primary: #1a1a1a;
+  --color-secondary: #5A6351;
+  --color-tertiary: #5A6351;
+  --color-neutral: #f4f1ea;
+  --color-editorial-bg: #f4f1ea;
+  --color-editorial-bg-light: #fcfbf9;
+  --color-editorial-bg-dark: #ebe6da;
+  --color-surface: #FFFFFF;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-muted: rgba(26, 26, 26, 0.65);
+  --color-hairline: rgba(26, 26, 26, 0.16);
+  --color-olive: #858b73;
+  --color-olive-dark: #5a6351;
+  --color-olive-tint: rgba(133, 139, 115, 0.14);
+
+  --font-headline: 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif;
+  --font-body: 'Newsreader Variable', 'Newsreader', Georgia, serif;
+  --font-label: 'Space Mono', monospace;
+}
 
 :root {
   /* Layout & Width Tokens */
@@ -129,4 +157,22 @@ samp,
 .label {
   font-family: var(--font-label);
 }
+
+/* Kinetic Motion & Text Animation States */
+.hero-type-word,
+.atelier-type-word,
+.works-type-word,
+.commissions-type-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-type-char,
+.atelier-type-char,
+.works-type-char,
+.commissions-type-char {
+  display: inline;
+}
+
+
 

@@ -14,7 +14,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth scroll-pt-[72px] m-0 w-full max-w-[100vw] min-h-full overflow-x-clip">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,24 +24,8 @@ const {
 		<meta name="description" content={description} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="m-0 w-full max-w-[100vw] min-h-full overflow-x-clip bg-bg text-primary font-body antialiased">
 		<Navbar />
 		<slot />
 	</body>
 </html>
-
-<style>
-	html {
-		scroll-behavior: smooth;
-		scroll-padding-top: 72px;
-	}
-
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		max-width: 100vw;
-		min-height: 100%;
-		overflow-x: clip;
-	}
-</style>
