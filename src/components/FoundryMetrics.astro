@@ -102,7 +102,7 @@ const plates: FoundryPlate[] = [
 
         <div class="meta-item meta-standards">
           <span class="meta-label">STANDARDS:</span>
-          <span class="meta-strong">W3C • TC39 • WHATWG</span>
+          <span class="meta-strong">TYPE-SAFE • ZERO-BLOAT</span>
         </div>
 
         <div class="meta-item meta-status">
@@ -142,7 +142,7 @@ const plates: FoundryPlate[] = [
 
         <!-- Accompanying Italicized Editorial Aside -->
         <div class="header-right">
-          <blockquote class="editorial-aside">
+          <blockquote class="editorial-aside border-l-2 border-olive">
             <p>
               “A high-performance web engineering stack. Building modern, type-safe applications with clean codebases, scalable database layers, and fluid cross-device execution.”
             </p>
@@ -596,9 +596,9 @@ const plates: FoundryPlate[] = [
       const normX = ((mouseX / rect.width) - 0.5) * 2;
       const normY = ((mouseY / rect.height) - 0.5) * 2;
 
-      // Maximum tilt angles in degrees
-      const MAX_TILT_X = 22; // Pitch on horizontal axis (Up / Down)
-      const MAX_TILT_Y = 24; // Yaw on vertical axis (Left / Right)
+      // Maximum tilt angles in degrees - refined for subtle, luxury tactile feedback
+      const MAX_TILT_X = 14; // Pitch on horizontal axis (Up / Down)
+      const MAX_TILT_Y = 16; // Yaw on vertical axis (Left / Right)
 
       // Directional 3D response
       targetTiltX = -normY * MAX_TILT_X;
@@ -613,10 +613,10 @@ const plates: FoundryPlate[] = [
         rafId = requestAnimationFrame(() => {
           cardInner.style.setProperty('--card-tilt-x', `${targetTiltX.toFixed(2)}deg`);
           cardInner.style.setProperty('--card-tilt-y', `${targetTiltY.toFixed(2)}deg`);
-          cardInner.style.setProperty('--card-lift-z', '18px');
+          cardInner.style.setProperty('--card-lift-z', '14px');
           cardInner.style.setProperty('--glare-x', `${targetGlareX.toFixed(1)}%`);
           cardInner.style.setProperty('--glare-y', `${targetGlareY.toFixed(1)}%`);
-          cardInner.style.setProperty('--glare-opacity', '0.65');
+          cardInner.style.setProperty('--glare-opacity', '0.5');
           rafId = null;
         });
       }
@@ -827,10 +827,12 @@ const plates: FoundryPlate[] = [
       if (tag) {
         clearElementAnim(tag);
         tag.style.opacity = '0';
+        tag.style.transform = 'translateY(8px)';
       }
       if (cardSection) {
         clearElementAnim(cardSection);
         cardSection.style.opacity = '0';
+        cardSection.style.transform = 'translateY(24px)';
       }
       headlineChars.forEach((c) => {
         clearElementAnim(c);
@@ -858,35 +860,39 @@ const plates: FoundryPlate[] = [
       // 1. Tag (SECTION 02 // FOUNDRY METRICS)
       if (tag) {
         animations.push(
-          animate(tag, { opacity: [0, 1] }, { duration: 0.35, delay: 0.05, ease: 'easeOut' })
+          animate(
+            tag,
+            { opacity: [0, 1], y: [8, 0] },
+            { duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }
+          )
         );
       }
 
-      // 2. Heading: THE TECHNICAL ATELIER (Typing effect without typing cursor)
+      // 2. Heading: THE TECHNICAL ATELIER (Fluid ink typewriter reveal)
       if (headlineChars.length > 0) {
         animations.push(
           animate(
             headlineChars,
             { opacity: [0, 1] },
             {
-              duration: 0.1,
-              delay: stagger(0.038, { startDelay: 0.15 }),
-              ease: 'linear'
+              duration: 0.08,
+              delay: stagger(0.022, { startDelay: 0.1 }),
+              ease: [0.25, 1, 0.5, 1]
             }
           )
         );
       }
 
-      // 3. Section that displays the card
+      // 3. Section that displays the 3D card cylinder (#wheel-view-wrapper)
       if (cardSection) {
         animations.push(
           animate(
             cardSection,
-            { opacity: [0, 1] },
+            { opacity: [0, 1], y: [24, 0] },
             {
-              duration: 0.8,
-              delay: 0.1,
-              ease: [0.26, 1, 0.3, 1]
+              duration: 0.85,
+              delay: 0.2,
+              ease: [0.16, 1, 0.3, 1]
             }
           )
         );
@@ -899,23 +905,23 @@ const plates: FoundryPlate[] = [
             subTaglineChars,
             { opacity: [0, 1] },
             {
-              duration: 0.01,
-              delay: stagger(0.006, { startDelay: 0.15 }),
+              duration: 0.04,
+              delay: stagger(0.007, { startDelay: 0.28 }),
               ease: 'linear'
             }
           )
         );
       }
 
-      // 5. Aside description text (Typing effect without typing cursor)
+      // 5. Aside description text (Typing quote)
       if (asideChars.length > 0) {
         animations.push(
           animate(
             asideChars,
             { opacity: [0, 1] },
             {
-              duration: 0.01,
-              delay: stagger(0.004, { startDelay: 0.2 }),
+              duration: 0.04,
+              delay: stagger(0.0035, { startDelay: 0.35 }),
               ease: 'linear'
             }
           )
@@ -924,28 +930,31 @@ const plates: FoundryPlate[] = [
 
       activeAnimations = animations;
 
-      // Ensure full visibility upon animation completion
-      Promise.allSettled(animations).then(() => {
-        if (runId !== currentRunId) return;
+      const finishAndCleanStyles = () => {
         if (cardSection) {
           cardSection.style.opacity = '1';
+          cardSection.style.removeProperty('transform');
         }
         if (tag) {
           tag.style.opacity = '1';
+          tag.style.removeProperty('transform');
         }
         headlineChars.forEach((c) => { c.style.opacity = '1'; });
         subTaglineChars.forEach((c) => { c.style.opacity = '1'; });
         asideChars.forEach((c) => { c.style.opacity = '1'; });
+      };
+
+      // Ensure full visibility upon animation completion
+      Promise.allSettled(animations).then(() => {
+        if (runId !== currentRunId) return;
+        finishAndCleanStyles();
       });
 
-      // Safety fallback: guarantee full visibility
+      // Safety fallback: guarantee full visibility after 1800ms
       setTimeout(() => {
-        if (cardSection) cardSection.style.opacity = '1';
-        if (tag) tag.style.opacity = '1';
-        headlineChars.forEach((c) => { c.style.opacity = '1'; });
-        subTaglineChars.forEach((c) => { c.style.opacity = '1'; });
-        asideChars.forEach((c) => { c.style.opacity = '1'; });
-      }, 600);
+        if (runId !== currentRunId) return;
+        finishAndCleanStyles();
+      }, 1800);
     }
 
     function checkAtelierViewport() {

@@ -26,12 +26,12 @@ const navLinks = [
     >
       <span class="nav-toggle-text text-xs">Menu</span>
       <span class="nav-toggle-bars flex flex-col justify-center w-[18px] h-[14px] relative" aria-hidden="true">
-        <span class="bar top-bar w-full h-[1.5px] bg-primary absolute left-0 top-[3px] transition-all duration-200 [.nav-toggle.is-active_&]:top-[6px] [.nav-toggle.is-active_&]:rotate-45"></span>
-        <span class="bar bottom-bar w-full h-[1.5px] bg-primary absolute left-0 top-[9px] transition-all duration-200 [.nav-toggle.is-active_&]:top-[6px] [.nav-toggle.is-active_&]:-rotate-45"></span>
+        <span class="bar top-bar w-full h-[1.5px] bg-primary absolute left-0 top-[3px] transition-all duration-300 ease-out [.nav-toggle.is-active_&]:top-[6px] [.nav-toggle.is-active_&]:rotate-45"></span>
+        <span class="bar bottom-bar w-full h-[1.5px] bg-primary absolute left-0 top-[9px] transition-all duration-300 ease-out [.nav-toggle.is-active_&]:top-[6px] [.nav-toggle.is-active_&]:-rotate-45"></span>
       </span>
     </button>
 
-    <nav id="primary-navigation" class="nav-menu hidden lg:flex items-center max-lg:[&.is-open]:flex max-lg:[&.is-open]:flex-col max-lg:[&.is-open]:absolute max-lg:[&.is-open]:top-full max-lg:[&.is-open]:left-0 max-lg:[&.is-open]:w-full max-lg:[&.is-open]:bg-[#f4f1ea] max-lg:[&.is-open]:border-b max-lg:[&.is-open]:border-hairline max-lg:[&.is-open]:p-6 max-lg:[&.is-open]:shadow-xl" aria-label="Main Navigation">
+    <nav id="primary-navigation" class="nav-menu" aria-label="Main Navigation">
       <ul class="nav-list flex items-center list-none m-0 p-0 gap-6 lg:gap-8 max-lg:flex-col max-lg:items-start max-lg:gap-4 max-lg:w-full">
         {
           navLinks.map((link) => (
@@ -123,6 +123,84 @@ const navLinks = [
       border-radius: 2px;
     }
   }
+
+  /* Desktop Navigation Layout */
+  @media (min-width: 1024px) {
+    .nav-menu {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  /* Mobile / Small Devices Navigation & Smooth Transitions */
+  @media (max-width: 1023px) {
+    .nav-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(244, 241, 234, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-hairline, rgba(26, 26, 26, 0.16));
+      box-shadow: 0 20px 35px -10px rgba(26, 26, 26, 0.12);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100dvh - 68px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+
+      /* Closed state: smooth exit animation */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.28s ease;
+      will-change: transform, opacity;
+    }
+
+    /* Open state: smooth enter animation */
+    .nav-menu.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0s ease;
+    }
+
+    /* Staggered link reveal on open */
+    .nav-item {
+      opacity: 0;
+      transform: translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-menu.is-open .nav-item {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-menu.is-open .nav-item:nth-child(1) { transition-delay: 0.04s; }
+    .nav-menu.is-open .nav-item:nth-child(2) { transition-delay: 0.08s; }
+    .nav-menu.is-open .nav-item:nth-child(3) { transition-delay: 0.12s; }
+    .nav-menu.is-open .nav-item:nth-child(4) { transition-delay: 0.16s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-menu,
+    .nav-item,
+    .bar {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
 </style>
 
 <script>
@@ -152,6 +230,22 @@ const navLinks = [
       toggleMenu(true);
     }
   });
+
+  // Auto-close menu when clicking outside header
+  document.addEventListener('click', (e) => {
+    if (!navMenu?.classList.contains('is-open')) return;
+    const target = e.target as HTMLElement | null;
+    if (target && !header?.contains(target)) {
+      toggleMenu(true);
+    }
+  });
+
+  // Auto-close menu when viewport is expanded to desktop size
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024 && navMenu?.classList.contains('is-open')) {
+      toggleMenu(true);
+    }
+  }, { passive: true });
 
   // =========================================================================
   // ACTIVE SECTION TRACKING & URL REWRITE

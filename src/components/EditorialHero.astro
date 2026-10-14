@@ -36,7 +36,7 @@ const {
   <!-- ========================================== -->
   <!-- SUB-HEADER BAR: METADATA, ISSUE & PRICING -->
   <!-- ========================================== -->
-  <aside class="sub-header-bar w-full relative z-[1] border-b border-hairline bg-[rgba(235,230,218,0.4)] font-label text-[0.6875rem] tracking-[0.14em] uppercase text-charcoal" aria-label="Editorial Monograph Metadata">
+  <aside class="sub-header-bar max-[768px]:hidden w-full relative z-[1] border-b border-hairline bg-[rgba(235,230,218,0.4)] font-label text-[0.6875rem] tracking-[0.14em] uppercase text-charcoal" aria-label="Editorial Monograph Metadata">
     <div class="hero-container max-w-[var(--container-max-width,1540px)] mx-auto px-[var(--container-padding,clamp(1.25rem,3.2vw,2.5rem))] relative z-[1] max-[768px]:px-[var(--container-padding,1.25rem)]">
       <div class="meta-grid grid grid-cols-4 max-[1024px]:grid-cols-2 max-[768px]:grid-cols-1">
         <div class="meta-item meta-issue py-3 px-4 flex items-center gap-2 border-r border-hairline max-[1024px]:border-r max-[768px]:border-r-0 max-[768px]:border-t max-[768px]:border-hairline max-[768px]:py-2 max-[768px]:px-0 max-[768px]:first:border-t-0">
@@ -67,7 +67,7 @@ const {
   <!-- ========================================== -->
   <section class="editorial-hero-section py-[4.5rem] pb-[5.5rem] max-[640px]:py-12 max-[640px]:pb-16">
     <div class="hero-container max-w-[var(--container-max-width,1540px)] mx-auto px-[var(--container-padding,clamp(1.25rem,3.2vw,2.5rem))] relative z-[1] max-[768px]:px-[var(--container-padding,1.25rem)]">
-      <div id="hero-inner-frame" class="w-full will-change-transform origin-top">
+      <div id="hero-inner-frame" class="w-full will-change-transform origin-top max-[1024px]:origin-bottom">
         <div class="asymmetric-layout grid grid-cols-[minmax(0,1.35fr)_minmax(380px,460px)] gap-[clamp(2.5rem,3.5vw,4rem)] items-start 2xl:grid-cols-[minmax(0,1.45fr)_minmax(460px,560px)] 2xl:gap-20 max-[1024px]:grid-cols-1 max-[1024px]:gap-14">
 
           <!-- ======================================== -->
@@ -312,20 +312,52 @@ const {
     const heroWrapper = document.getElementById('cover-feature');
     if (!heroWrapper) return;
 
+    // Responsive sticky curtain effect positioning:
+    // On desktop, Hero pins at top: 0 as Atelier slides over it.
+    // On small screens (<= 1024px), Hero scrolls naturally through the Left Column and Right Column (Monograph Plate),
+    // and only pins once the Monograph Plate has fully scrolled into view / displayed in the Hero section.
+    function updateHeroStickyTop() {
+      if (!heroWrapper) return;
+      if (window.innerWidth > 1024) {
+        heroWrapper.style.top = '0px';
+      } else {
+        const heroHeight = heroWrapper.offsetHeight;
+        const vh = window.innerHeight;
+        const stickyTop = Math.min(0, vh - heroHeight);
+        heroWrapper.style.top = `${stickyTop}px`;
+      }
+    }
+
+    updateHeroStickyTop();
+    window.addEventListener('resize', updateHeroStickyTop, { passive: true });
+    window.addEventListener('orientationchange', updateHeroStickyTop, { passive: true });
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const resizeObserver = new ResizeObserver(() => {
+        updateHeroStickyTop();
+      });
+      resizeObserver.observe(heroWrapper);
+    }
+
+    const heroImg = heroWrapper.querySelector('.plate-image') as HTMLImageElement | null;
+    if (heroImg && !heroImg.complete) {
+      heroImg.addEventListener('load', updateHeroStickyTop, { once: true });
+    }
+
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) {
       document.documentElement.classList.remove('hero-motion-ready');
       return;
     }
 
-    // Curtain reveal scroll parallax: Scale down from 1 to 0.92 as Technical Atelier slides over it
+    // Curtain reveal scroll parallax: Scale down from 1 to 0.94 as Technical Atelier slides over it
     const heroInner = document.getElementById('hero-inner-frame');
     const atelierSection = document.getElementById('technical-atelier');
     if (heroInner && atelierSection) {
       scroll(
         animate(heroInner, {
-          scale: [1, 0.92],
-          opacity: [1, 0.8],
+          scale: [1, 0.94],
+          opacity: [1, 0.75],
         }),
         {
           target: atelierSection,
@@ -442,20 +474,22 @@ const {
       if (tag) {
         clearElementAnim(tag);
         tag.style.opacity = '0';
+        tag.style.transform = 'translateY(8px)';
       }
       if (monographPlateCol) {
         clearElementAnim(monographPlateCol);
         monographPlateCol.style.opacity = '0';
+        monographPlateCol.style.transform = 'translateY(20px) scale(0.985)';
       }
       if (thesesBlock) {
         clearElementAnim(thesesBlock);
         thesesBlock.style.opacity = '0';
-        thesesBlock.style.transform = 'translateY(28px)';
+        thesesBlock.style.transform = 'translateY(16px)';
       }
       buttons.forEach((btn) => {
         clearElementAnim(btn);
         btn.style.opacity = '0';
-        btn.style.transform = 'translateY(24px)';
+        btn.style.transform = 'translateY(12px)';
       });
       headlineChars.forEach((c) => {
         clearElementAnim(c);
@@ -483,7 +517,11 @@ const {
       // 1. Tag (DEVELOPER PROFILE & RETROSPECTIVE)
       if (tag) {
         animations.push(
-          animate(tag, { opacity: [0, 1] }, { duration: 0.3, delay: 0.02, ease: 'easeOut' })
+          animate(
+            tag,
+            { opacity: [0, 1], y: [8, 0] },
+            { duration: 0.4, delay: 0.05, ease: [0.16, 1, 0.3, 1] }
+          )
         );
       }
 
@@ -495,38 +533,38 @@ const {
             { opacity: [0, 1] },
             {
               duration: 0.08,
-              delay: stagger(0.018, { startDelay: 0.05 }),
-              ease: 'linear'
+              delay: stagger(0.02, { startDelay: 0.08 }),
+              ease: [0.25, 1, 0.5, 1]
             }
           )
         );
       }
 
-      // 3. Right Column: Monograph Plate
+      // 3. Right Column: Monograph Plate (Architectural arrival)
       if (monographPlateCol) {
         animations.push(
           animate(
             monographPlateCol,
-            { opacity: [0, 1] },
+            { opacity: [0, 1], y: [20, 0], scale: [0.985, 1] },
             {
-              duration: 0.8,
-              delay: 0.1,
+              duration: 0.9,
+              delay: 0.15,
               ease: [0.16, 1, 0.3, 1]
             }
           )
         );
       }
 
-      // 4. Description / Bio Hook
+      // 4. Description / Bio Hook (Fluid ink reveal)
       if (bioChars.length > 0) {
         animations.push(
           animate(
             bioChars,
             { opacity: [0, 1] },
             {
-              duration: 0.01,
-              delay: stagger(0.004, { startDelay: 0.15 }),
-              ease: 'linear'
+              duration: 0.05,
+              delay: stagger(0.0035, { startDelay: 0.32 }),
+              ease: 'easeOut'
             }
           )
         );
@@ -537,11 +575,11 @@ const {
         animations.push(
           animate(
             thesesBlock,
-            { opacity: [0, 1], y: [20, 0] },
+            { opacity: [0, 1], y: [16, 0] },
             {
-              duration: 0.6,
-              delay: 0.25,
-              ease: [0.22, 1, 0.36, 1]
+              duration: 0.65,
+              delay: 0.38,
+              ease: [0.16, 1, 0.3, 1]
             }
           )
         );
@@ -552,11 +590,11 @@ const {
         animations.push(
           animate(
             buttons,
-            { opacity: [0, 1], y: [16, 0] },
+            { opacity: [0, 1], y: [12, 0] },
             {
-              duration: 0.45,
-              delay: stagger(0.08, { startDelay: 0.3 }),
-              ease: [0.22, 1, 0.36, 1]
+              duration: 0.5,
+              delay: stagger(0.08, { startDelay: 0.48 }),
+              ease: [0.16, 1, 0.3, 1]
             }
           )
         );
@@ -569,8 +607,8 @@ const {
             footnoteChars,
             { opacity: [0, 1] },
             {
-              duration: 0.01,
-              delay: stagger(0.005, { startDelay: 0.35 }),
+              duration: 0.04,
+              delay: stagger(0.004, { startDelay: 0.52 }),
               ease: 'linear'
             }
           )
@@ -579,40 +617,39 @@ const {
 
       activeAnimations = animations;
 
+      const finishAndCleanStyles = () => {
+        if (tag) {
+          tag.style.opacity = '1';
+          tag.style.removeProperty('transform');
+        }
+        if (monographPlateCol) {
+          monographPlateCol.style.opacity = '1';
+          monographPlateCol.style.removeProperty('transform');
+        }
+        if (thesesBlock) {
+          thesesBlock.style.opacity = '1';
+          thesesBlock.style.removeProperty('transform');
+        }
+        buttons.forEach((btn) => {
+          btn.style.opacity = '1';
+          btn.style.removeProperty('transform');
+        });
+        headlineChars.forEach((c) => { c.style.opacity = '1'; });
+        bioChars.forEach((c) => { c.style.opacity = '1'; });
+        footnoteChars.forEach((c) => { c.style.opacity = '1'; });
+      };
+
       // Ensure full visibility upon animation completion
       Promise.allSettled(animations).then(() => {
         if (runId !== currentRunId) return;
-        if (tag) tag.style.opacity = '1';
-        if (monographPlateCol) monographPlateCol.style.opacity = '1';
-        if (thesesBlock) {
-          thesesBlock.style.transform = 'none';
-          thesesBlock.style.opacity = '1';
-        }
-        buttons.forEach((btn) => {
-          btn.style.transform = 'none';
-          btn.style.opacity = '1';
-        });
-        headlineChars.forEach((c) => { c.style.opacity = '1'; });
-        bioChars.forEach((c) => { c.style.opacity = '1'; });
-        footnoteChars.forEach((c) => { c.style.opacity = '1'; });
+        finishAndCleanStyles();
       });
 
-      // Safety fallback: guarantee 100% visibility after 600ms
+      // Safety fallback: guarantee 100% visibility after 1800ms
       setTimeout(() => {
-        if (tag) tag.style.opacity = '1';
-        if (monographPlateCol) monographPlateCol.style.opacity = '1';
-        if (thesesBlock) {
-          thesesBlock.style.transform = 'none';
-          thesesBlock.style.opacity = '1';
-        }
-        buttons.forEach((btn) => {
-          btn.style.transform = 'none';
-          btn.style.opacity = '1';
-        });
-        headlineChars.forEach((c) => { c.style.opacity = '1'; });
-        bioChars.forEach((c) => { c.style.opacity = '1'; });
-        footnoteChars.forEach((c) => { c.style.opacity = '1'; });
-      }, 600);
+        if (runId !== currentRunId) return;
+        finishAndCleanStyles();
+      }, 1800);
     }
 
     // Play immediately on load

@@ -63,6 +63,17 @@
   --color-text-muted: var(--color-charcoal-muted);
   --color-border: var(--color-hairline);
 
+  /* Section Fallback Tokens */
+  --atelier-olive: var(--color-olive);
+  --atelier-olive-dark: var(--color-olive-dark);
+  --atelier-charcoal: var(--color-charcoal);
+  --exhibition-olive: var(--color-olive);
+  --exhibition-olive-dark: var(--color-olive-dark);
+  --exhibition-charcoal: var(--color-charcoal);
+  --commissions-olive: var(--color-olive);
+  --commissions-olive-dark: var(--color-olive-dark);
+  --commissions-charcoal: var(--color-charcoal);
+
   /* Typography */
   --font-headline: 'Bodoni Moda Variable', 'Bodoni Moda', Georgia, serif;
   --font-body: 'Newsreader Variable', 'Newsreader', Georgia, serif;
@@ -100,6 +111,16 @@
 @media (max-width: 360px) {
   :root {
     --container-padding: 0.75rem;
+  }
+}
+
+/* Hide section sub-header bars on small devices */
+@media (max-width: 768px) {
+  .sub-header-bar,
+  .atelier-sub-bar,
+  .exhibition-sub-bar,
+  .commissions-sub-bar {
+    display: none !important;
   }
 }
 
@@ -174,5 +195,16 @@ samp,
   display: inline;
 }
 
+/* Hero kinetic motion initialization state */
+html.hero-motion-ready .editorial-headline,
+html.hero-motion-ready .bio-hook p,
+html.hero-motion-ready .editorial-footnote {
+  visibility: hidden;
+}
 
-
+html.hero-motion-ready .editorial-hero-wrapper .olive-tag,
+html.hero-motion-ready .editorial-hero-wrapper .theses-block,
+html.hero-motion-ready .editorial-hero-wrapper .actions-strip .btn,
+html.hero-motion-ready .monograph-plate-col {
+  opacity: 0;
+}
