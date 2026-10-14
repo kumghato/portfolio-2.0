@@ -74,6 +74,12 @@ const plates: FoundryPlate[] = [
 ];
 ---
 
+<script is:inline>
+  if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('atelier-motion-ready');
+  }
+</script>
+
 <section 
   class="foundry-metrics-wrapper" 
   id="technical-atelier" 
@@ -288,7 +294,7 @@ const plates: FoundryPlate[] = [
 <!-- CLIENT SCRIPT: MOTION IMAGE WHEEL & 3D TILT-->
 <!-- ========================================== -->
 <script>
-  import { animate } from 'motion';
+  import { animate, stagger, inView } from 'motion';
 
   // Read data
   const platesDataElement = document.getElementById('plates-json');
@@ -701,9 +707,327 @@ const plates: FoundryPlate[] = [
   if (isAutoSpinning) {
     startAutoSpin();
   }
+
+  // =========================================================================
+  // ATELIER ENTRANCE & TYPING ANIMATIONS (Matching Editorial Hero)
+  // =========================================================================
+  function initAtelierAnimations() {
+    const atelierWrapper = document.getElementById('technical-atelier');
+    if (!atelierWrapper) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.documentElement.classList.remove('atelier-motion-ready');
+      return;
+    }
+
+    // Target elements
+    const headerBlock = atelierWrapper.querySelector('.atelier-header-block') as HTMLElement | null;
+    const headline = atelierWrapper.querySelector('.atelier-headline') as HTMLElement | null;
+    const subTagline = atelierWrapper.querySelector('.header-sub-tagline') as HTMLElement | null;
+    const asideP = atelierWrapper.querySelector('.editorial-aside p') as HTMLElement | null;
+    const tag = atelierWrapper.querySelector('.olive-tag') as HTMLElement | null;
+    const cardSection = atelierWrapper.querySelector('#wheel-view-wrapper') as HTMLElement | null;
+
+    // Split text into words and individual character spans for a typing effect without a cursor
+    function prepareTyping(container: HTMLElement): HTMLElement[] {
+      const existing = container.querySelectorAll('.atelier-type-char');
+      if (existing.length > 0) {
+        return Array.from(existing) as HTMLElement[];
+      }
+
+      const chars: HTMLElement[] = [];
+
+      // Preserve accessibility: store full text in aria-label for screen readers
+      if (!container.getAttribute('aria-label')) {
+        const fullText = container.textContent?.replace(/\s+/g, ' ').trim() || '';
+        if (fullText) {
+          container.setAttribute('aria-label', fullText);
+        }
+      }
+
+      function walk(node: Node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || '';
+          if (!text) return;
+
+          // Ignore pure whitespace text nodes formatting between elements
+          if (/^\s+$/.test(text)) {
+            return;
+          }
+
+          const tokens = text.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+
+          for (const token of tokens) {
+            if (!token) continue;
+            if (/^\s+$/.test(token)) {
+              frag.appendChild(document.createTextNode(token));
+            } else {
+              const wordSpan = document.createElement('span');
+              wordSpan.className = 'atelier-type-word';
+              wordSpan.setAttribute('aria-hidden', 'true');
+
+              for (const c of Array.from(token)) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'atelier-type-char';
+                charSpan.style.opacity = '0';
+                charSpan.textContent = c;
+                charSpan.setAttribute('aria-hidden', 'true');
+                wordSpan.appendChild(charSpan);
+                chars.push(charSpan);
+              }
+              frag.appendChild(wordSpan);
+            }
+          }
+          node.parentNode?.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          if (el.classList.contains('atelier-type-word') || el.classList.contains('atelier-type-char')) {
+            return;
+          }
+          Array.from(node.childNodes).forEach(walk);
+        }
+      }
+
+      walk(container);
+      return chars;
+    }
+
+    // Prepare typing structures
+    const headlineChars = headline ? prepareTyping(headline) : [];
+    const subTaglineChars = subTagline ? prepareTyping(subTagline) : [];
+    const asideChars = asideP ? prepareTyping(asideP) : [];
+
+    // Make containers visible now that inner character spans are at opacity: 0
+    if (headline) headline.style.visibility = 'visible';
+    if (subTagline) subTagline.style.visibility = 'visible';
+    if (asideP) asideP.style.visibility = 'visible';
+
+    let hasRun = false;
+    let currentRunId = 0;
+    let activeAnimations: any[] = [];
+
+    function resetAnimations() {
+      currentRunId++;
+      activeAnimations.forEach((a) => {
+        try {
+          if (typeof a.cancel === 'function') a.cancel();
+          else if (typeof a.stop === 'function') a.stop();
+        } catch (_) {}
+      });
+      activeAnimations = [];
+
+      function clearElementAnim(el: HTMLElement | null) {
+        if (el && typeof el.getAnimations === 'function') {
+          el.getAnimations().forEach((a) => { try { a.cancel(); } catch (_) {} });
+        }
+      }
+
+      if (tag) {
+        clearElementAnim(tag);
+        tag.style.opacity = '0';
+      }
+      if (cardSection) {
+        clearElementAnim(cardSection);
+        cardSection.style.opacity = '0';
+      }
+      headlineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      subTaglineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      asideChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+
+      hasRun = false;
+    }
+
+    function playAnimations() {
+      if (hasRun) return;
+      hasRun = true;
+      const runId = ++currentRunId;
+
+      const animations: any[] = [];
+
+      // 1. Tag (SECTION 02 // FOUNDRY METRICS)
+      if (tag) {
+        animations.push(
+          animate(tag, { opacity: [0, 1] }, { duration: 0.35, delay: 0.05, ease: 'easeOut' })
+        );
+      }
+
+      // 2. Heading: THE TECHNICAL ATELIER (Typing effect without typing cursor)
+      if (headlineChars.length > 0) {
+        animations.push(
+          animate(
+            headlineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.1,
+              delay: stagger(0.038, { startDelay: 0.15 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 3. Section that displays the card (0 opacity to 100 opacity, smooth transition)
+      // Exactly matches Right Column: Monograph Plate from hero section
+      if (cardSection) {
+        animations.push(
+          animate(
+            cardSection,
+            { opacity: [0, 1] },
+            {
+              duration: 3,
+              delay: 1,
+              ease: [0.26, 1, 0.3, 1]
+            }
+          )
+        );
+      }
+
+      // 4. Sub-tagline: ARCHITECTURAL INVENTORY & CORE STACK PROFICIENCY
+      if (subTaglineChars.length > 0) {
+        animations.push(
+          animate(
+            subTaglineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.012, { startDelay: 0.75 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 5. Aside description text (Typing effect without typing cursor)
+      if (asideChars.length > 0) {
+        animations.push(
+          animate(
+            asideChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.009, { startDelay: 1 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      activeAnimations = animations;
+
+      // Cleanup upon animation completion
+      Promise.allSettled(animations).then(() => {
+        if (runId !== currentRunId) return;
+        if (cardSection) {
+          cardSection.style.opacity = '1';
+        }
+        if (tag) {
+          tag.style.opacity = '1';
+        }
+        headlineChars.forEach((c) => { c.style.opacity = '1'; });
+        subTaglineChars.forEach((c) => { c.style.opacity = '1'; });
+        asideChars.forEach((c) => { c.style.opacity = '1'; });
+      });
+    }
+
+    // Set initial hidden state
+    resetAnimations();
+
+    function checkAtelierViewport() {
+      if (!atelierWrapper) return;
+      const rect = atelierWrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // In viewport check: when section top enters bottom 85% of viewport and bottom hasn't scrolled completely away
+      const isInView = rect.top < windowHeight * 0.85 && rect.bottom > 80;
+      // Section is completely below viewport (user scrolled up above it, e.g. at Hero or scrolling up to top)
+      const isBelowViewport = (rect.top >= windowHeight + 40) || (scrollY <= 80);
+
+      if (isInView && !hasRun) {
+        playAnimations();
+      } else if (isBelowViewport && hasRun) {
+        resetAnimations();
+      }
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          checkAtelierViewport();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    window.addEventListener('app:reset-scroll-animations', () => {
+      resetAnimations();
+    });
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasRun) {
+            checkAtelierViewport();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(atelierWrapper);
+    }
+
+    checkAtelierViewport();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAtelierAnimations);
+  } else {
+    initAtelierAnimations();
+  }
+  document.addEventListener('astro:page-load', initAtelierAnimations);
 </script>
 
 <style>
+  /* ==========================================================================
+     TYPING & IN-VIEW ENTRANCE ANIMATIONS (Matching Editorial Hero)
+     ========================================================================== */
+  .atelier-type-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .atelier-type-char {
+    display: inline;
+  }
+
+  :global(html.atelier-motion-ready) .atelier-headline,
+  :global(html.atelier-motion-ready) .header-sub-tagline,
+  :global(html.atelier-motion-ready) .editorial-aside p {
+    visibility: hidden;
+  }
+
+  :global(html.atelier-motion-ready) .olive-tag {
+    opacity: 0;
+  }
+
+  :global(html.atelier-motion-ready) #wheel-view-wrapper {
+    opacity: 0;
+  }
+
   /* ==========================================================================
      ATELIER SECTION VARIABLES & TOKENS (Matching High-Fashion Monograph Spec)
      ========================================================================== */

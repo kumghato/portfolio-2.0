@@ -179,6 +179,10 @@ const navLinks = [
         const targetId = href.slice(1);
         setActiveSection(targetId, true);
 
+        if (targetId === 'cover-feature') {
+          window.dispatchEvent(new CustomEvent('app:reset-scroll-animations'));
+        }
+
         // Lock auto-detection temporarily while smooth scroll animates
         isProgrammaticScroll = true;
         clearTimeout(programmaticScrollTimer);
@@ -192,6 +196,7 @@ const navLinks = [
   // Brand logo click smoothly scrolls to top and activates cover-feature
   const brandLogo = document.querySelector<HTMLAnchorElement>('.brand-logo');
   brandLogo?.addEventListener('click', () => {
+    window.dispatchEvent(new CustomEvent('app:reset-scroll-animations'));
     setActiveSection('cover-feature', true);
   });
 

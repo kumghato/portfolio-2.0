@@ -20,6 +20,12 @@ const {
 ---
 
 
+<script is:inline>
+  if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('hero-motion-ready');
+  }
+</script>
+
 <div class="editorial-hero-wrapper" id="cover-feature">
   <!-- Archival Watermark Seal Design in Hero Background -->
   <div class="hero-watermark-wrapper" aria-hidden="true">
@@ -643,7 +649,7 @@ const {
     padding: 0.85rem 1.25rem;
     white-space: nowrap;
     flex: 0 1 auto;
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     line-height: 1;
   }
@@ -1156,4 +1162,384 @@ const {
       padding-bottom: 0;
     }
   }
+
+  /* ========================================== */
+  /* HERO MOTION & TYPING ANIMATION STYLES      */
+  /* ========================================== */
+  .hero-type-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .hero-type-char {
+    display: inline;
+  }
+
+  :global(html.hero-motion-ready) .editorial-headline,
+  :global(html.hero-motion-ready) .bio-hook p,
+  :global(html.hero-motion-ready) .editorial-footnote {
+    visibility: hidden;
+  }
+
+  :global(html.hero-motion-ready) .olive-tag {
+    opacity: 0;
+  }
+
+  :global(html.hero-motion-ready) .theses-block {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  :global(html.hero-motion-ready) .actions-strip .btn {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  :global(html.hero-motion-ready) .monograph-plate-col {
+    opacity: 0;
+  }
 </style>
+
+<script>
+  import { animate, stagger } from 'motion';
+
+  function initHeroAnimations() {
+    const heroWrapper = document.getElementById('cover-feature');
+    if (!heroWrapper) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.documentElement.classList.remove('hero-motion-ready');
+      return;
+    }
+
+    // Target elements
+    const headline = heroWrapper.querySelector('.editorial-headline') as HTMLElement | null;
+    const bioHookP = heroWrapper.querySelector('.bio-hook p') as HTMLElement | null;
+    const tag = heroWrapper.querySelector('.olive-tag') as HTMLElement | null;
+    const thesesBlock = heroWrapper.querySelector('.theses-block') as HTMLElement | null;
+    const buttons = Array.from(heroWrapper.querySelectorAll('.actions-strip .btn')) as HTMLElement[];
+    const footnote = heroWrapper.querySelector('.editorial-footnote') as HTMLElement | null;
+    const monographPlateCol = heroWrapper.querySelector('.monograph-plate-col') as HTMLElement | null;
+
+    // Split text into words and individual character spans for a typing effect without a cursor
+    function prepareTyping(container: HTMLElement): HTMLElement[] {
+      const existing = container.querySelectorAll('.hero-type-char');
+      if (existing.length > 0) {
+        return Array.from(existing) as HTMLElement[];
+      }
+
+      const chars: HTMLElement[] = [];
+
+      // Preserve accessibility: store full text in aria-label for screen readers
+      if (!container.getAttribute('aria-label')) {
+        const fullText = container.textContent?.replace(/\s+/g, ' ').trim() || '';
+        if (fullText) {
+          container.setAttribute('aria-label', fullText);
+        }
+      }
+
+      function walk(node: Node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || '';
+          if (!text) return;
+
+          // Ignore pure whitespace text nodes formatting between elements
+          if (/^\s+$/.test(text)) {
+            return;
+          }
+
+          const tokens = text.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+
+          for (const token of tokens) {
+            if (!token) continue;
+            if (/^\s+$/.test(token)) {
+              frag.appendChild(document.createTextNode(token));
+            } else {
+              const wordSpan = document.createElement('span');
+              wordSpan.className = 'hero-type-word';
+              wordSpan.setAttribute('aria-hidden', 'true');
+
+              for (const c of Array.from(token)) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'hero-type-char';
+                charSpan.style.opacity = '0';
+                charSpan.textContent = c;
+                charSpan.setAttribute('aria-hidden', 'true');
+                wordSpan.appendChild(charSpan);
+                chars.push(charSpan);
+              }
+              frag.appendChild(wordSpan);
+            }
+          }
+          node.parentNode?.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          if (el.classList.contains('hero-type-word') || el.classList.contains('hero-type-char')) {
+            return;
+          }
+          Array.from(node.childNodes).forEach(walk);
+        }
+      }
+
+      walk(container);
+      return chars;
+    }
+
+    // Prepare typing structures
+    const headlineChars = headline ? prepareTyping(headline) : [];
+    const bioChars = bioHookP ? prepareTyping(bioHookP) : [];
+    const footnoteChars = footnote ? prepareTyping(footnote) : [];
+
+    // Make containers visible now that inner character spans are at opacity: 0
+    if (headline) headline.style.visibility = 'visible';
+    if (bioHookP) bioHookP.style.visibility = 'visible';
+    if (footnote) footnote.style.visibility = 'visible';
+
+    let hasRun = false;
+    let hasScrolledAway = false;
+    let currentRunId = 0;
+    let activeAnimations: any[] = [];
+
+    function resetAnimations() {
+      currentRunId++;
+      activeAnimations.forEach((a) => {
+        try {
+          if (typeof a.cancel === 'function') a.cancel();
+          else if (typeof a.stop === 'function') a.stop();
+        } catch (_) {}
+      });
+      activeAnimations = [];
+
+      function clearElementAnim(el: HTMLElement | null) {
+        if (el && typeof el.getAnimations === 'function') {
+          el.getAnimations().forEach((a) => { try { a.cancel(); } catch (_) {} });
+        }
+      }
+
+      if (tag) {
+        clearElementAnim(tag);
+        tag.style.opacity = '0';
+      }
+      if (monographPlateCol) {
+        clearElementAnim(monographPlateCol);
+        monographPlateCol.style.opacity = '0';
+      }
+      if (thesesBlock) {
+        clearElementAnim(thesesBlock);
+        thesesBlock.style.opacity = '0';
+        thesesBlock.style.transform = 'translateY(28px)';
+      }
+      buttons.forEach((btn) => {
+        clearElementAnim(btn);
+        btn.style.opacity = '0';
+        btn.style.transform = 'translateY(24px)';
+      });
+      headlineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      bioChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      footnoteChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+
+      hasRun = false;
+    }
+
+    function playAnimations() {
+      if (hasRun) return;
+      hasRun = true;
+      const runId = ++currentRunId;
+
+      const animations: any[] = [];
+
+      // 1. Tag (DEVELOPER PROFILE & RETROSPECTIVE)
+      if (tag) {
+        animations.push(
+          animate(tag, { opacity: [0, 1] }, { duration: 0.35, delay: 0.05, ease: 'easeOut' })
+        );
+      }
+
+      // 2. Heading (Typing effect without typing cursor)
+      if (headlineChars.length > 0) {
+        animations.push(
+          animate(
+            headlineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.1,
+              delay: stagger(0.038, { startDelay: 0.15 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 3. Right Column: Monograph Plate (0 opacity to 100 opacity, smooth transition)
+      if (monographPlateCol) {
+        animations.push(
+          animate(
+            monographPlateCol,
+            { opacity: [0, 1] },
+            {
+              duration: 4,
+              delay: 0.3,
+              ease: [0.16, 1, 0.3, 1]
+            }
+          )
+        );
+      }
+
+      // 4. Description / Bio Hook (Typing effect without typing cursor)
+      if (bioChars.length > 0) {
+        animations.push(
+          animate(
+            bioChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.009, { startDelay: 1 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 5. Salient Theses and Monograph Outline (from below with 0 opacity to original position with 100 opacity)
+      if (thesesBlock) {
+        animations.push(
+          animate(
+            thesesBlock,
+            { opacity: [0, 1], y: [28, 0] },
+            {
+              duration: 1,
+              delay: 3,
+              ease: [0.22, 1, 0.36, 1]
+            }
+          )
+        );
+      }
+
+      // 6. Action Buttons (from below with 0 opacity to original position with 100 opacity)
+      if (buttons.length > 0) {
+        animations.push(
+          animate(
+            buttons,
+            { opacity: [0, 1], y: [24, 0] },
+            {
+              duration: 0.65,
+              delay: stagger(0.12, { startDelay: 3 }),
+              ease: [0.22, 1, 0.36, 1]
+            }
+          )
+        );
+      }
+
+      // 7. Editorial Colophon Micro-Stamps (letters appear from left to right like typing effect)
+      if (footnoteChars.length > 0) {
+        animations.push(
+          animate(
+            footnoteChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.012, { startDelay: 3.5 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      activeAnimations = animations;
+
+      // Cleanup upon animation completion
+      Promise.allSettled(animations).then(() => {
+        if (runId !== currentRunId) return;
+        if (tag) tag.style.opacity = '1';
+        if (monographPlateCol) monographPlateCol.style.opacity = '1';
+        if (thesesBlock) {
+          thesesBlock.style.transform = 'none';
+          thesesBlock.style.opacity = '1';
+        }
+        buttons.forEach((btn) => {
+          btn.style.transform = 'none';
+          btn.style.opacity = '1';
+        });
+        headlineChars.forEach((c) => { c.style.opacity = '1'; });
+        bioChars.forEach((c) => { c.style.opacity = '1'; });
+        footnoteChars.forEach((c) => { c.style.opacity = '1'; });
+      });
+    }
+
+    // Set initial hidden state
+    resetAnimations();
+
+    function checkHeroViewport() {
+      if (!heroWrapper) return;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const rect = heroWrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Hero is in viewport
+      const isInView = rect.bottom > 80 && rect.top < windowHeight * 0.85;
+
+      // User has scrolled away down the page
+      if (scrollY > 300) {
+        hasScrolledAway = true;
+      }
+
+      if (isInView && !hasRun) {
+        playAnimations();
+      } 
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          checkHeroViewport();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    window.addEventListener('app:reset-scroll-animations', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY <= 80) {
+        hasScrolledAway = false;
+        resetAnimations();
+        playAnimations();
+      }
+    });
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasRun) {
+            checkHeroViewport();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(heroWrapper);
+    }
+
+    checkHeroViewport();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroAnimations);
+  } else {
+    initHeroAnimations();
+  }
+  document.addEventListener('astro:page-load', initHeroAnimations);
+</script>

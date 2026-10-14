@@ -18,6 +18,12 @@ const web3FormsKey =
   import.meta.env.WEB3FORMS_ACCESS_KEY 
 ---
 
+<script is:inline>
+  if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('commissions-motion-ready');
+  }
+</script>
+
 <section 
   class="commissions-dialogue-wrapper" 
   id="colophon-inquiries" 
@@ -593,9 +599,309 @@ const web3FormsKey =
       if (label) label.textContent = 'TRANSMIT EDITORIAL DISPATCH';
     }
   });
+
+  import { animate, stagger, inView } from 'motion';
+
+  // =========================================================================
+  // 3. COMMISSIONS ENTRANCE & TYPING ANIMATIONS (Matching Editorial Hero / Atelier / Exhibition)
+  // =========================================================================
+  function initCommissionsAnimations() {
+    const commissionsWrapper = document.getElementById('colophon-inquiries');
+    if (!commissionsWrapper) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.documentElement.classList.remove('commissions-motion-ready');
+      return;
+    }
+
+    // Target elements
+    const editorialInfoCol = commissionsWrapper.querySelector('.editorial-info-column') as HTMLElement | null;
+    const headline = commissionsWrapper.querySelector('.commissions-headline') as HTMLElement | null;
+    const subTagline = commissionsWrapper.querySelector('.header-sub-tagline') as HTMLElement | null;
+    const tag = commissionsWrapper.querySelector('.olive-tag') as HTMLElement | null;
+    const directWireCard = commissionsWrapper.querySelector('.direct-wire-card') as HTMLElement | null;
+    const archivalSeal = commissionsWrapper.querySelector('.archival-seal-block') as HTMLElement | null;
+    const dispatchFormCard = commissionsWrapper.querySelector('.dispatch-form-card') as HTMLElement | null;
+
+    // Split text into words and individual character spans for a typing effect without a cursor
+    function prepareTyping(container: HTMLElement): HTMLElement[] {
+      const existing = container.querySelectorAll('.commissions-type-char');
+      if (existing.length > 0) {
+        return Array.from(existing) as HTMLElement[];
+      }
+
+      const chars: HTMLElement[] = [];
+
+      // Preserve accessibility: store full text in aria-label for screen readers
+      if (!container.getAttribute('aria-label')) {
+        const fullText = container.textContent?.replace(/\s+/g, ' ').trim() || '';
+        if (fullText) {
+          container.setAttribute('aria-label', fullText);
+        }
+      }
+
+      function walk(node: Node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || '';
+          if (!text) return;
+
+          // Ignore pure whitespace text nodes formatting between elements
+          if (/^\s+$/.test(text)) {
+            return;
+          }
+
+          const tokens = text.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+
+          for (const token of tokens) {
+            if (!token) continue;
+            if (/^\s+$/.test(token)) {
+              frag.appendChild(document.createTextNode(token));
+            } else {
+              const wordSpan = document.createElement('span');
+              wordSpan.className = 'commissions-type-word';
+              wordSpan.setAttribute('aria-hidden', 'true');
+
+              for (const c of Array.from(token)) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'commissions-type-char';
+                charSpan.style.opacity = '0';
+                charSpan.textContent = c;
+                charSpan.setAttribute('aria-hidden', 'true');
+                wordSpan.appendChild(charSpan);
+                chars.push(charSpan);
+              }
+              frag.appendChild(wordSpan);
+            }
+          }
+          node.parentNode?.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          if (el.classList.contains('commissions-type-word') || el.classList.contains('commissions-type-char')) {
+            return;
+          }
+          Array.from(node.childNodes).forEach(walk);
+        }
+      }
+
+      walk(container);
+      return chars;
+    }
+
+    // Prepare typing structures
+    const headlineChars = headline ? prepareTyping(headline) : [];
+    const subTaglineChars = subTagline ? prepareTyping(subTagline) : [];
+    const fadeElements = [directWireCard, archivalSeal, dispatchFormCard].filter(Boolean) as HTMLElement[];
+
+    // Make containers visible now that inner character spans are at opacity: 0
+    if (headline) headline.style.visibility = 'visible';
+    if (subTagline) subTagline.style.visibility = 'visible';
+
+    let hasRun = false;
+    let currentRunId = 0;
+    let activeAnimations: any[] = [];
+
+    function resetAnimations() {
+      currentRunId++;
+      activeAnimations.forEach((a) => {
+        try {
+          if (typeof a.cancel === 'function') a.cancel();
+          else if (typeof a.stop === 'function') a.stop();
+        } catch (_) {}
+      });
+      activeAnimations = [];
+
+      function clearElementAnim(el: HTMLElement | null) {
+        if (el && typeof el.getAnimations === 'function') {
+          el.getAnimations().forEach((a) => { try { a.cancel(); } catch (_) {} });
+        }
+      }
+
+      if (tag) {
+        clearElementAnim(tag);
+        tag.style.opacity = '0';
+      }
+      fadeElements.forEach((el) => {
+        clearElementAnim(el);
+        el.style.opacity = '0';
+      });
+      headlineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      subTaglineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+
+      hasRun = false;
+    }
+
+    function playAnimations() {
+      if (hasRun) return;
+      hasRun = true;
+      const runId = ++currentRunId;
+
+      const animations: any[] = [];
+
+      // 1. Tag (SECTION 04 // COMMISSIONS & DIALOGUE)
+      if (tag) {
+        animations.push(
+          animate(tag, { opacity: [0, 1] }, { duration: 0.35, delay: 0.05, ease: 'easeOut' })
+        );
+      }
+
+      // 2. Heading: INQUIRIES & EDITORIAL DESK (Typing effect without typing cursor)
+      if (headlineChars.length > 0) {
+        animations.push(
+          animate(
+            headlineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.1,
+              delay: stagger(0.038, { startDelay: 0.15 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 3. EDITORIAL INFO & DIRECT WIRE and the INTERACTIVE DISPATCH FORM
+      // (0 opacity to 100 opacity, smooth transition - matches Monograph Plate / Section cards)
+      if (fadeElements.length > 0) {
+        animations.push(
+          animate(
+            fadeElements,
+            { opacity: [0, 1] },
+            {
+              duration: 4,
+              delay: 0.3,
+              ease: [0.16, 1, 0.3, 1]
+            }
+          )
+        );
+      }
+
+      // 4. Sub-tagline: ARCHITECTURAL ADVISORY • BESPOKE DESIGN SYSTEMS • CRITICAL DISPATCH
+      if (subTaglineChars.length > 0) {
+        animations.push(
+          animate(
+            subTaglineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.012, { startDelay: 0.75 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      activeAnimations = animations;
+
+      // Cleanup upon animation completion
+      Promise.allSettled(animations).then(() => {
+        if (runId !== currentRunId) return;
+        if (tag) {
+          tag.style.opacity = '1';
+        }
+        fadeElements.forEach((el) => {
+          el.style.opacity = '1';
+        });
+        headlineChars.forEach((c) => { c.style.opacity = '1'; });
+        subTaglineChars.forEach((c) => { c.style.opacity = '1'; });
+      });
+    }
+
+    // Set initial hidden state
+    resetAnimations();
+
+    function checkCommissionsViewport() {
+      if (!commissionsWrapper) return;
+      const rect = commissionsWrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // In viewport check: when section top enters bottom 85% of viewport and bottom hasn't scrolled completely away
+      const isInView = rect.top < windowHeight * 0.85 && rect.bottom > 80;
+      // Section is completely below viewport (user scrolled up above it, e.g. at Hero or scrolling up to top)
+      const isBelowViewport = (rect.top >= windowHeight + 40) || (scrollY <= 80);
+
+      if (isInView && !hasRun) {
+        playAnimations();
+      } else if (isBelowViewport && hasRun) {
+        resetAnimations();
+      }
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          checkCommissionsViewport();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    window.addEventListener('app:reset-scroll-animations', () => {
+      resetAnimations();
+    });
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasRun) {
+            checkCommissionsViewport();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(commissionsWrapper);
+    }
+
+    checkCommissionsViewport();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCommissionsAnimations);
+  } else {
+    initCommissionsAnimations();
+  }
+  document.addEventListener('astro:page-load', initCommissionsAnimations);
 </script>
 
 <style>
+  /* ==========================================================================
+     TYPING & IN-VIEW ENTRANCE ANIMATIONS (Matching Editorial Hero / Foundry / Portfolio)
+     ========================================================================== */
+  .commissions-type-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .commissions-type-char {
+    display: inline;
+  }
+
+  :global(html.commissions-motion-ready) .commissions-headline,
+  :global(html.commissions-motion-ready) .header-sub-tagline {
+    visibility: hidden;
+  }
+
+  :global(html.commissions-motion-ready) .olive-tag {
+    opacity: 0;
+  }
+
+  :global(html.commissions-motion-ready) .direct-wire-card,
+  :global(html.commissions-motion-ready) .archival-seal-block,
+  :global(html.commissions-motion-ready) .dispatch-form-card {
+    opacity: 0;
+  }
   /* ==========================================================================
      COMMISSIONS & DIALOGUE TOKENS (Matching High-Fashion Monograph Language)
      ========================================================================== */

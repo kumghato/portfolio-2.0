@@ -94,6 +94,12 @@ const projects: Project[] = [
 ];
 ---
 
+<script is:inline>
+  if (typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('exhibition-motion-ready');
+  }
+</script>
+
 <section 
   class="portfolio-exhibition-wrapper" 
   id="selected-works" 
@@ -160,7 +166,7 @@ const projects: Project[] = [
             <p>
               “True art is creation, and creation is beyond all theories”
               <br>
-              <span style="display:flex; flex-direction:row-reverse">-Carl Gustav Jung </span>
+              <span style="display:flex; justify-content:flex-end;">-Carl Gustav Jung </span>
             </p>
           </blockquote>
         </div>
@@ -265,7 +271,7 @@ const projects: Project[] = [
                     {project.title}
                   </a>
                 </h3>
-                <span class="project-chronology">{project.chronology}</span>
+              
               </div>
 
               <!-- Descriptive Paragraph Explaining Technical Objective -->
@@ -1305,4 +1311,324 @@ const projects: Project[] = [
       display: inline;
     }
   }
+
+  /* ==========================================================================
+     TYPING & IN-VIEW ENTRANCE ANIMATIONS (Matching Editorial Hero)
+     ========================================================================== */
+  .exhibition-type-word {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .exhibition-type-char {
+    display: inline;
+  }
+
+  :global(html.exhibition-motion-ready) .exhibition-headline,
+  :global(html.exhibition-motion-ready) .header-sub-tagline,
+  :global(html.exhibition-motion-ready) .editorial-aside p {
+    visibility: hidden;
+  }
+
+  :global(html.exhibition-motion-ready) .olive-tag {
+    opacity: 0;
+  }
+
+  :global(html.exhibition-motion-ready) .project-card {
+    opacity: 0;
+  }
 </style>
+
+<script>
+  import { animate, stagger, inView } from 'motion';
+
+  function initExhibitionAnimations() {
+    const exhibitionWrapper = document.getElementById('selected-works');
+    if (!exhibitionWrapper) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      document.documentElement.classList.remove('exhibition-motion-ready');
+      return;
+    }
+
+    // Target elements
+    const headerBlock = exhibitionWrapper.querySelector('.exhibition-header-block') as HTMLElement | null;
+    const headline = exhibitionWrapper.querySelector('.exhibition-headline') as HTMLElement | null;
+    const subTagline = exhibitionWrapper.querySelector('.header-sub-tagline') as HTMLElement | null;
+    const asideP = exhibitionWrapper.querySelector('.editorial-aside p') as HTMLElement | null;
+    const tag = exhibitionWrapper.querySelector('.olive-tag') as HTMLElement | null;
+    const showcaseGrid = exhibitionWrapper.querySelector('#showcase-grid') as HTMLElement | null;
+    const cards = Array.from(exhibitionWrapper.querySelectorAll('.project-card')) as HTMLElement[];
+
+    // Split text into words and individual character spans for a typing effect without a cursor
+    function prepareTyping(container: HTMLElement): HTMLElement[] {
+      const existing = container.querySelectorAll('.exhibition-type-char');
+      if (existing.length > 0) {
+        return Array.from(existing) as HTMLElement[];
+      }
+
+      const chars: HTMLElement[] = [];
+
+      // Preserve accessibility: store full text in aria-label for screen readers
+      if (!container.getAttribute('aria-label')) {
+        const fullText = container.textContent?.replace(/\s+/g, ' ').trim() || '';
+        if (fullText) {
+          container.setAttribute('aria-label', fullText);
+        }
+      }
+
+      function walk(node: Node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent || '';
+          if (!text) return;
+
+          // Ignore pure whitespace text nodes formatting between elements
+          if (/^\s+$/.test(text)) {
+            return;
+          }
+
+          const tokens = text.split(/(\s+)/);
+          const frag = document.createDocumentFragment();
+
+          for (const token of tokens) {
+            if (!token) continue;
+            if (/^\s+$/.test(token)) {
+              frag.appendChild(document.createTextNode(token));
+            } else {
+              const wordSpan = document.createElement('span');
+              wordSpan.className = 'exhibition-type-word';
+              wordSpan.setAttribute('aria-hidden', 'true');
+
+              for (const c of Array.from(token)) {
+                const charSpan = document.createElement('span');
+                charSpan.className = 'exhibition-type-char';
+                charSpan.style.opacity = '0';
+                charSpan.textContent = c;
+                charSpan.setAttribute('aria-hidden', 'true');
+                wordSpan.appendChild(charSpan);
+                chars.push(charSpan);
+              }
+              frag.appendChild(wordSpan);
+            }
+          }
+          node.parentNode?.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          if (el.classList.contains('exhibition-type-word') || el.classList.contains('exhibition-type-char')) {
+            return;
+          }
+          Array.from(node.childNodes).forEach(walk);
+        }
+      }
+
+      walk(container);
+      return chars;
+    }
+
+    // Prepare typing structures
+    const headlineChars = headline ? prepareTyping(headline) : [];
+    const subTaglineChars = subTagline ? prepareTyping(subTagline) : [];
+    const asideChars = asideP ? prepareTyping(asideP) : [];
+
+    // Make containers visible now that inner character spans are at opacity: 0
+    if (headline) headline.style.visibility = 'visible';
+    if (subTagline) subTagline.style.visibility = 'visible';
+    if (asideP) asideP.style.visibility = 'visible';
+
+    let hasRun = false;
+    let currentRunId = 0;
+    let activeAnimations: any[] = [];
+
+    function resetAnimations() {
+      currentRunId++;
+      activeAnimations.forEach((a) => {
+        try {
+          if (typeof a.cancel === 'function') a.cancel();
+          else if (typeof a.stop === 'function') a.stop();
+        } catch (_) {}
+      });
+      activeAnimations = [];
+
+      function clearElementAnim(el: HTMLElement | null) {
+        if (el && typeof el.getAnimations === 'function') {
+          el.getAnimations().forEach((a) => { try { a.cancel(); } catch (_) {} });
+        }
+      }
+
+      if (tag) {
+        clearElementAnim(tag);
+        tag.style.opacity = '0';
+      }
+      cards.forEach((card) => {
+        clearElementAnim(card);
+        card.style.opacity = '0';
+      });
+      headlineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      subTaglineChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+      asideChars.forEach((c) => {
+        clearElementAnim(c);
+        c.style.opacity = '0';
+      });
+
+      hasRun = false;
+    }
+
+    function playAnimations() {
+      if (hasRun) return;
+      hasRun = true;
+      const runId = ++currentRunId;
+
+      const animations: any[] = [];
+
+      // 1. Tag (SECTION 03 // PORTFOLIO EXHIBITION)
+      if (tag) {
+        animations.push(
+          animate(tag, { opacity: [0, 1] }, { duration: 0.35, delay: 0.05, ease: 'easeOut' })
+        );
+      }
+
+      // 2. Heading: SELECTED ARCHITECTURAL WORKS (Typing effect without typing cursor)
+      if (headlineChars.length > 0) {
+        animations.push(
+          animate(
+            headlineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.1,
+              delay: stagger(0.038, { startDelay: 0.15 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 3. Section that displays the card (0 opacity to 100 opacity, smooth transition)
+      // Exactly matches Right Column: Monograph Plate from hero section, appearing one by one (one after the other)
+      if (cards.length > 0) {
+        animations.push(
+          animate(
+            cards,
+            { opacity: [0, 1] },
+            {
+              duration: 4,
+              delay: stagger(1, { startDelay: 0.3 }),
+              ease: [0.16, 1, 0.3, 1]
+            }
+          )
+        );
+      }
+
+      // 4. Sub-tagline: ENGINEERED PRODUCTION & OPEN REPOSITORIES (Typing effect)
+      if (subTaglineChars.length > 0) {
+        animations.push(
+          animate(
+            subTaglineChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.012, { startDelay: 0.75 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      // 5. Aside description quote (Typing effect without typing cursor)
+      if (asideChars.length > 0) {
+        animations.push(
+          animate(
+            asideChars,
+            { opacity: [0, 1] },
+            {
+              duration: 0.01,
+              delay: stagger(0.009, { startDelay: 1 }),
+              ease: 'linear'
+            }
+          )
+        );
+      }
+
+      activeAnimations = animations;
+
+      // Cleanup upon animation completion
+      Promise.allSettled(animations).then(() => {
+        if (runId !== currentRunId) return;
+        cards.forEach((card) => {
+          card.style.opacity = '1';
+        });
+        if (tag) {
+          tag.style.opacity = '1';
+        }
+        headlineChars.forEach((c) => { c.style.opacity = '1'; });
+        subTaglineChars.forEach((c) => { c.style.opacity = '1'; });
+        asideChars.forEach((c) => { c.style.opacity = '1'; });
+      });
+    }
+
+    // Set initial hidden state
+    resetAnimations();
+
+    function checkExhibitionViewport() {
+      if (!exhibitionWrapper) return;
+      const rect = exhibitionWrapper.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // In viewport check: when section top enters bottom 85% of viewport and bottom hasn't scrolled completely away
+      const isInView = rect.top < windowHeight * 0.85 && rect.bottom > 80;
+      // Section is completely below viewport (user scrolled up above it, e.g. at Hero or scrolling up to top)
+      const isBelowViewport = (rect.top >= windowHeight + 40) || (scrollY <= 80);
+
+      if (isInView && !hasRun) {
+        playAnimations();
+      } else if (isBelowViewport && hasRun) {
+        resetAnimations();
+      }
+    }
+
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          checkExhibitionViewport();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    window.addEventListener('app:reset-scroll-animations', () => {
+      resetAnimations();
+    });
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasRun) {
+            checkExhibitionViewport();
+          }
+        });
+      }, { threshold: 0.1 });
+      observer.observe(exhibitionWrapper);
+    }
+
+    checkExhibitionViewport();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExhibitionAnimations);
+  } else {
+    initExhibitionAnimations();
+  }
+  document.addEventListener('astro:page-load', initExhibitionAnimations);
+</script>
